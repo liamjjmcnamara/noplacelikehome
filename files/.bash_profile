@@ -9,7 +9,8 @@ export PYTHONPATH="."
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-alias ls="gls --color=yes"
+# if mac
+# alias ls="gls --color=yes"
 alias l="ls -l"
 alias ..='cd ..'
 alias ...='cd ../..'
