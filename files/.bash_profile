@@ -37,8 +37,8 @@ alias lt="ls --sort=time"
 alias d="docker"
 alias g="grep -d skip"
 alias gca="git commit -a"
+alias docker_purge="docker rm $( docker ps -q -f status=exited )"
 
-w
 if [ ! -S ~/.ssh/ssh_auth_sock ]; then
   eval `ssh-agent`
   ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
