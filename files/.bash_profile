@@ -9,7 +9,6 @@ export HISTFILESIZE=2000
 export PYTHONPATH="."
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export JAVA_HOME=$(/usr/libexec/java_home)
 export EDITOR="vim"
 export PATH="/usr/local/sbin:$PATH:$HOME/bin"
 
@@ -38,7 +37,7 @@ alias d="docker"
 alias g="grep -d skip"
 alias gca="git commit -a"
 alias docker_purge="docker rm $( docker ps -q -f status=exited )"
-alias noplace=''echo "git clone https://github.com/liamjjmcnamara/noplacelikehome.git"''
+alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome.git"'
 
 if [ ! -S ~/.ssh/ssh_auth_sock ]; then
   eval `ssh-agent`
@@ -47,7 +46,9 @@ fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 ssh-add -l | grep "The agent has no identities" && ssh-add
 
-. ~/.kerl/.kerlrc
+if [ -e ~/.ssh/ssh_auth_sock ]; then
+  . ~/.kerl/.kerlrc
+fi
 
 if [[ \$TMUX  ]]; then source ~/.tmux-git/tmux-git.sh; fi
 
