@@ -46,7 +46,7 @@ fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 ssh-add -l | grep "The agent has no identities" && ssh-add
 
-if [ -e ~/.ssh/ssh_auth_sock ]; then
+if [ -e ~/.kerl/.kerlrc ]; then
   . ~/.kerl/.kerlrc
 fi
 
