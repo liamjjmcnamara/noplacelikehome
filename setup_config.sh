@@ -8,6 +8,6 @@ yum -y install vim tmux
 
 # Copy dot files
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
-/bin/cp -r $DIR/files/* ~
+/bin/cp -r $DIR/files/.* ~
 
 
