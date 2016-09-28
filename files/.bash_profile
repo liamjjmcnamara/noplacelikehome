@@ -38,6 +38,7 @@ alias d="docker"
 alias g="grep -d skip"
 alias gca="git commit -a"
 alias docker_purge="docker rm $( docker ps -q -f status=exited )"
+alias noplace=''echo "git clone https://github.com/liamjjmcnamara/noplacelikehome.git"''
 
 if [ ! -S ~/.ssh/ssh_auth_sock ]; then
   eval `ssh-agent`
