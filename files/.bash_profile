@@ -1,4 +1,13 @@
 
+# Detect OS
+OS=`uname`
+
+# Detect host
+HOST=`hostname`
+if [ $HOST == "C02S82H7G8WN"  ]; then
+HOST="yukon"
+fi
+
 # Pull the bashrc
 if [ -f ~/.bashrc  ]; then
 	. ~/.bashrc
@@ -19,14 +28,16 @@ export PATH="/usr/local/sbin:$PATH:$HOME/bin"
 
 
 # nice informative PS1
-export PS1="\[\033[0;37m\][\[\033[1;37m\]\H\[\033[0;37m\]]<\[\033[1;37m\]\W\[\033[0;37m\]>"
+export PS1="\[\033[0;37m\][\[\033[1;37m\]$HOST\[\033[0;37m\]]<\[\033[1;37m\]\W\[\033[0;37m\]>"
 # only set CDPATH in interactive shells
 if test “${PS1+set}”; then CDPATH=".:~"; fi
 # avoid cd output
 #alias cd='>/dev/null cd'
 
 # if mac
-# alias ls="gls --color=yes"
+if [ $OS == "Darwin"  ]; then
+	alias ls="gls --color=yes"
+fi
 alias l="ls -l"
 alias ..='cd ..'
 alias ...='cd ../..'
