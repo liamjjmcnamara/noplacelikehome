@@ -65,3 +65,9 @@ if [[ \$TMUX  ]]; then source ~/.tmux-git/tmux-git.sh; fi
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
+
+if [ -e /usr/local/erlang/r16b03-1/activate ]; then
+. /usr/local/erlang/r16b03-1/activate
+fi
+alias erl-r16=". /usr/local/erlang/r16b03-1/activate"
+#alias erl-r15=". /usr/local/erlang/r15b03-1/activate"
