@@ -45,14 +45,11 @@ alias ....='cd ../../..'
 
 alias lt="ls --sort=time"
 alias d="docker"
-alias g="grep -d skip"
+alias g="git"
+alias xg="xargs grep -d skip"
 alias gca="git commit -a"
 alias docker_purge="docker rm $( docker ps -q -f status=exited )"
 alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome.git"'
-
-
-git config --global alias.stat 'status --short --branch'
-git config --global alias.glog 'log --graph --abbrev-commit --decorate --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"'
 
 if [ ! -S ~/.ssh/ssh_auth_sock ]; then
   eval `ssh-agent`
@@ -65,9 +62,7 @@ if [ -e ~/.kerl/.kerlrc ]; then
   . ~/.kerl/.kerlrc
 fi
 
-if [[ -n $TMUX  ]]; then 
-	source ~/.tmux-git/tmux-git.sh; 
-fi
+if [[ -n $TMUX  ]]; then source ~/.tmux-git/tmux-git.sh; fi
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
