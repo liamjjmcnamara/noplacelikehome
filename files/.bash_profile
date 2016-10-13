@@ -30,7 +30,7 @@ export PATH="/usr/local/sbin:$PATH:$HOME/bin"
 # nice informative PS1
 export PS1="\[\033[0;37m\][\[\033[1;37m\]$HOST\[\033[0;37m\]]<\[\033[1;37m\]\W\[\033[0;37m\]>"
 # only set CDPATH in interactive shells
-if test “${PS1+set}”; then CDPATH=".:~"; fi
+if test “${PS1+set}”; then CDPATH=".:~:~/code:~/code/fredp"; fi
 # avoid cd output
 #alias cd='>/dev/null cd'
 
@@ -51,6 +51,13 @@ alias gca="git commit -a"
 alias docker_purge="docker rm $( docker ps -q -f status=exited )"
 alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome.git"'
 
+git config --global alias.stat 'status --short --branch'
+git config --global alias.glog 'log --graph --abbrev-commit --decorate --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"'
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+
 if [ ! -S ~/.ssh/ssh_auth_sock ]; then
   eval `ssh-agent`
   ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
@@ -62,7 +69,9 @@ if [ -e ~/.kerl/.kerlrc ]; then
   . ~/.kerl/.kerlrc
 fi
 
-if [[ -n $TMUX  ]]; then source ~/.tmux-git/tmux-git.sh; fi
+if [[ -n $TMUX  ]]; then 
+	source ~/.tmux-git/tmux-git.sh
+fi
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
@@ -72,3 +81,8 @@ if [ -e /usr/local/erlang/r16b03-1/activate ]; then
 fi
 alias erl-r16=". /usr/local/erlang/r16b03-1/activate"
 #alias erl-r15=". /usr/local/erlang/r15b03-1/activate"
+
+# Allow local specifics
+if [ -e ~/.bash_profile.local ]; then
+  . ~/.bash_profile.local
+fi
