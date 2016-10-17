@@ -74,6 +74,10 @@ if [[ -n $TMUX  ]]; then
 fi
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+. $(brew --prefix)/etc/bash_completion
+fi
+shopt -s cdspell
 
 
 if [ -e /usr/local/erlang/r16b03-1/activate ]; then
