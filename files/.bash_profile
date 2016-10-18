@@ -69,7 +69,9 @@ if [ -e ~/.kerl/.kerlrc ]; then
   . ~/.kerl/.kerlrc
 fi
 
+# label a window in tmux and set git status
 if [[ -n $TMUX  ]]; then 
+	PROMPT_COMMAND='$(tmux rename-window $(pwd|sed 's,$HOME,~,'|sed s,.*/,, )/)'
 	source ~/.tmux-git/tmux-git.sh
 fi
 
