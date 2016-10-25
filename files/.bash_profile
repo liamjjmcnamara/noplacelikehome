@@ -20,6 +20,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR="vim"
 export PATH="/usr/local/sbin:$PATH:$HOME/bin"
+export GPG_TTY=$(tty)
 
 #export DOCKER_CERT_PATH=/Users/ljjm/.boot2docker/certs/boot2docker-vm
 #export DOCKER_TLS_VERIFY=1
