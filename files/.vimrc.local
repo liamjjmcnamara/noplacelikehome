@@ -7,13 +7,25 @@ Plugin 'vim-erlang/vim-erlang-runtime'
 Plugin 'Yggdroot/indentLine'
 Plugin 'benmills/vimux'
 Plugin 'kana/vim-fakeclip'
+Plugin 'Konfekt/FastFold'
+Plugin 'Konfekt/FoldText'
+
+autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%:t"))
 
 set nonumber
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11j
 set nu!
 set spell!
 
-"let g:neocomplcache_disable_auto_complete = 1
+set timeoutlen=1000  ttimeoutlen=0
+set ttimeoutlen=10
+augroup FastEscape
+	autocmd!
+	au InsertEnter * set timeoutlen=0
+	au InsertLeave * set timeoutlen=1000
+augroup END
+
+let g:neocomplcache_disable_auto_complete = 1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=8
@@ -42,7 +54,8 @@ set list
 set clipboard=unnamed
 set tags=./tags;/
 
-highlight LineNr ctermfg=black ctermbg=darkgrey
+highlight LineNr ctermfg=233 ctermbg=237
+highlight CursorLineNr ctermfg=202 ctermbg=237
 
 let g:indentLine_color_gui = '#A4E001'
 let g:indentLine_char = '┆'
@@ -67,3 +80,7 @@ let g:airline_section_y ='' "      (fileencoding, fileformat)
 
 set tabstop=2
 set expandtab
+
+" filetype specifc
+autocmd FileType erlang setlocal shiftwidth=2 tabstop=2
+autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
