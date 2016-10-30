@@ -31,7 +31,7 @@ export GPG_TTY=$(tty)
 # nice informative PS1
 export PS1="\[\033[0;37m\][\[\033[1;37m\]$HOST\[\033[0;37m\]]<\[\033[1;37m\]\W\[\033[0;37m\]>"
 # only set CDPATH in interactive shells
-if test “${PS1+set}”; then CDPATH=".:~:~/code:~/code/fredp"; fi
+# if test “${PS1+set}”; then CDPATH=".:~:~/code:~/code/fredp"; fi
 # avoid cd output
 #alias cd='>/dev/null cd'
 
