@@ -66,9 +66,6 @@ fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 ssh-add -l | grep "The agent has no identities" && ssh-add
 
-if [ -e ~/.kerl/.kerlrc ]; then
-  . ~/.kerl/.kerlrc
-fi
 
 # label a window in tmux and set git status
 if [[ -n $TMUX  ]]; then 
@@ -83,6 +80,9 @@ fi
 shopt -s cdspell
 
 
+if [ -e ~/.kerl/.kerlrc ]; then
+  . ~/.kerl/.kerlrc
+fi
 if [ -e /usr/local/erlang/r16b03-1/activate ]; then
 . /usr/local/erlang/r16b03-1/activate
 fi
