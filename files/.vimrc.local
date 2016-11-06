@@ -6,6 +6,7 @@ Plugin 'vim-erlang/vim-erlang-compiler'
 Plugin 'vim-erlang/vim-erlang-runtime'
 Plugin 'Yggdroot/indentLine'
 Plugin 'benmills/vimux'
+Plugin 'sjl/vitality'
 Plugin 'kana/vim-fakeclip'
 Plugin 'Konfekt/FastFold'
 Plugin 'Konfekt/FoldText'
@@ -24,6 +25,10 @@ augroup FastEscape
 	au InsertEnter * set timeoutlen=0
 	au InsertLeave * set timeoutlen=1000
 augroup END
+autocmd WinEnter,FocusGained * :setlocal relativenumber
+autocmd WinLeave,FocusLost *   :setlocal norelativenumber
+autocmd InsertEnter        *   :setlocal norelativenumber
+autocmd InsertLeave *          :setlocal relativenumber
 
 let g:neocomplcache_disable_auto_complete = 1
 let g:indent_guides_auto_colors = 0
@@ -35,8 +40,12 @@ set foldmethod=indent
 autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
 set foldenable
 nnoremap <space> za
-set nofoldenable " don't fold by default
-set foldlevel=1
+" set nofoldenable " don't fold by default
+set foldlevel=0
+set sw=2
+
+nnoremap K kJ
+nnoremap Q @q
 
 " vimux
 " Prompt for a command to run map
@@ -49,17 +58,33 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 "
 set wrap linebreak nolist
 set ttyfast
-set colorcolumn=80
+set colorcolumn=81
 set list
 set clipboard=unnamed
 set tags=./tags;/
 
-highlight LineNr ctermfg=233 ctermbg=237
-highlight CursorLineNr ctermfg=202 ctermbg=237
+highlight ColorColumn  ctermbg=235
+highlight LineNr       ctermfg=239 ctermbg=234
+highlight CursorLineNr ctermfg=202 ctermbg=234
 
-let g:indentLine_color_gui = '#A4E001'
-let g:indentLine_char = '┆'
+let g:indentLine_color_term = '235'
+"let g:indentLine_char = '┊'
+let g:indentLine_char = ' '
+let g:indentLine_first_char = '│'
+let g:indentLine_showFirstIndentLevel = "1"
+let g:indentLine_color_dark = 1 " (default: 2)
+let g:indentLine_concealcursor=''
+let g:indentLine_faster = '1'
 let g:AutoPairs = {}
+function! MyFoldText()
+    let nl = v:foldend - v:foldstart + 1
+    let comment = substitute(getline(v:foldstart),"^ *","",1)
+    let linetext = substitute(getline(v:foldstart),"^ *","",1)
+    let txt = ' +' . linetext . ' : "' . comment . '" : length ' . nl
+    return txt
+endfunction
+set foldtext=MyFoldText()
+set foldnestmax=1
 
 " Erlang
 set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
@@ -67,7 +92,6 @@ set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
 set runtimepath^=/usr/local/erlang/R16B03-1/bin/erl
 
 let g:syntastic_auto_loc_list = 1
-
 "let g:airline_section_a =      '(mode, crypt, paste, spell, iminsert)'
 "let g:airline_section_b =      (hunks, branch)
 "let g:airline_section_c =      (bufferline or filename)
