@@ -1,3 +1,9 @@
+# oh my zsh
+export ZSH=/Users/liam.mcnamara/.oh-my-zsh
+plugins=(git osx docker)
+source $ZSH/oh-my-zsh.sh
+
+
 setopt PROMPT_SUBST
 #export PS1=$'\ek$(basename $(pwd))\e\\[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
 export PS1=$'%{\ek$(basename $(pwd))\e\\%}[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
