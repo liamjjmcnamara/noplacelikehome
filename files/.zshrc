@@ -6,9 +6,8 @@ source $ZSH/oh-my-zsh.sh
 
 setopt PROMPT_SUBST
 #export PS1=$'\ek$(basename $(pwd))\e\\[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
-export PS1=$'%{\ek$(basename $(pwd))\e\\%}[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
+export PS1=$'[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
 
-export PATH=~/code/fredp/gitrdun/bin:$PATH
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
@@ -43,13 +42,13 @@ fi
 alias erl-r16=". /usr/local/erlang/r16b03-1/activate"
 
 # label a window in tmux and set git status
-if [[ -n $TMUX  ]]; then 
-  PROMPT_COMMAND='$(tmux rename-window $(pwd|sed "s,$HOME,~,"|sed "s,.*/,," )/)'
-  if [ -e ~/.tmux-git/tmux-git.sh ]; then
-    source ~/.tmux-git/tmux-git.sh
-  fi
-fi
-precmd() { eval "$PROMPT_COMMAND" }
+#if [[ -n $TMUX  ]]; then 
+#  PROMPT_COMMAND='$(tmux rename-window $(pwd|sed "s,$HOME,~,"|sed "s,.*/,," )/)'
+#  if [ -e ~/.tmux-git/tmux-git.sh ]; then
+#    source ~/.tmux-git/tmux-git.sh
+#  fi
+#fi
+# precmd() { eval "$PROMPT_COMMAND" }
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
