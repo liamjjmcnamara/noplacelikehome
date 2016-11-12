@@ -11,7 +11,7 @@ Plugin 'kana/vim-fakeclip'
 Plugin 'Konfekt/FastFold'
 Plugin 'Konfekt/FoldText'
 
-autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%:t"))
+autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
 
 set nonumber
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11j
@@ -67,7 +67,7 @@ highlight ColorColumn  ctermbg=235
 highlight LineNr       ctermfg=239 ctermbg=234
 highlight CursorLineNr ctermfg=202 ctermbg=234
 
-let g:indentLine_color_term = '235'
+let g:indentLine_color_term = '238'
 "let g:indentLine_char = '┊'
 let g:indentLine_char = ' '
 let g:indentLine_first_char = '│'
