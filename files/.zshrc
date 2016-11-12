@@ -42,13 +42,13 @@ fi
 alias erl-r16=". /usr/local/erlang/r16b03-1/activate"
 
 # label a window in tmux and set git status
-#if [[ -n $TMUX  ]]; then 
-#  PROMPT_COMMAND='$(tmux rename-window $(pwd|sed "s,$HOME,~,"|sed "s,.*/,," )/)'
-#  if [ -e ~/.tmux-git/tmux-git.sh ]; then
-#    source ~/.tmux-git/tmux-git.sh
-#  fi
-#fi
-# precmd() { eval "$PROMPT_COMMAND" }
+if [[ -n $TMUX  ]]; then 
+  PROMPT_COMMAND='$(tmux rename-window $(pwd|sed "s,$HOME,~,"|sed "s,.*/,," )/)'
+  if [ -e ~/.tmux-git/tmux-git-zsh.sh ]; then
+    source ~/.tmux-git/tmux-git-zsh.sh
+  fi
+fi
+precmd() { eval "$PROMPT_COMMAND" }
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
