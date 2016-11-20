@@ -21,10 +21,10 @@ set spell!
 set timeoutlen=1000  ttimeoutlen=0
 set ttimeoutlen=10
 augroup FastEscape
-	autocmd!
-	au InsertEnter * set timeoutlen=0
-	au InsertLeave * set timeoutlen=1000
-augroup END
+  autocmd!
+  au InsertEnter * set timeoutlen=0
+  au InsertLeave * set timeoutlen=1000
+  augroup END
 autocmd WinEnter,FocusGained * :setlocal relativenumber
 autocmd WinLeave,FocusLost *   :setlocal norelativenumber
 autocmd InsertEnter        *   :setlocal norelativenumber
@@ -33,7 +33,7 @@ autocmd InsertLeave *          :setlocal relativenumber
 let g:neocomplcache_disable_auto_complete = 1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=8
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
 
 set foldmethod=indent
@@ -63,11 +63,13 @@ set list
 set clipboard=unnamed
 set tags=./tags;/
 
-highlight ColorColumn  ctermbg=235
-highlight LineNr       ctermfg=239 ctermbg=234
-highlight CursorLineNr ctermfg=202 ctermbg=234
+highlight ColorColumn  ctermbg=233
+highlight LineNr       ctermfg=239 ctermbg=233
+highlight CursorLineNr ctermfg=202 ctermbg=233
+highlight CursorLine   ctermbg=233
+highlight SpecialKey   ctermbg=233
 
-let g:indentLine_color_term = '238'
+let g:indentLine_color_term = '235'
 "let g:indentLine_char = '┊'
 let g:indentLine_char = ' '
 let g:indentLine_first_char = '│'
@@ -97,7 +99,8 @@ let g:syntastic_auto_loc_list = 1
 "let g:airline_section_c =      (bufferline or filename)
 "let g:airline_section_gutter=  (readonly, csv)
 "let g:airline_section_x       (tagbar, filetype, virtualenv)
-let g:airline_section_y ='' "      (fileencoding, fileformat)
+let g:airline_section_c = ''
+let g:airline_section_y = '' "      (fileencoding, fileformat)
 "let g:airline_section_z       (percentage, line number, column number)
 "let g:airline_section_error   (ycm_error_count, syntastic, eclim)
 "let g:airline_section_warning (ycm_warning_count, whitespace)
