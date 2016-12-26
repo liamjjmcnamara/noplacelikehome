@@ -30,7 +30,8 @@ export GPG_TTY=$(tty)
 
 
 # nice informative PS1
-export PS1="\[\033[0;37m\][\[\033[1;37m\]$HOST\[\033[0;37m\]]<\[\033[1;37m\]\W\[\033[0;37m\]>"
+# export PS1="\[\033[0;37m\][\[\033[1;37m\]$HOST\[\033[0;37m\]]<\[\033[1;37m\]\W\[\033[0;37m\]>"
+export PS1="[$HOST]<\W>"
 # only set CDPATH in interactive shells
 # if test “${PS1+set}”; then CDPATH=".:~:~/code:~/code/fredp"; fi
 # avoid cd output
@@ -69,10 +70,10 @@ ssh-add -l | grep "The agent has no identities" && ssh-add
 
 
 # label a window in tmux and set git status
-if [[ -n $TMUX  ]]; then 
-	#PROMPT_COMMAND='$(tmux rename-window $(pwd|sed 's,$HOME,~,'|sed s,.*/,, )/)'
-	#source ~/.tmux-git/tmux-git-zsh.sh
-fi
+#if [[ -n $TMUX  ]]; then 
+#PROMPT_COMMAND='$(tmux rename-window $(pwd|sed 's,$HOME,~,'|sed s,.*/,, )/)'
+#source ~/.tmux-git/tmux-git-zsh.sh
+#fi
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 if [ -f $(brew --prefix)/etc/bash_completion ]; then

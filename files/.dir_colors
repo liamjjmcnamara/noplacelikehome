@@ -82,10 +82,10 @@ TERM xterm-debian
 
 ## Special files
 
-NORMAL 00;38;5;244 # no color code at all
+NORMAL 01;38;5;244 # no color code at all
 #FILE 00 # regular file: use no color at all
 RESET 0 # reset to "normal" color
-DIR 00;38;5;61 # directory 01;34
+DIR 01;34;5;61 # directory 01;34
 LINK 01;38;5;37 # symbolic link. (If you set this to 'target' instead of a
  # numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 00 # regular file with more than one link
@@ -102,7 +102,7 @@ STICKY_OTHER_WRITABLE 48;5;64;38;5;230 # dir that is sticky and other-writable (
 OTHER_WRITABLE 48;5;235;38;5;33 # dir that is other-writable (o+w) and not sticky
 STICKY 48;5;33;38;5;230 # dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
-EXEC 01;38;5;64
+EXEC 01;32;5;64
 
 ## Archives or compressed (violet + bold for compression)
 .tar    00;38;5;88
@@ -141,6 +141,8 @@ EXEC 01;38;5;64
 .cpp    00;38;5;226
 .c		00;38;5;226
 .h		00;38;5;26
+.hrl		00;38;5;26
+.erl		00;38;5;226
 
 
 # Image formats (yellow)
@@ -169,9 +171,11 @@ EXEC 01;38;5;64
 .cgm    00;38;5;129
 .emf    00;38;5;129
 .pdf    00;38;5;45
-.epub    00;38;5;45
+.epub   00;38;5;45
 .eps    00;38;5;45
-.ps    00;38;5;45
+.ps     00;38;5;45
+.html   00;38;5;45
+.xml    00;38;5;45
 .CR2    00;38;5;129
 .ico    00;38;5;129
 
@@ -179,7 +183,7 @@ EXEC 01;38;5;64
 .tex             00;38;5;33
 .cls             00;38;5;33
 .bbl             00;38;5;33
-.txt			00;38;5;33
+.txt             00;38;5;33
 .rdf             01;38;5;245
 .owl             01;38;5;245
 .n3              01;38;5;245
@@ -187,6 +191,7 @@ EXEC 01;38;5;64
 .nt              01;38;5;245
 .torrent         01;38;5;245
 *Makefile        01;38;5;245
+*GNUmakefile     01;38;5;245
 *Rakefile        01;38;5;245
 *build.xml       01;38;5;245
 *rc              01;38;5;245
@@ -196,13 +201,15 @@ EXEC 01;38;5;64
 *README.txt      01;38;5;245
 *readme.txt      01;38;5;245
 *README.md       01;38;5;245
+*README.org      01;38;5;245
 *README.markdown 01;38;5;245
 *ini             01;38;5;245
 *yml             01;38;5;245
 *cfg             01;38;5;245
 *conf            01;38;5;245
 .conf            01;38;5;245
-.txt            01;38;5;245
+.txt             01;38;5;245
+.mk             01;38;5;245
 
 # "unimportant" files as logs and backups (base01)
 .log        00;38;5;240
@@ -222,6 +229,7 @@ EXEC 01;38;5;64
 .pyc        00;38;5;240
 .class      00;38;5;240
 .cache      00;38;5;240
+.beam       00;38;5;240
 
 # Audio formats (orange)
 .aac    00;38;5;126

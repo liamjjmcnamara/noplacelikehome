@@ -46,8 +46,8 @@ set sw=2
 
 nnoremap K kJ
 nnoremap Q @q
+vnoremap // y/<C-R>"<CR>
 
-" vimux
 " Prompt for a command to run map
 map <Leader>vp :VimuxPromptCommand<CR>
 " Run last command executed by VimuxRunCommand
@@ -105,6 +105,7 @@ let g:airline_section_y = '' "      (fileencoding, fileformat)
 "let g:airline_section_error   (ycm_error_count, syntastic, eclim)
 "let g:airline_section_warning (ycm_warning_count, whitespace)
 
+set scrolloff=16 " Keep 3 lines below and above the cursor
 set tabstop=2
 set expandtab
 

@@ -1,6 +1,6 @@
 # oh my zsh
 export ZSH=/Users/liam.mcnamara/.oh-my-zsh
-plugins=(git osx docker)
+plugins=(git osx)
 source $ZSH/oh-my-zsh.sh
 
 
@@ -8,11 +8,16 @@ setopt PROMPT_SUBST
 #export PS1=$'\ek$(basename $(pwd))\e\\[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
 export PS1=$'[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
 
+export ERL_LIBS=..
+export REBAR_DEPS_DIR=..
+
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
-alias ls="gls --color=yes"
+eval "$(dircolors ~/.dircolors)"
+alias ls="gls --color=auto"
 alias l="ls -l"
+alias tt="tree -C -L 2"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
