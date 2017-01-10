@@ -10,6 +10,7 @@ Plugin 'sjl/vitality'
 Plugin 'kana/vim-fakeclip'
 Plugin 'Konfekt/FastFold'
 Plugin 'Konfekt/FoldText'
+Plugin 'yuttie/comfortable-motion.vim'
 
 autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
 

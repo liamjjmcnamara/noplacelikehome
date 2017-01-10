@@ -101,6 +101,10 @@ find_git_stash() {
     fi
 }
 
+reset_tmux_git() {
+    TMUX_GIT_LASTREPO=""
+}
+
 update_tmux() {
     # The trailing slash is for avoiding conflicts with repos with 
     # similar names. Kudos to https://github.com/tillt for the bug report
@@ -144,7 +148,7 @@ update_tmux() {
             tmux set-window-option status-$TMUX_STATUS_LOCATION "$TMUX_OUTREPO_STATUS" > /dev/null
         fi
     fi
-
+    true
 }
 
 # Update the prompt for execute the script
