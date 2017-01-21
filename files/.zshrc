@@ -3,6 +3,17 @@ export ZSH=/Users/liam.mcnamara/.oh-my-zsh
 plugins=(git osx)
 source $ZSH/oh-my-zsh.sh
 
+# set VIMODE according to the current mode
+# https://dougblack.io/words/zsh-vi-mode.html
+function zle-line-init zle-keymap-select {
+    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+    RPS2=$RPS1
+    zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+bindkey -v
 
 setopt PROMPT_SUBST
 #export PS1=$'\ek$(basename $(pwd))\e\\[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
@@ -13,6 +24,8 @@ export REBAR_DEPS_DIR=..
 
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>/:'
+KEYTIMEOUT=1
 
 eval "$(dircolors ~/.dircolors)"
 alias ls="gls --color=auto"
@@ -56,6 +69,12 @@ fi
 precmd() { eval "$PROMPT_COMMAND" }
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
+bindkey "^[[A" up-line-or-history
+bindkey "^[[B" down-line-or-history
 
 # Allow local specifics
 if [ -e ~/.zshrc.local ]; then
