@@ -3,21 +3,27 @@ export ZSH=/Users/liam.mcnamara/.oh-my-zsh
 plugins=(git osx)
 source $ZSH/oh-my-zsh.sh
 
+setopt PROMPT_SUBST
+#export PS1=$'\ek$(basename $(pwd))\e\\[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
+export PS1=$'[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
+
 # set VIMODE according to the current mode
 # https://dougblack.io/words/zsh-vi-mode.html
 function zle-line-init zle-keymap-select {
-    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-    RPS2=$RPS1
+    #RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+    #RPS2=$RPS1
+    PS1=$'[%{$FG[015]%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
+    case $KEYMAP in
+        #vicmd|main) PS1=$'[%{$FG[10]%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>';;
+        main)      PS1=$'[%{$FG[178]%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>';;
+    esac
+
     zle reset-prompt
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
 
 bindkey -v
-
-setopt PROMPT_SUBST
-#export PS1=$'\ek$(basename $(pwd))\e\\[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
-export PS1=$'[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
 
 export ERL_LIBS=..
 export REBAR_DEPS_DIR=..
