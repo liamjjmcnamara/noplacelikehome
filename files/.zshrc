@@ -12,12 +12,11 @@ export PS1=$'[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
 function zle-line-init zle-keymap-select {
     #RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
     #RPS2=$RPS1
-    PS1=$'[%{$FG[015]%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
+    PS1=$'%{$FG[007]%}[%{$FG[015]%}yukon%{\e[0m%}%{$FG[007]%}]<%{\e[97m%}%~%b%{\e[0m%}%{$FG[007]%}>%{$FG[015]%}'
     case $KEYMAP in
         #vicmd|main) PS1=$'[%{$FG[10]%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>';;
-        main)      PS1=$'[%{$FG[178]%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>';;
+        main) PS1=$'%{$FG[136]%}[%{$FG[015]%}yukon%{\e[0m%}%{$FG[136]%}]<%{\e[97m%}%~%b%{\e[0m%}%{$FG[136]%}>%{$FG[015]%}';;
     esac
-
     zle reset-prompt
 }
 zle -N zle-line-init
@@ -78,7 +77,9 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-
+bindkey -v '^?' backward-delete-char
+bindkey '^R' history-incremental-search-backward
+bindkey "^A" beginning-of-line
 bindkey "^[[A" up-line-or-history
 bindkey "^[[B" down-line-or-history
 
