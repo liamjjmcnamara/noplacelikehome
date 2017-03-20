@@ -32,17 +32,17 @@ function title {
         # Try to use terminfo to set the title
         # If the feature is available set title
         if [[ -n "$terminfo[fsl]" ]] && [[ -n "$terminfo[tsl]" ]]; then
-    echoti tsl
-    print -Pn "$1"
-    echoti fsl
-  fi
+	  echoti tsl
+	  print -Pn "$1"
+	  echoti fsl
+	fi
       fi
       ;;
   esac
 }
 
 #ZSH_THEME_TERM_TAB_TITLE_IDLE="%15<..<%~%<<" #15 char left truncated PWD
-ZSH_THEME_TERM_TAB_TITLE_IDLE="%19<..<%~%<</" #15 char left truncated PWD
+ZSH_THEME_TERM_TAB_TITLE_IDLE="%15<..<%~%<<" #15 char left truncated PWD
 ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
 # Avoid duplication of directory in terminals with independent dir display
 if [[ "$TERM_PROGRAM" == Apple_Terminal ]]; then

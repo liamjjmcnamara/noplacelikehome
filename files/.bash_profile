@@ -77,7 +77,7 @@ ssh-add -l | grep "The agent has no identities" && ssh-add
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
-. $(brew --prefix)/etc/bash_completion
+  . $(brew --prefix)/etc/bash_completion
 fi
 shopt -s cdspell
 
@@ -85,11 +85,9 @@ shopt -s cdspell
 if [ -e ~/.kerl/.kerlrc ]; then
   . ~/.kerl/.kerlrc
 fi
-if [ -e /usr/local/erlang/r16b03-1/activate ]; then
-. /usr/local/erlang/r16b03-1/activate
+if [ -e /usr/local/erlang/kredotp/activate ]; then
+  source /usr/local/erlang/kredotp/activate
 fi
-alias erl-r16=". /usr/local/erlang/r16b03-1/activate"
-#alias erl-r15=". /usr/local/erlang/r15b03-1/activate"
 
 # Allow local specifics
 if [ -e ~/.bash_profile.local ]; then

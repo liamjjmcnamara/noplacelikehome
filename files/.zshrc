@@ -59,10 +59,9 @@ git config --global alias.st status
 if [ -e ~/.kerl/.kerlrc ]; then
   . ~/.kerl/.kerlrc
 fi
-if [ -e /usr/local/erlang/r16b03-1/activate ]; then
-  . /usr/local/erlang/r16b03-1/activate
+if [ -e /usr/local/erlang/kredotp/activate ]; then
+  . /usr/local/erlang/kredotp/activate
 fi
-alias erl-r16=". /usr/local/erlang/r16b03-1/activate"
 
 # label a window in tmux and set git status
 if [[ -n $TMUX  ]]; then 
@@ -82,6 +81,8 @@ bindkey '^R' history-incremental-search-backward
 bindkey "^A" beginning-of-line
 bindkey "^[[A" up-line-or-history
 bindkey "^[[B" down-line-or-history
+
+CASE_SENSITIVE="true"
 
 # Allow local specifics
 if [ -e ~/.zshrc.local ]; then

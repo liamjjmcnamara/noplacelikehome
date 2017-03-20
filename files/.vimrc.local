@@ -110,6 +110,8 @@ set scrolloff=16 " Keep 3 lines below and above the cursor
 set tabstop=2
 set expandtab
 
+cmap w!! w !sudo tee % > /dev/null
+
 " filetype specifc
 autocmd FileType erlang setlocal shiftwidth=2 tabstop=2
 autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
