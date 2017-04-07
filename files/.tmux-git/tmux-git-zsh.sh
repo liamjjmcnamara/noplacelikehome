@@ -16,7 +16,7 @@ else
     # Linux
     READLINK='readlink -e'
 fi
-READLINK='/usr/local/Cellar/coreutils/8.26/bin/greadlink -e '
+READLINK='/usr/local/Cellar/coreutils/8.27/bin/greadlink -e '
 
 
 # Check for a configuration file.
