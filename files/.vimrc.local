@@ -11,6 +11,7 @@ Plugin 'kana/vim-fakeclip'
 Plugin 'Konfekt/FastFold'
 Plugin 'Konfekt/FoldText'
 Plugin 'yuttie/comfortable-motion.vim'
+Plugin 'w0rp/ale'
 
 autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
 
@@ -69,6 +70,8 @@ highlight LineNr       ctermfg=239 ctermbg=233
 highlight CursorLineNr ctermfg=202 ctermbg=233
 highlight CursorLine   ctermbg=233
 highlight SpecialKey   ctermbg=233
+highlight clear SignColumn
+highlight SignColumn ctermbg=233
 
 let g:indentLine_color_term = '235'
 "let g:indentLine_char = '┊'
@@ -92,9 +95,12 @@ set foldnestmax=1
 " Erlang
 set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
 " this should reflect the kerl setting
-set runtimepath^=/usr/local/erlang/R16B03-1/bin/erl
+set runtimepath^=/usr/local/erlang/kredotp/bin/erl
 
-let g:syntastic_auto_loc_list = 1
+let g:ale_statusline_format = ['%d⨉', '%d⚠', '⬥ ok']
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+"let g:syntastic_auto_loc_list = 1
 "let g:airline_section_a =      '(mode, crypt, paste, spell, iminsert)'
 "let g:airline_section_b =      (hunks, branch)
 "let g:airline_section_c =      (bufferline or filename)
@@ -103,8 +109,10 @@ let g:syntastic_auto_loc_list = 1
 let g:airline_section_c = ''
 let g:airline_section_y = '' "      (fileencoding, fileformat)
 "let g:airline_section_z       (percentage, line number, column number)
-"let g:airline_section_error   (ycm_error_count, syntastic, eclim)
-"let g:airline_section_warning (ycm_warning_count, whitespace)
+let g:airline_section_error = '%q'
+"ycm_error_count, syntastic, eclim)
+let g:airline_section_warning = '%{ALEGetStatusLine()}'
+"(ycm_warning_count, whitespace)
 
 set scrolloff=16 " Keep 3 lines below and above the cursor
 set tabstop=2
