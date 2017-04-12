@@ -72,6 +72,9 @@ highlight CursorLine   ctermbg=233
 highlight SpecialKey   ctermbg=233
 highlight clear SignColumn
 highlight SignColumn ctermbg=233
+highlight DiffAdd    ctermbg=233
+highlight DiffDelete ctermbg=233
+highlight DiffChange ctermbg=233
 
 let g:indentLine_color_term = '235'
 "let g:indentLine_char = '┊'
