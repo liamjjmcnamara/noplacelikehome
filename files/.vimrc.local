@@ -76,7 +76,7 @@ highlight DiffAdd    ctermbg=233
 highlight DiffDelete ctermbg=233
 highlight DiffChange ctermbg=233
 
-let g:indentLine_color_term = '235'
+let g:indentLine_color_term = '236'
 "let g:indentLine_char = '┊'
 let g:indentLine_char = ' '
 let g:indentLine_first_char = '│'
