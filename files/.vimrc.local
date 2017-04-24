@@ -2,6 +2,7 @@ UnBundle 'airblade/vim-gitgutter'
 UnBundle 'spf13/vim-autoclose'
 UnBundle 'AutoClose'
 UnBundle 'numbers.vim'
+UnBundle 'vim-syntastic/syntastic'
 Plugin 'vim-erlang/vim-erlang-compiler'
 Plugin 'vim-erlang/vim-erlang-runtime'
 Plugin 'Yggdroot/indentLine'
@@ -62,6 +63,7 @@ set wrap linebreak nolist
 set ttyfast
 set colorcolumn=81
 set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
 set clipboard=unnamed
 set tags=./tags;/
 
@@ -108,7 +110,7 @@ let g:ale_echo_msg_warning_str = 'W'
 "let g:airline_section_b =      (hunks, branch)
 "let g:airline_section_c =      (bufferline or filename)
 "let g:airline_section_gutter=  (readonly, csv)
-"let g:airline_section_x       (tagbar, filetype, virtualenv)
+"let g:airline_section_x =      '(tagbar, filetype, virtualenv)'
 let g:airline_section_c = ''
 let g:airline_section_y = '' "      (fileencoding, fileformat)
 "let g:airline_section_z       (percentage, line number, column number)
@@ -126,3 +128,12 @@ cmap w!! w !sudo tee % > /dev/null
 " filetype specifc
 autocmd FileType erlang setlocal shiftwidth=2 tabstop=2
 autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
+
+autocmd FileType nerdtree set norelativenumber
+autocmd FileType taglist set norelativenumber
+
+nnoremap <Leader>f NERDTreeToggle()<CR>
+nnoremap <Leader>t TagbarToggle()<CR>
+map <C-n> :NERDTreeToggle<CR>
+
+

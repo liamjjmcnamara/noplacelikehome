@@ -35,7 +35,7 @@ KEYTIMEOUT=1
 eval "$(dircolors ~/.dircolors)"
 alias ls="gls --color=auto"
 alias l="ls -l"
-alias tt="tree -C -L 2"
+alias tt="tree -C -L 2 -F -A"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
