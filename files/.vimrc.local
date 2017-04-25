@@ -14,7 +14,7 @@ Plugin 'Konfekt/FoldText'
 Plugin 'yuttie/comfortable-motion.vim'
 Plugin 'w0rp/ale'
 Plugin 'christoomey/vim-tmux-navigator'
-
+"Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
 
@@ -48,27 +48,6 @@ nnoremap <space> za
 " set nofoldenable " don't fold by default
 set foldlevel=99
 set sw=2
-function! MyFoldText()
-    let nl = v:foldend - v:foldstart + 1
-    let comment = substitute(getline(v:foldstart),"^ *","",1)
-    let linetext = substitute(getline(v:foldstart),"^ *","",1)
-    let txt = ' +' . linetext . ' : "' . comment . '" : length ' . nl
-    return txt
-endfunction
-set foldtext=MyFoldText()
-set foldnestmax=1
-function! NeatFoldText()
-    let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-    let lines_count = v:foldend - v:foldstart + 1
-    let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-    let foldchar = matchstr(&fillchars, 'fold:\zs.')
-    let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-    let foldtextend = lines_count_text . repeat(foldchar, 8)
-    let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-    return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-endfunction
-
-"set foldtext=NeatFoldText()
 
 nnoremap K kJ
 nnoremap Q @q
@@ -80,8 +59,7 @@ map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 
 nnoremap <Leader>t :TagbarToggle<CR>
-nnoremap <Leader>f :Lexplore<CR>
-map <C-n> :NERDTreeToggle<CR>
+nnoremap <Leader>f :NERDTreeToggle<CR>
 
 set timeoutlen=300 ttimeoutlen=500
 aug netrw_close
@@ -124,7 +102,7 @@ highlight DiffChange ctermbg=233
 " Lint ale
 highlight ALEErrorSign   ctermfg=1 ctermbg=233
 highlight ALEWarningSign ctermfg=202 ctermbg=233
-let g:ale_sign_error = '⨉'
+let g:ale_sign_error = '⤬'
 let g:ale_sign_warning = '⚠'
 
 let g:indentLine_color_term = '239'
@@ -143,7 +121,7 @@ set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
 " this should reflect the kerl setting
 set runtimepath^=/usr/local/erlang/kredotp/bin/erl
 
-let g:ale_statusline_format = ['%d⨉', '%d⚠', '⬥ ok']
+let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 "let g:syntastic_auto_loc_list = 1
