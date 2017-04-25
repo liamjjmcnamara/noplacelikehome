@@ -16,39 +16,30 @@ Plugin 'w0rp/ale'
 Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'Xuyuanp/nerdtree-git-plugin'
 
-autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
 
 set nonumber
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11j
 set nu!
 set spell!
-
-set timeoutlen=1000  ttimeoutlen=0
-set ttimeoutlen=10
-augroup FastEscape
-  autocmd!
-  au InsertEnter * set timeoutlen=0
-  au InsertLeave * set timeoutlen=1000
-augroup END
-autocmd WinEnter,FocusGained * :setlocal relativenumber
-autocmd WinLeave,FocusLost *   :setlocal norelativenumber
-autocmd InsertEnter        *   :setlocal norelativenumber
-autocmd InsertLeave *          :setlocal relativenumber
-
-let g:neocomplcache_disable_auto_complete = 1
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_enable_on_vim_startup = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
-
-set foldmethod=indent
-autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
-set foldenable
-nnoremap <space> za
-" set nofoldenable " don't fold by default
-set foldlevel=99
 set sw=2
+set wrap linebreak nolist
+set ttyfast
+set colorcolumn=81
+set list
+set clipboard=unnamed
+set tags=./tags;/
+set scrolloff=16 " Keep 3 lines below and above the cursor
+set tabstop=2
+set expandtab
+set timeoutlen=300 ttimeoutlen=300
+set ttimeoutlen=10
+set foldmethod=indent
+set foldenable
+set foldlevel=99
+nnoremap <space> za
+autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
 
+cmap w!! w !sudo tee % > /dev/null
 nnoremap K kJ
 nnoremap Q @q
 vnoremap // y/<C-R>"<CR>
@@ -57,35 +48,43 @@ vnoremap // y/<C-R>"<CR>
 map <Leader>vp :VimuxPromptCommand<CR>
 " Run last command executed by VimuxRunCommand
 map <Leader>vl :VimuxRunLastCommand<CR>
-
 nnoremap <Leader>t :TagbarToggle<CR>
 nnoremap <Leader>f :NERDTreeToggle<CR>
 
-set timeoutlen=300 ttimeoutlen=500
-aug netrw_close
-	au!
-	au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw"|q|endif
-aug END
 let g:netrw_banner = 0
 let g:netrw_liststyle = 6
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
-"augroup ProjectDrawer
-"	autocmd!
-"	autocmd VimEnter * :Vexplore
-"augroup END
+let g:neocomplcache_disable_auto_complete = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_enable_on_vim_startup = 0
+let g:indentLine_color_term = '239'
+let g:indentLine_char = ' '
+let g:indentLine_first_char = '┊'
+let g:indentLine_showFirstIndentLevel = "1"
+let g:indentLine_color_dark = 1 " (default: 2)
+let g:indentLine_concealcursor=''
+let g:indentLine_faster = '1'
+let g:AutoPairs = {}
+let g:ale_sign_error = '⤬'
+let g:ale_sign_warning = '⚠'
+let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
 
-
-"set tags=~/.vim/tags/stdlibcpp
-"set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
-"
-set wrap linebreak nolist
-set ttyfast
-set colorcolumn=81
-set list
-set clipboard=unnamed
-set tags=./tags;/
+"let g:airline_section_a =      '(mode, crypt, paste, spell, iminsert)'
+"let g:airline_section_b =      (hunks, branch)
+"let g:airline_section_c =      (bufferline or filename)
+"let g:airline_section_gutter=  (readonly, csv)
+"let g:airline_section_x =      '(tagbar, filetype, virtualenv)'
+let g:airline_section_c = ''
+let g:airline_section_y = '' "      (fileencoding, fileformat)
+"let g:airline_section_z       (percentage, line number, column number)
+let g:airline_section_error = '%q'
+"ycm_error_count, syntastic, eclim)
+let g:airline_section_warning = '%{ALEGetStatusLine()}'
+"(ycm_warning_count, whitespace)
 
 " Line numbers
 highlight ColorColumn  ctermbg=233
@@ -102,53 +101,35 @@ highlight DiffChange ctermbg=233
 " Lint ale
 highlight ALEErrorSign   ctermfg=1 ctermbg=233
 highlight ALEWarningSign ctermfg=202 ctermbg=233
-let g:ale_sign_error = '⤬'
-let g:ale_sign_warning = '⚠'
 
-let g:indentLine_color_term = '239'
-"let g:indentLine_char = '┊'
-let g:indentLine_char = ' '
-"let g:indentLine_first_char = '│'
-let g:indentLine_first_char = '┊'
-let g:indentLine_showFirstIndentLevel = "1"
-let g:indentLine_color_dark = 1 " (default: 2)
-let g:indentLine_concealcursor=''
-let g:indentLine_faster = '1'
-let g:AutoPairs = {}
+" filetype specifc
+autocmd FileType erlang setlocal shiftwidth=2 tabstop=2
+autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
+autocmd FileType nerdtree set norelativenumber
+autocmd FileType netrw set nonumber
+autocmd FileType taglist set nonumber norelativenumber
+
+autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
+autocmd WinEnter,FocusGained * :setlocal relativenumber
+autocmd WinLeave,FocusLost *   :setlocal norelativenumber
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
+autocmd InsertEnter        *   :setlocal norelativenumber
+autocmd InsertLeave *          :setlocal relativenumber
+
+augroup FastEscape
+  autocmd!
+  au InsertEnter * set timeoutlen=0
+  au InsertLeave * set timeoutlen=1000
+augroup END
+
+aug netrw_close
+	au!
+	au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw"|q|endif
+aug END
 
 " Erlang
 set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
 " this should reflect the kerl setting
 set runtimepath^=/usr/local/erlang/kredotp/bin/erl
-
-let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-"let g:syntastic_auto_loc_list = 1
-"let g:airline_section_a =      '(mode, crypt, paste, spell, iminsert)'
-"let g:airline_section_b =      (hunks, branch)
-"let g:airline_section_c =      (bufferline or filename)
-"let g:airline_section_gutter=  (readonly, csv)
-"let g:airline_section_x =      '(tagbar, filetype, virtualenv)'
-let g:airline_section_c = ''
-let g:airline_section_y = '' "      (fileencoding, fileformat)
-"let g:airline_section_z       (percentage, line number, column number)
-let g:airline_section_error = '%q'
-"ycm_error_count, syntastic, eclim)
-let g:airline_section_warning = '%{ALEGetStatusLine()}'
-"(ycm_warning_count, whitespace)
-
-set scrolloff=16 " Keep 3 lines below and above the cursor
-set tabstop=2
-set expandtab
-
-cmap w!! w !sudo tee % > /dev/null
-
-" filetype specifc
-autocmd FileType erlang setlocal shiftwidth=2 tabstop=2
-autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
-
-autocmd FileType nerdtree set norelativenumber
-autocmd FileType netrw set nonumber
-autocmd FileType taglist set nonumber norelativenumber
 
