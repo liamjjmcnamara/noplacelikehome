@@ -106,16 +106,16 @@ highlight ALEWarningSign ctermfg=202 ctermbg=233
 autocmd FileType erlang setlocal shiftwidth=2 tabstop=2
 autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
 autocmd FileType nerdtree set norelativenumber
-autocmd FileType netrw set nonumber
-autocmd FileType taglist set nonumber norelativenumber
+autocmd FileType netrw    set nonumber
+autocmd FileType taglist  set nonumber norelativenumber
 
 autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
-autocmd WinEnter,FocusGained * :setlocal relativenumber
-autocmd WinLeave,FocusLost *   :setlocal norelativenumber
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
-autocmd InsertEnter        *   :setlocal norelativenumber
-autocmd InsertLeave *          :setlocal relativenumber
+autocmd WinEnter,FocusGained * :setlocal relativenumber
+autocmd WinLeave,FocusLost   * :setlocal norelativenumber
+autocmd InsertEnter          * :setlocal norelativenumber
+autocmd InsertLeave          * :setlocal relativenumber
 
 augroup FastEscape
   autocmd!
