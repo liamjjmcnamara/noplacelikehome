@@ -16,7 +16,7 @@ Plugin 'w0rp/ale'
 Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'Xuyuanp/nerdtree-git-plugin'
 
-
+" Settings
 set nonumber
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11j
 set nu!
@@ -33,12 +33,15 @@ set tabstop=2
 set expandtab
 set timeoutlen=300 ttimeoutlen=300
 set ttimeoutlen=10
+
+" Folding
 set foldmethod=indent
 set foldenable
 set foldlevel=99
 nnoremap <space> za
 autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
 
+" Remaps
 cmap w!! w !sudo tee % > /dev/null
 nnoremap K kJ
 nnoremap Q @q
@@ -51,6 +54,21 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 nnoremap <Leader>t :TagbarToggle<CR>
 nnoremap <Leader>f :NERDTreeToggle<CR>
 
+" File extension colouring
+function! NERDTreeHighlightFile(extension, fg, bg)
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:bg .' guifg='. a:fg
+endfunction
+call NERDTreeHighlightFile('txt', 'white', 'black')
+call NERDTreeHighlightFile('erl', 'yellow', 'black')
+
+let g:NERDTreeWinSize = 25
+let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
+let NERDTreeQuitOnOpen = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let g:NERDTreeShowHidden=0
+let g:NERDTreeBookmarksSort = 0
 let g:netrw_banner = 0
 let g:netrw_liststyle = 6
 let g:netrw_browse_split = 4
@@ -116,6 +134,17 @@ autocmd WinEnter,FocusGained * :setlocal relativenumber
 autocmd WinLeave,FocusLost   * :setlocal norelativenumber
 autocmd InsertEnter          * :setlocal norelativenumber
 autocmd InsertLeave          * :setlocal relativenumber
+
+nnoremap <silent> <c-\><Left> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-\><Down> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-\><Up> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-\><Right> :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\>h :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-\>j :TmuxNavigateDown<cr>
+nnoremap <silent> <c-\>k :TmuxNavigateUp<cr>
+nnoremap <silent> <c-\>l :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\><bslash> :TmuxNavigatePrevious<cr>
+nnoremap <silent> <c-\><c-h> :TmuxNavigateLeft<cr>
 
 augroup FastEscape
   autocmd!
