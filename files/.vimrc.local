@@ -54,19 +54,27 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 nnoremap <Leader>t :TagbarToggle<CR>
 nnoremap <Leader>f :NERDTreeToggle<CR>
 
-" File extension colouring
-function! NERDTreeHighlightFile(extension, fg, bg)
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:bg .' guifg='. a:fg
-endfunction
-call NERDTreeHighlightFile('txt', 'white', 'black')
-call NERDTreeHighlightFile('erl', 'yellow', 'black')
+set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)\ -\ %{v:servername}
+autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
 
-let g:NERDTreeWinSize = 25
+" File extension colouring
+function! NERDTreeHighlightFile(extension, fg)
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+ exec 'autocmd filetype nerdtree highlight ' . a:extension . ' ctermfg='. a:fg .' guifg='. a:fg
+endfunction
+call NERDTreeHighlightFile('txt', 'white')
+call NERDTreeHighlightFile('erl', 'yellow')
+call NERDTreeHighlightFile('hrl', 'darkblue')
+call NERDTreeHighlightFile('beam', 'darkgray')
+call NERDTreeHighlightFile('html', 'blue')
+hi Directory ctermfg='blue'
+
+let g:NERDTreeWinSize = 30
 let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
 let NERDTreeQuitOnOpen = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+let g:tagbar_width=20
 let g:NERDTreeShowHidden=0
 let g:NERDTreeBookmarksSort = 0
 let g:netrw_banner = 0
@@ -90,7 +98,7 @@ let g:ale_sign_warning = '⚠'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
-
+let g:ale_erlang_erlc_options = '-I../include -I../../*/include -I../.. -I../_build/default/lib -I/Users/liam.mcnamara/code/id -I/Users/liam.mcnamara/code/fredp'
 "let g:airline_section_a =      '(mode, crypt, paste, spell, iminsert)'
 "let g:airline_section_b =      (hunks, branch)
 "let g:airline_section_c =      (bufferline or filename)
