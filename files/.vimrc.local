@@ -165,6 +165,13 @@ aug netrw_close
 	au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw"|q|endif
 aug END
 
+" Skeleton templates
+augroup templates
+  autocmd BufNewFile *.sh      0r ~/.vim/templates/skeleton.sh
+  autocmd BufNewFile *.erl     0r ~/.vim/templates/skeleton.erl
+  autocmd BufNewFile *.escript 0r ~/.vim/templates/skeleton.escript
+augroup END
+
 " Erlang
 set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
 " this should reflect the kerl setting

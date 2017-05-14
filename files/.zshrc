@@ -44,7 +44,7 @@ alias id='cd ~/code/id'
 alias lt="ls --sort=time"
 alias d="docker"
 alias g="git"
-alias xg="xargs grep -d skip"
+alias xg="xargs grep -sn"
 alias gca="git commit -a"
 alias docker_purge="docker rm $( docker ps -q -f status=exited )"
 alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome.git"'

@@ -114,20 +114,20 @@ update_tmux() {
         find_git_dirty
 
         GIT_FLAGS=($GIT_STASH)
-        
+
         TMUX_STATUS_DEFINITION
-        
+
         if [ "$GIT_DIRTY" ]; then 
             tmux set-window-option status-$TMUX_STATUS_LOCATION-attr bright > /dev/null
         else
             tmux set-window-option status-$TMUX_STATUS_LOCATION-attr none > /dev/null
         fi
-        
+
         tmux set-window-option status-$TMUX_STATUS_LOCATION "$TMUX_STATUS" > /dev/null            
 
     else
         find_git_repo
-        
+
         if [[ $GIT_REPO ]]; then
             export TMUX_GIT_LASTREPO="$GIT_REPO"
             update_tmux
@@ -140,7 +140,6 @@ update_tmux() {
             tmux set-window-option status-$TMUX_STATUS_LOCATION "$TMUX_OUTREPO_STATUS" > /dev/null
         fi
     fi
-
 }
 
 # Update the prompt for execute the script

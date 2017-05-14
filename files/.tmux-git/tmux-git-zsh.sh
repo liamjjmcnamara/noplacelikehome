@@ -111,10 +111,12 @@ update_tmux() {
     CMD="/usr/local/Cellar/coreutils/8.26/bin/greadlink -e $(pwd)"
     CWD=`eval ${CMD}`
 
+    find_git_repo
+
     LASTREPO_LEN=${#TMUX_GIT_LASTREPO}
 
     if [[ $TMUX_GIT_LASTREPO ]] && [ "$TMUX_GIT_LASTREPO" = "${CWD:0:$LASTREPO_LEN}" ]; then
-        GIT_REPO="$TMUX_GIT_LASTREPO"
+        #GIT_REPO="$TMUX_GIT_LASTREPO"
         #echo $GIT_REPO
         # Get the info
         find_git_branch "$GIT_REPO"
@@ -134,8 +136,6 @@ update_tmux() {
         tmux set-window-option status-$TMUX_STATUS_LOCATION "$TMUX_STATUS" > /dev/null
 
     else
-        find_git_repo
-
         if [[ $GIT_REPO ]]; then
             export TMUX_GIT_LASTREPO="$GIT_REPO"
             update_tmux
