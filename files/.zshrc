@@ -40,8 +40,8 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias id='cd ~/code/id'
-
 alias lt="ls --sort=time"
+alias v="vi"
 alias d="docker"
 alias g="git"
 alias xg="xargs grep -sn"

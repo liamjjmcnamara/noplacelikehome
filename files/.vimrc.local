@@ -1,20 +1,3 @@
-UnBundle 'airblade/vim-gitgutter'
-UnBundle 'spf13/vim-autoclose'
-UnBundle 'AutoClose'
-UnBundle 'numbers.vim'
-UnBundle 'vim-syntastic/syntastic'
-Plugin 'vim-erlang/vim-erlang-compiler'
-Plugin 'vim-erlang/vim-erlang-runtime'
-Plugin 'Yggdroot/indentLine'
-Plugin 'benmills/vimux'
-Plugin 'sjl/vitality'
-Plugin 'kana/vim-fakeclip'
-Plugin 'Konfekt/FastFold'
-Plugin 'Konfekt/FoldText'
-Plugin 'yuttie/comfortable-motion.vim'
-Plugin 'w0rp/ale'
-Plugin 'christoomey/vim-tmux-navigator'
-"Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " Settings
 set nonumber
@@ -40,6 +23,8 @@ set foldenable
 set foldlevel=99
 nnoremap <space> za
 autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
+
+"set t_kD=
 
 " Remaps
 cmap w!! w !sudo tee % > /dev/null
@@ -74,7 +59,7 @@ let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
 let NERDTreeQuitOnOpen = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-let g:tagbar_width=20
+let g:tagbar_width=30
 let g:NERDTreeShowHidden=0
 let g:NERDTreeBookmarksSort = 0
 let g:netrw_banner = 0
@@ -105,7 +90,7 @@ let g:ale_erlang_erlc_options = '-I../include -I../../*/include -I../.. -I../_bu
 "let g:airline_section_gutter=  (readonly, csv)
 "let g:airline_section_x =      '(tagbar, filetype, virtualenv)'
 let g:airline_section_c = ''
-let g:airline_section_y = '' "      (fileencoding, fileformat)
+"let g:airline_section_y = '' "      (fileencoding, fileformat)
 "let g:airline_section_z       (percentage, line number, column number)
 let g:airline_section_error = '%q'
 "ycm_error_count, syntastic, eclim)
@@ -129,7 +114,7 @@ highlight ALEErrorSign   ctermfg=1 ctermbg=233
 highlight ALEWarningSign ctermfg=202 ctermbg=233
 
 " filetype specifc
-autocmd FileType erlang setlocal shiftwidth=2 tabstop=2
+autocmd FileType erlang setlocal shiftwidth=0 tabstop=2 softtabstop=2 sw=2 ts=2 sts=2
 autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
 autocmd FileType nerdtree set norelativenumber
 autocmd FileType netrw    set nonumber
