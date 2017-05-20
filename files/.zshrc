@@ -78,11 +78,12 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-bindkey -v '^?' backward-delete-char
+#bindkey -v '^?' backward-delete-char
 bindkey '^R' history-incremental-search-backward
 bindkey "^A" beginning-of-line
 bindkey "^[[A" up-line-or-history
 bindkey "^[[B" down-line-or-history
+bindkey    "^[[3~" delete-char
 
 source <(kubectl completion zsh)
 
