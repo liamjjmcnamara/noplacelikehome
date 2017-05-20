@@ -39,8 +39,6 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 nnoremap <Leader>t :TagbarToggle<CR>
 nnoremap <Leader>f :NERDTreeToggle<CR>
 
-set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)\ -\ %{v:servername}
-autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
 
 " File extension colouring
 function! NERDTreeHighlightFile(extension, fg)
@@ -90,7 +88,7 @@ let g:ale_erlang_erlc_options = '-I../include -I../../*/include -I../.. -I../_bu
 "let g:airline_section_gutter=  (readonly, csv)
 "let g:airline_section_x =      '(tagbar, filetype, virtualenv)'
 let g:airline_section_c = ''
-"let g:airline_section_y = '' "      (fileencoding, fileformat)
+let g:airline_section_y = '' "      (fileencoding, fileformat)
 "let g:airline_section_z       (percentage, line number, column number)
 let g:airline_section_error = '%q'
 "ycm_error_count, syntastic, eclim)
@@ -113,20 +111,6 @@ highlight DiffChange ctermbg=233
 highlight ALEErrorSign   ctermfg=1 ctermbg=233
 highlight ALEWarningSign ctermfg=202 ctermbg=233
 
-" filetype specifc
-autocmd FileType erlang setlocal shiftwidth=0 tabstop=2 softtabstop=2 sw=2 ts=2 sts=2
-autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
-autocmd FileType nerdtree set norelativenumber
-autocmd FileType netrw    set nonumber
-autocmd FileType taglist  set nonumber norelativenumber
-
-autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
-autocmd WinEnter,FocusGained * :setlocal relativenumber
-autocmd WinLeave,FocusLost   * :setlocal norelativenumber
-autocmd InsertEnter          * :setlocal norelativenumber
-autocmd InsertLeave          * :setlocal relativenumber
 
 nnoremap <silent> <c-\><Left> :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-\><Down> :TmuxNavigateDown<cr>
@@ -157,6 +141,27 @@ augroup templates
   autocmd BufNewFile *.escript 0r ~/.vim/templates/skeleton.escript
 augroup END
 
+" filetype specifc
+autocmd FileType erlang setlocal shiftwidth=0 tabstop=2 softtabstop=2 sw=2 ts=2 sts=2
+autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
+autocmd FileType nerdtree set norelativenumber
+autocmd FileType netrw    set nonumber
+autocmd FileType taglist  set nonumber norelativenumber
+
+autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
+autocmd WinEnter,FocusGained * :setlocal relativenumber
+autocmd WinLeave,FocusLost   * :setlocal norelativenumber
+autocmd InsertEnter          * :setlocal norelativenumber
+autocmd InsertLeave          * :setlocal relativenumber
+
+"set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)\ -\ %{v:servername}
+autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
+autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
+
+let &titlestring = expand("%:p")
+set title
 " Erlang
 set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
 " this should reflect the kerl setting
