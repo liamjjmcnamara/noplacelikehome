@@ -10,12 +10,14 @@
 	stat = status --short --branch
 	grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
 	glog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
+  ls = log --oneline
 	co = checkout
 	br = branch
 	ci = commit
 	st = status
 	cam = commit -am --
-	cob = checkout -b --
+  cam = "!f() { git commit  -am $@; }; f"
+  cob = "!f() { git checkout -b $1; }; f"
 	last = log -1 HEAD
 [core]
 	excludesfile = ~/.gitignore
