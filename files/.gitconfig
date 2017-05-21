@@ -16,8 +16,7 @@
 	ci = commit
 	st = status
   cam = commit -S -am
-  #cam = "!f() { git commit  -a -m $@; }; f"
-  cob = "!f() { git checkout -b $1; }; f"
+  cob = checkout -b
 	last = log -1 HEAD
 [core]
 	excludesfile = ~/.gitignore
