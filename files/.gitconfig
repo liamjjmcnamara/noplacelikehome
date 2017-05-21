@@ -16,7 +16,7 @@
 	ci = commit
 	st = status
 	cam = commit -am --
-  cam = "!f() { git commit  -am $@; }; f"
+  cam = "!f() { git commit  -a -m $@; }; f"
   cob = "!f() { git checkout -b $1; }; f"
 	last = log -1 HEAD
 [core]
