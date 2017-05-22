@@ -15,8 +15,8 @@
 	br = branch
 	ci = commit
 	st = status
-  cam = commit -S -am
-  cob = checkout -b
+	cam = commit -S -am
+	cob = checkout -b
 	last = log -1 HEAD
 [core]
 	excludesfile = ~/.gitignore

@@ -53,10 +53,10 @@ alias r3="rebar3"
 git config --global alias.stat 'status --short --branch'
 git config --global alias.glog 'log --graph --abbrev-commit --decorate --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"'
 git config --global alias.co checkout
-git config --global alias.cob 'checkout -b --'
+git config --global alias.cob 'checkout -b'
 git config --global alias.br branch
 git config --global alias.ci commit
-git config --global alias.cam 'commit -am --'
+git config --global alias.cam 'commit -S -am'
 git config --global alias.st status
 git config --global alias.last 'log -1 HEAD'
 
