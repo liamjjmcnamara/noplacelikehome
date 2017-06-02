@@ -152,7 +152,7 @@
     " General Programming {
         if count(g:spf13_bundle_groups, 'programming')
             " Pick one of the checksyntax, jslint, or syntastic
-            Bundle 'scrooloose/syntastic'
+            "Bundle 'scrooloose/syntastic'
             Bundle 'tpope/vim-fugitive'
             Bundle 'mattn/webapi-vim'
             Bundle 'mattn/gist-vim'
@@ -309,3 +309,21 @@
         source ~/.vimrc.bundles.local
     endif
 " }
+"
+
+UnBundle 'airblade/vim-gitgutter'
+UnBundle 'spf13/vim-autoclose'
+UnBundle 'AutoClose'
+UnBundle 'numbers.vim'
+UnBundle 'vim-syntastic/syntastic'
+Plugin 'vim-erlang/vim-erlang-compiler'
+Plugin 'vim-erlang/vim-erlang-runtime'
+Plugin 'Yggdroot/indentLine'
+Plugin 'benmills/vimux'
+Plugin 'kana/vim-fakeclip'
+Plugin 'Konfekt/FastFold'
+Plugin 'Konfekt/FoldText'
+Plugin 'yuttie/comfortable-motion.vim'
+Plugin 'w0rp/ale'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
