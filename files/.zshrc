@@ -1,7 +1,10 @@
 # oh my zsh
 export ZSH=/Users/liam.mcnamara/.oh-my-zsh
 plugins=(git osx)
-source $ZSH/oh-my-zsh.sh
+
+if [ -e $ZSH/oh-my-zsh.sh ]; then
+  source $ZSH/oh-my-zsh.sh
+fi
 
 setopt PROMPT_SUBST
 #export PS1=$'\ek$(basename $(pwd))\e\\[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
@@ -77,7 +80,6 @@ if [[ -n $TMUX  ]]; then
 fi
 precmd() { eval "$PROMPT_COMMAND" }
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -91,6 +93,11 @@ bindkey    "^[[3~" delete-char
 source <(kubectl completion zsh)
 
 CASE_SENSITIVE="true"
+bindkey '^e' end-of-line
+
+if [ -e /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # Allow local specifics
 if [ -e ~/.zshrc.local ]; then

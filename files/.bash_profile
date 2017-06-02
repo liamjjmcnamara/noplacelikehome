@@ -23,19 +23,7 @@ export EDITOR="vim"
 export PATH="/usr/local/sbin:$PATH:$HOME/bin"
 export GPG_TTY=$(tty)
 
-#export DOCKER_CERT_PATH=/Users/ljjm/.boot2docker/certs/boot2docker-vm
-#export DOCKER_TLS_VERIFY=1
-#export DOCKER_HOST=tcp://192.168.59.103:2376
-#export DOCKER_HOST=tcp://localhost:4243
-
-
-# nice informative PS1
-# export PS1="\[\033[0;37m\][\[\033[1;37m\]$HOST\[\033[0;37m\]]<\[\033[1;37m\]\W\[\033[0;37m\]>"
 export PS1="[$HOST]<\W>"
-# only set CDPATH in interactive shells
-# if test “${PS1+set}”; then CDPATH=".:~:~/code:~/code/fredp"; fi
-# avoid cd output
-#alias cd='>/dev/null cd'
 
 # if mac
 if [ $OS == "Darwin"  ]; then
@@ -68,19 +56,11 @@ fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 ssh-add -l | grep "The agent has no identities" && ssh-add
 
-
-# label a window in tmux and set git status
-#if [[ -n $TMUX  ]]; then 
-#PROMPT_COMMAND='$(tmux rename-window $(pwd|sed 's,$HOME,~,'|sed s,.*/,, )/)'
-#source ~/.tmux-git/tmux-git-zsh.sh
-#fi
-
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 shopt -s cdspell
-
 
 if [ -e ~/.kerl/.kerlrc ]; then
   . ~/.kerl/.kerlrc
