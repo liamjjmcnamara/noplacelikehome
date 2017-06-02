@@ -39,7 +39,6 @@ alias tt="tree -C -L 2 -F -A"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias id='cd ~/code/id'
 alias lt="ls --sort=time"
 alias v="vi"
 alias d="docker"

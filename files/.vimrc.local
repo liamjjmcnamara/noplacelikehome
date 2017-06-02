@@ -16,6 +16,7 @@ set tabstop=2
 set expandtab
 set timeoutlen=300 ttimeoutlen=300
 set ttimeoutlen=10
+set nobackup
 
 " Folding
 set foldmethod=indent
@@ -43,6 +44,9 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 nnoremap <Leader>t :TagbarToggle<CR>
 nnoremap <Leader>f :NERDTreeToggle<CR>
 
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
 " File extension colouring
 function! NERDTreeHighlightFile(extension, fg)
  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
@@ -52,7 +56,12 @@ call NERDTreeHighlightFile('txt', 'white')
 call NERDTreeHighlightFile('erl', 'yellow')
 call NERDTreeHighlightFile('hrl', 'darkblue')
 call NERDTreeHighlightFile('beam', 'darkgray')
+call NERDTreeHighlightFile('log', 'darkgray')
 call NERDTreeHighlightFile('html', 'blue')
+call NERDTreeHighlightFile('mk', 'white')
+call NERDTreeHighlightFile('Makefile', 'white')
+call NERDTreeHighlightFile('md', 'gray')
+call NERDTreeHighlightFile('config', 'darkred')
 hi Directory ctermfg='blue'
 
 let g:NERDTreeWinSize = 30
@@ -63,11 +72,6 @@ let NERDTreeDirArrows = 1
 let g:tagbar_width=30
 let g:NERDTreeShowHidden=0
 let g:NERDTreeBookmarksSort = 0
-let g:netrw_banner = 0
-let g:netrw_liststyle = 6
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
 let g:neocomplcache_disable_auto_complete = 1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 0
