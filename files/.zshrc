@@ -1,5 +1,5 @@
 # oh my zsh
-export ZSH=/Users/liam.mcnamara/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 plugins=(git osx)
 
 if [ -e $ZSH/oh-my-zsh.sh ]; then
