@@ -35,7 +35,9 @@ HISTFILE=~/.zsh_history
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>/:'
 KEYTIMEOUT=1
 
-eval "$(dircolors ~/.dircolors)"
+if [ -e ~/.dircolors ]; then
+  eval "$(dircolors ~/.dircolors)"
+fi
 alias ls="gls --color=auto"
 alias l="ls -l"
 alias tt="tree -C -L 2 -F -A"
