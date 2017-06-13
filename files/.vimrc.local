@@ -64,31 +64,33 @@ call NERDTreeHighlightFile('md', 'gray')
 call NERDTreeHighlightFile('config', 'darkred')
 hi Directory ctermfg='blue'
 
-let g:NERDTreeWinSize = 30
 let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
-let NERDTreeQuitOnOpen = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let g:tagbar_width=30
-let g:NERDTreeShowHidden=0
 let g:NERDTreeBookmarksSort = 0
+let g:NERDTreeWinSize    = 30
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeMinimalUI  = 1
+let g:NERDTreeDirArrows  = 1
+let g:NERDTreeShowHidden = 0
+let g:tagbar_width = 30
+let g:tagbar_sort  = 0
 let g:neocomplcache_disable_auto_complete = 1
-let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 0
-let g:indentLine_color_term = '239'
-let g:indentLine_char = ' '
-let g:indentLine_first_char = '┊'
+let g:indent_guides_auto_colors = 0
 let g:indentLine_showFirstIndentLevel = "1"
+let g:indentLine_concealcursor = ''
+let g:indentLine_first_char    = '┊'
 let g:indentLine_color_dark = 1 " (default: 2)
-let g:indentLine_concealcursor=''
+let g:indentLine_color_term = '239'
 let g:indentLine_faster = '1'
+let g:indentLine_char   = ' '
 let g:AutoPairs = {}
-let g:ale_sign_error = '⤬'
+let g:ale_sign_error   = '⤬'
 let g:ale_sign_warning = '⚠'
-let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
-let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_error_str   = 'E'
 let g:ale_echo_msg_warning_str = 'W'
+let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
 let g:ale_erlang_erlc_options = '-I../include -I../../*/include -I../.. -I../_build/default/lib -I/Users/liam.mcnamara/code/id -I/Users/liam.mcnamara/code/fredp'
+
 let g:airline_theme='distinguished'
 "let g:airline_section_a =      '(mode, crypt, paste, spell, iminsert)'
 "let g:airline_section_b =      (hunks, branch)
@@ -119,12 +121,12 @@ let g:bufferline_modified = '+'
 "   \ } | :AirlineRefresh
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#show_close_button = 1
-let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tabline#fnamemod     = ':t'
 let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-let g:airline#extensions#tabline#show_splits = 1
+let g:airline#extensions#tabline#show_tabs    = 0
+let g:airline#extensions#tabline#tab_nr_type  = 1 " tab number
+let g:airline#extensions#tabline#show_splits  = 1
 
 " Line numbers
 highlight ColorColumn  ctermbg=233
@@ -139,7 +141,7 @@ highlight DiffAdd    ctermbg=233
 highlight DiffDelete ctermbg=233
 highlight DiffChange ctermbg=233
 " Lint ale
-highlight ALEErrorSign   ctermfg=1 ctermbg=233
+highlight ALEErrorSign   ctermfg=1   ctermbg=233
 highlight ALEWarningSign ctermfg=202 ctermbg=233
 
 
