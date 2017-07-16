@@ -27,8 +27,8 @@ zle -N zle-keymap-select
 
 bindkey -v
 
-export ERL_LIBS=..
-export REBAR_DEPS_DIR=..
+#export ERL_LIBS=..
+#export REBAR_DEPS_DIR=..
 
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
@@ -88,20 +88,23 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 #bindkey -v '^?' backward-delete-char
 bindkey '^R' history-incremental-search-backward
 bindkey "^A" beginning-of-line
-bindkey "^[[A" up-line-or-history
-bindkey "^[[B" down-line-or-history
-bindkey    "^[[3~" delete-char
+bindkey "^[[A"  up-line-or-history
+bindkey "^[[B"  down-line-or-history
+bindkey "^[[3~" delete-char
+bindkey -e
+bindkey '[C' forward-word
+bindkey '[D' backward-word
+
+bindkey '^e' end-of-line
+CASE_SENSITIVE="true"
 
 source <(kubectl completion zsh)
 
-CASE_SENSITIVE="true"
-bindkey '^e' end-of-line
-
 if [ -e /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # Allow local specifics
 if [ -e ~/.zshrc.local ]; then
-  . ~/.zshrc.local
+  source ~/.zshrc.local
 fi

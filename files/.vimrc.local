@@ -36,6 +36,9 @@ map <leader>p :bp<cr>
 map <leader>d :bd<cr>
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
+" tag jumping
+nnoremap <leader>k <C-]>
+nnoremap <leader>j <C-T>
 
 " Prompt for a command to run map
 map <Leader>vp :VimuxPromptCommand<CR>
@@ -90,6 +93,9 @@ let g:ale_echo_msg_error_str   = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
 let g:ale_erlang_erlc_options = '-I../include -I../../*/include -I../.. -I../_build/default/lib -I/Users/liam.mcnamara/code/id -I/Users/liam.mcnamara/code/fredp'
+
+let g:lt_location_list_toggle_map = '<Leader>l'
+let g:lt_quickfix_list_toggle_map = '<Leader>x'
 
 let g:airline_theme='distinguished'
 "let g:airline_section_a =      '(mode, crypt, paste, spell, iminsert)'
