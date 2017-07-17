@@ -19,4 +19,4 @@
 	cob = checkout -b
 	last = log -1 HEAD
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/liam.mcnamara/.gitignore
