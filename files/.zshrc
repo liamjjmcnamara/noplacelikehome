@@ -41,6 +41,7 @@ fi
 alias ls="gls --color=auto"
 alias l="ls -l"
 alias tt="tree -C -L 2 -F -A"
+alias t="tt"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -48,7 +49,10 @@ alias lt="ls --sort=time"
 alias v="vi"
 alias d="docker"
 alias g="git"
+alias gs="git status"
+alias gr="grep -sn"
 alias xg="xargs grep -sn"
+alias fxg="find . | xargs grep -sn"
 alias gca="git commit -a"
 alias docker_purge="docker rm $( docker ps -q -f status=exited )"
 alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome.git"'
@@ -63,7 +67,7 @@ git config --global alias.ci commit
 git config --global alias.cam 'commit -S -am'
 git config --global alias.st status
 git config --global alias.last 'log -1 HEAD'
-
+git config --global commit.verbose true
 
 
 if [ -e ~/.kerl/.kerlrc ]; then

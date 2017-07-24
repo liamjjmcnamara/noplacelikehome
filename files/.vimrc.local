@@ -10,13 +10,16 @@ set ttyfast
 set colorcolumn=81
 set list
 set clipboard=unnamed
-set tags=./tags;/
 set scrolloff=16 " Keep 3 lines below and above the cursor
 set tabstop=2
 set expandtab
 set timeoutlen=300 ttimeoutlen=300
 set ttimeoutlen=10
 set nobackup
+set tags=./tags;/
+set tags+=~/code/id/tags
+let Tlist_Show_One_File = 1
+
 
 " Folding
 set foldmethod=indent
@@ -29,6 +32,7 @@ autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
 cmap w!! w !sudo tee % > /dev/null
 nnoremap K kJ
 nnoremap Q @q
+nnoremap # *
 vnoremap // y/<C-R>"<CR>
 " buffer switching
 map <leader>n :bn<cr>

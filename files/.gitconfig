@@ -20,3 +20,5 @@
 	last = log -1 HEAD
 [core]
 	excludesfile = /Users/liam.mcnamara/.gitignore
+[commit]
+	verbose = true
