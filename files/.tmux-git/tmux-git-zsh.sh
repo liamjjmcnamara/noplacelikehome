@@ -16,7 +16,7 @@ else
     # Linux
     READLINK='readlink -e'
 fi
-READLINK='/usr/local/Cellar/coreutils/8.27/bin/greadlink -e '
+READLINK='/usr/local/opt/coreutils/bin/greadlink -e '
 
 
 # Check for a configuration file.
@@ -59,14 +59,14 @@ fi
 
 # Taken from http://aaroncrane.co.uk/2009/03/git_branch_prompt/
 find_git_repo() {
-    local dir=$( /usr/local/Cellar/coreutils/8.26/bin/greadlink -e . )
+    local dir=$( /usr/local/opt/coreutils/bin/greadlink -e . )
     until [ $dir -ef '/' ]; do
         if [ -f $dir/.git/HEAD ]; then
             CMD="$READLINK $dir"
             GIT_REPO=`eval ${CMD}`
             return
         fi
-        dir=$( /usr/local/Cellar/coreutils/8.26/bin/greadlink -e $dir/.. )
+        dir=$( /usr/local/opt/coreutils/bin/greadlink -e $dir/.. )
     done
     GIT_REPO=''
     return
@@ -108,7 +108,7 @@ reset_tmux_git() {
 update_tmux() {
     # The trailing slash is for avoiding conflicts with repos with 
     # similar names. Kudos to https://github.com/tillt for the bug report
-    CMD="/usr/local/Cellar/coreutils/8.26/bin/greadlink -e $(pwd)"
+    CMD=" /usr/local/opt/coreutils/bin/greadlink -e $(pwd)"
     CWD=`eval ${CMD}`
 
     find_git_repo

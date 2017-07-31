@@ -69,8 +69,6 @@ call NERDTreeHighlightFile('mk', 'white')
 call NERDTreeHighlightFile('Makefile', 'white')
 call NERDTreeHighlightFile('md', 'gray')
 call NERDTreeHighlightFile('config', 'darkred')
-hi Directory ctermfg='blue'
-
 let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
 let g:NERDTreeBookmarksSort = 0
 let g:NERDTreeWinSize    = 30
@@ -80,7 +78,8 @@ let g:NERDTreeDirArrows  = 1
 let g:NERDTreeShowHidden = 0
 let g:tagbar_width = 30
 let g:tagbar_sort  = 0
-let g:neocomplcache_disable_auto_complete = 1
+let g:necomplete#enable_at_startup = 1
+let g:neocomplcache_disable_auto_complete = 0
 let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_auto_colors = 0
 let g:indentLine_showFirstIndentLevel = "1"
@@ -140,8 +139,8 @@ let g:airline#extensions#tabline#show_splits  = 1
 
 " Line numbers
 highlight ColorColumn  ctermbg=233
-highlight LineNr       ctermfg=239 ctermbg=233
-highlight CursorLineNr ctermfg=202 ctermbg=233
+highlight LineNr       ctermbg=233 ctermfg=239
+highlight CursorLineNr ctermbg=233 ctermfg=202
 highlight CursorLine   ctermbg=233
 highlight SpecialKey   ctermbg=233
 " Sign column for Git
@@ -151,20 +150,26 @@ highlight DiffAdd    ctermbg=233
 highlight DiffDelete ctermbg=233
 highlight DiffChange ctermbg=233
 " Lint ale
-highlight ALEErrorSign   ctermfg=1   ctermbg=233
-highlight ALEWarningSign ctermfg=202 ctermbg=233
+highlight ALEErrorSign   ctermbg=233 ctermfg=1
+highlight ALEWarningSign ctermbg=233 ctermfg=202
 
+hi Directory           ctermfg='blue'
+" popup menu
+hi Pmenu     ctermbg=0 ctermfg=202
+" popup selected
+hi PmenuSel  ctermbg=202 ctermfg=0
+hi PmenuSbar ctermbg=0 ctermfg=202
 
-nnoremap <silent> <c-\><Left> :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-\><Down> :TmuxNavigateDown<cr>
-nnoremap <silent> <c-\><Up> :TmuxNavigateUp<cr>
-nnoremap <silent> <c-\><Right> :TmuxNavigateRight<cr>
-nnoremap <silent> <c-\>h :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-\>j :TmuxNavigateDown<cr>
-nnoremap <silent> <c-\>k :TmuxNavigateUp<cr>
-nnoremap <silent> <c-\>l :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\><Left>   :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-\><Down>   :TmuxNavigateDown<cr>
+nnoremap <silent> <c-\><Up>     :TmuxNavigateUp<cr>
+nnoremap <silent> <c-\><Right>  :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\>h        :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-\>j        :TmuxNavigateDown<cr>
+nnoremap <silent> <c-\>k        :TmuxNavigateUp<cr>
+nnoremap <silent> <c-\>l        :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\><bslash> :TmuxNavigatePrevious<cr>
-nnoremap <silent> <c-\><c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
 
 augroup FastEscape
   autocmd!
@@ -203,10 +208,17 @@ autocmd InsertLeave          * :setlocal relativenumber
 autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
 autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
 
+"autocmd VimEnter * NeoCompleteEnable " Enable NeoComplete at startup
+set runtimepath^=~/.vim/bundle/vim-erlang-omnicomplete
+set omnifunc=syntaxcomplete#Complete
+
+
 let &titlestring = expand("%:p")
 set title
 " Erlang
-set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
+set runtimepath^=~/.vim/bundle/vim-erlang-runtime
+set runtimepath^=/path/to/vim-erlang-tags
+
 " this should reflect the kerl setting
 set runtimepath^=/usr/local/erlang/kredotp/bin/erl
 
