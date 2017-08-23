@@ -1,0 +1,2 @@
+cd ~
+mkdir -p code && cd code && git clone https://github.com/liamjjmcnamara/noplacelikehome.git && cd noplacelikehome && ./setup_config.sh && echo "There is no place like home!"
