@@ -20,7 +20,6 @@ set tags=./tags;/
 set tags+=~/code/id/tags
 let Tlist_Show_One_File = 1
 
-
 " Folding
 set foldmethod=indent
 set foldenable
@@ -138,29 +137,29 @@ let g:airline#extensions#tabline#tab_nr_type  = 1 " tab number
 let g:airline#extensions#tabline#show_splits  = 1
 
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-
+ 
 " Line numbers
-highlight ColorColumn  ctermbg=233
-highlight LineNr       ctermbg=233 ctermfg=239
-highlight CursorLineNr ctermbg=233 ctermfg=202
-highlight CursorLine   ctermbg=233
-highlight SpecialKey   ctermbg=233
+highlight ColorColumn  ctermbg=234
+highlight LineNr       ctermbg=234 ctermfg=239
+highlight CursorLineNr ctermbg=234 ctermfg=202
+highlight CursorLine   ctermbg=234
+highlight SpecialKey   ctermbg=234
 " Sign column for Git
 highlight clear SignColumn
-highlight SignColumn ctermbg=233
-highlight DiffAdd    ctermbg=233
-highlight DiffDelete ctermbg=233
-highlight DiffChange ctermbg=233
+highlight SignColumn ctermbg=234
+highlight DiffAdd    ctermbg=234
+highlight DiffDelete ctermbg=234
+highlight DiffChange ctermbg=234
 " Lint ale
-highlight ALEErrorSign   ctermbg=233 ctermfg=1
-highlight ALEWarningSign ctermbg=233 ctermfg=202
+highlight ALEErrorSign   ctermbg=234 ctermfg=1
+highlight ALEWarningSign ctermbg=234 ctermfg=202
 
-hi Directory           ctermfg='blue'
+highlight Directory ctermfg='blue'
 " popup menu
-hi Pmenu     ctermbg=0 ctermfg=202
+highlight Pmenu     ctermbg=0 ctermfg=202
 " popup selected
-hi PmenuSel  ctermbg=202 ctermfg=0
-hi PmenuSbar ctermbg=0 ctermfg=202
+highlight PmenuSel  ctermbg=202 ctermfg=0
+highlight PmenuSbar ctermbg=0 ctermfg=202
 
 nnoremap <silent> <c-\><Left>   :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-\><Down>   :TmuxNavigateDown<cr>
@@ -180,8 +179,8 @@ augroup FastEscape
 augroup END
 
 aug netrw_close
-	au!
-	au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw"|q|endif
+  au!
+  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw"|q|endif
 aug END
 
 " Skeleton templates
@@ -199,21 +198,18 @@ autocmd FileType netrw    set nonumber
 autocmd FileType taglist  set nonumber norelativenumber
 
 autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
 autocmd WinEnter,FocusGained * :setlocal relativenumber
 autocmd WinLeave,FocusLost   * :setlocal norelativenumber
 autocmd InsertEnter          * :setlocal norelativenumber
 autocmd InsertLeave          * :setlocal relativenumber
-
-"set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)\ -\ %{v:servername}
 autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
 autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
 
 "autocmd VimEnter * NeoCompleteEnable " Enable NeoComplete at startup
 set runtimepath^=~/.vim/bundle/vim-erlang-omnicomplete
 set omnifunc=syntaxcomplete#Complete
-
 
 let &titlestring = expand("%:p")
 set title
@@ -223,4 +219,3 @@ set runtimepath^=/path/to/vim-erlang-tags
 
 " this should reflect the kerl setting
 set runtimepath^=/usr/local/erlang/kredotp/bin/erl
-
