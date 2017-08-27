@@ -18,7 +18,6 @@ else
 fi
 READLINK='/usr/local/opt/coreutils/bin/greadlink -e '
 
-
 # Check for a configuration file.
 # Idea from https://github.com/michael-coleman
 if [ ! -f $CONFIG_FILE ]; then
