@@ -207,6 +207,8 @@ autocmd InsertLeave          * :setlocal relativenumber
 autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
 autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
 
+let &runtimepath=&runtimepath . ',/Users/liam.mcnamara/.vim/plugin'
+
 "autocmd VimEnter * NeoCompleteEnable " Enable NeoComplete at startup
 set runtimepath^=~/.vim/bundle/vim-erlang-omnicomplete
 set omnifunc=syntaxcomplete#Complete

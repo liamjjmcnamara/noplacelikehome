@@ -37,6 +37,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias lt="ls --sort=time"
+alias c="cd"
 alias v="vi"
 alias d="docker"
 alias g="git"
