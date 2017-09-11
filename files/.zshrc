@@ -111,3 +111,8 @@ fi
 if [ -e ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
+
+
+# Vi mode
+bindkey -v
+
