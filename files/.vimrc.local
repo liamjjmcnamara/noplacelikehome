@@ -1,10 +1,12 @@
+set encoding=utf-8
+scriptencoding utf-8
 
 " Settings
 set nonumber
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11j
-set nu!
+set number!
 set spell!
-set sw=2
+set shiftwidth=2
 set wrap linebreak nolist
 set ttyfast
 set colorcolumn=81
@@ -18,14 +20,13 @@ set ttimeoutlen=10
 set nobackup
 set tags=./tags;/
 set tags+=~/code/id/tags
-let Tlist_Show_One_File = 1
+let g:Tlist_Show_One_File = 1
 
 " Folding
 set foldmethod=indent
 set foldenable
 set foldlevel=99
 nnoremap <space> za
-autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
 
 " Remaps
 cmap w!! w !sudo tee % > /dev/null
@@ -34,14 +35,14 @@ nnoremap Q @q
 nnoremap # *
 vnoremap // y/<C-R>"<CR>
 " buffer switching
-map <leader>n :bn<cr>
-map <leader>p :bp<cr>
-map <leader>d :bd<cr>
+map <Leader>n :bn<cr>
+map <Leader>p :bp<cr>
+map <Leader>d :bd<cr>
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 " tag jumping
-nnoremap <leader>k <C-]>
-nnoremap <leader>j <C-T>
+nnoremap <Leader>k <C-]>
+nnoremap <Leader>j <C-T>
 
 " Prompt for a command to run map
 map <Leader>vp :VimuxPromptCommand<CR>
@@ -49,9 +50,6 @@ map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 nnoremap <Leader>t :TagbarToggle<CR>
 nnoremap <Leader>f :NERDTreeToggle<CR>
-
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " File extension colouring
 function! NERDTreeHighlightFile(extension, fg)
@@ -81,7 +79,7 @@ let g:necomplete#enable_at_startup = 1
 let g:neocomplcache_disable_auto_complete = 0
 let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_auto_colors = 0
-let g:indentLine_showFirstIndentLevel = "1"
+let g:indentLine_showFirstIndentLevel = '1'
 let g:indentLine_concealcursor = ''
 let g:indentLine_first_char    = '┊'
 let g:indentLine_color_dark = 1 " (default: 2)
@@ -100,14 +98,8 @@ let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
 
 let g:airline_theme='distinguished'
-"let g:airline_section_a =      '(mode, crypt, paste, spell, iminsert)'
-"let g:airline_section_b =      (hunks, branch)
-"let g:airline_section_c =      (bufferline or filename)
-"let g:airline_section_gutter=  (readonly, csv)
-"let g:airline_section_x =      '(tagbar, filetype, virtualenv)'
 let g:airline_section_c = ''
 let g:airline_section_y = '' "      (fileencoding, fileformat)
-"let g:airline_section_z       (percentage, line number, column number)
 let g:airline_section_error = '%q'
 let g:airline#extensions#bufferline#enabled = 1
 
@@ -116,17 +108,7 @@ let g:airline_section_warning = '%{ALEGetStatusLine()}'
 "(ycm_warning_count, whitespace)
 
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-"let g:airline#extensions#bufferline#overwrite_variables = 0
-"let g:airline#extensions#tabline#buffer_nr_show = 1
-"let g:bufferline_active_buffer_left = '['
-"highlight bufferline_selected ctermfg=13
 let g:bufferline_modified = '+'
-" set alternate color for modified active/inactive tabs
-"autocmd VimEnter *
-"   \ let g:airline#themes#distinguished#palette.tabline = {
-"   \    'airline_tabmod':       ['#f8f8f8','#780000',231,88,''],
-"   \    'airline_tabmod_unsel': ['#dddddd','#463030',231,52,''],
-"   \ } | :AirlineRefresh
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#show_close_button = 1
@@ -139,10 +121,13 @@ let g:airline#extensions#tabline#show_splits  = 1
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
  
 " Line numbers
+"set cursorline!
+set ttyfast
 highlight ColorColumn  ctermbg=234
 highlight LineNr       ctermbg=234 ctermfg=239
-highlight CursorLineNr ctermbg=234 ctermfg=202
-highlight CursorLine   ctermbg=234
+highlight CursorLineNr ctermbg=234 ctermfg=239
+"highlight CursorLineNr ctermbg=234 ctermfg=202
+highlight CursorLine   ctermbg=black
 highlight SpecialKey   ctermbg=234
 " Sign column for Git
 highlight clear SignColumn
@@ -172,6 +157,24 @@ nnoremap <silent> <c-\>l        :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\><bslash> :TmuxNavigatePrevious<cr>
 nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
 
+" Make <leader>f instant
+nunmap <leader>f0
+nunmap <leader>f1
+nunmap <leader>f2
+nunmap <leader>f3
+nunmap <leader>f4
+nunmap <leader>f5
+nunmap <leader>f6
+nunmap <leader>f7
+nunmap <leader>f8
+nunmap <leader>f9
+nunmap <leader>fu
+nunmap <leader>ff
+nunmap <leader>fc
+
+set norelativenumber
+
+
 augroup FastEscape
   autocmd!
   au InsertEnter * set timeoutlen=0
@@ -190,22 +193,32 @@ augroup templates
   autocmd BufNewFile *.escript 0r ~/.vim/templates/skeleton.escript
 augroup END
 
-" filetype specifc
-autocmd FileType erlang setlocal shiftwidth=0 tabstop=2 softtabstop=2 sw=2 ts=2 sts=2
-autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
-autocmd FileType nerdtree set norelativenumber
-autocmd FileType netrw    set nonumber
-autocmd FileType taglist  set nonumber norelativenumber
+augroup nerdtree
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+augroup END
 
-autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
-autocmd WinEnter,FocusGained * :setlocal relativenumber
-autocmd WinLeave,FocusLost   * :setlocal norelativenumber
-autocmd InsertEnter          * :setlocal norelativenumber
-autocmd InsertLeave          * :setlocal relativenumber
-autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
-autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
+augroup filetypes
+  autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
+  " filetype specifc
+  autocmd FileType erlang setlocal shiftwidth=0 tabstop=2 softtabstop=2 sw=2 ts=2 sts=2
+  autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
+  autocmd FileType nerdtree set norelativenumber
+  autocmd FileType netrw    set nonumber
+  autocmd FileType taglist  set nonumber norelativenumber
+augroup END
+
+augroup tmux_integration
+  autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
+  "autocmd WinEnter,FocusGained * :setlocal relativenumber
+  "autocmd WinLeave,FocusLost   * :setlocal norelativenumber
+  "autocmd InsertEnter          * :setlocal norelativenumber
+  "autocmd InsertLeave          * :setlocal relativenumber
+  autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
+  autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
+augroup END
 
 let &runtimepath=&runtimepath . ',/Users/liam.mcnamara/.vim/plugin'
 
@@ -213,7 +226,7 @@ let &runtimepath=&runtimepath . ',/Users/liam.mcnamara/.vim/plugin'
 set runtimepath^=~/.vim/bundle/vim-erlang-omnicomplete
 set omnifunc=syntaxcomplete#Complete
 
-let &titlestring = expand("%:p")
+let &titlestring = expand('%:p')
 set title
 " Erlang
 set runtimepath^=~/.vim/bundle/vim-erlang-runtime
