@@ -70,6 +70,9 @@ if [[ -n $TMUX  ]]; then
 fi
 precmd() { eval "$PROMPT_COMMAND" }
 
+
+# Vi mode
+bindkey -v
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 bindkey "^A" beginning-of-line
@@ -111,8 +114,4 @@ fi
 if [ -e ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
-
-
-# Vi mode
-bindkey -v
 
