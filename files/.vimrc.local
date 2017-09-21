@@ -122,12 +122,13 @@ let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
  
 " Line numbers
 "set cursorline!
+set norelativenumber
 set ttyfast
 highlight ColorColumn  ctermbg=234
 highlight LineNr       ctermbg=234 ctermfg=239
 highlight CursorLineNr ctermbg=234 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=202
-highlight CursorLine   ctermbg=black
+"highlight CursorLine   ctermbg=black
 highlight SpecialKey   ctermbg=234
 " Sign column for Git
 highlight clear SignColumn
@@ -146,6 +147,9 @@ highlight Pmenu     ctermbg=0 ctermfg=202
 highlight PmenuSel  ctermbg=202 ctermfg=0
 highlight PmenuSbar ctermbg=0 ctermfg=202
 
+inoremap jj <ESC>
+map <CR> o<Esc>
+
 nnoremap <silent> <c-\><Left>   :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-\><Down>   :TmuxNavigateDown<cr>
 nnoremap <silent> <c-\><Up>     :TmuxNavigateUp<cr>
@@ -157,23 +161,7 @@ nnoremap <silent> <c-\>l        :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\><bslash> :TmuxNavigatePrevious<cr>
 nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
 
-" Make <leader>f instant
-nunmap <leader>f0
-nunmap <leader>f1
-nunmap <leader>f2
-nunmap <leader>f3
-nunmap <leader>f4
-nunmap <leader>f5
-nunmap <leader>f6
-nunmap <leader>f7
-nunmap <leader>f8
-nunmap <leader>f9
-nunmap <leader>fu
-nunmap <leader>ff
-nunmap <leader>fc
-
-set norelativenumber
-
+unmap <Leader>nt
 
 augroup FastEscape
   autocmd!
@@ -200,7 +188,6 @@ augroup END
 
 augroup filetypes
   autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
-  " filetype specifc
   autocmd FileType erlang setlocal shiftwidth=0 tabstop=2 softtabstop=2 sw=2 ts=2 sts=2
   autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
   autocmd FileType nerdtree set norelativenumber
