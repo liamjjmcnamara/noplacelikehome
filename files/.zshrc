@@ -7,9 +7,14 @@ if [ -e $ZSH/oh-my-zsh.sh ]; then
 fi
 
 export PATH="/usr/local/sbin:$PATH"
+export PS1=$'[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
 
 setopt PROMPT_SUBST
-export PS1=$'[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt CDABLE_VARS
+setopt AUTO_LIST
+setopt AUTO_PARAM_SLASH
 
 # set VIMODE according to the current mode
 # https://dougblack.io/words/zsh-vi-mode.html
@@ -69,7 +74,6 @@ if [[ -n $TMUX  ]]; then
   fi
 fi
 precmd() { eval "$PROMPT_COMMAND" }
-
 
 # Vi mode
 bindkey -v
