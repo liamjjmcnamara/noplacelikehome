@@ -15,6 +15,7 @@ setopt AUTO_PUSHD
 setopt CDABLE_VARS
 setopt AUTO_LIST
 setopt AUTO_PARAM_SLASH
+unsetopt LISTAMBIGUOUS
 
 # set VIMODE according to the current mode
 # https://dougblack.io/words/zsh-vi-mode.html
