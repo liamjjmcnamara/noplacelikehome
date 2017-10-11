@@ -29,10 +29,14 @@ set foldlevel=99
 nnoremap <space> za
 
 " Remaps
+nnoremap ; :
 cmap w!! w !sudo tee % > /dev/null
 nnoremap K kJ
 nnoremap Q @q
 nnoremap # *
+noremap n nzz
+noremap Nzz
+noremap T y$
 vnoremap // y/<C-R>"<CR>
 " buffer switching
 map <Leader>n :bn<cr>
@@ -92,7 +96,7 @@ let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str   = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
-let g:ale_erlang_erlc_options = '-I../include -I../../*/include -I../.. -I../_build/default/lib -I/Users/liam.mcnamara/code/id -I/Users/liam.mcnamara/code/fredp'
+let g:ale_erlang_erlc_options = '-I../include -I../../*/include -I../.. -I../_build/default/lib -I~/code/id -I~/code/fredp'
 
 let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
@@ -162,6 +166,13 @@ nnoremap <silent> <c-\><bslash> :TmuxNavigatePrevious<cr>
 nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
 
 unmap <Leader>nt
+unmap <Leader>q
+" vimprompt
+map <Leader>q :VimuxPromptCommand<CR>
+map <Leader>w :call VimuxRunCommand("fc -e : -1")<CR>
+map <Leader>W :VimuxRunLastCommand<CR>
+" Generate tags and cscope
+map <Leader>T :!tagscope<CR>
 
 augroup FastEscape
   autocmd!
@@ -209,7 +220,7 @@ augroup tmux_integration
   autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
 augroup END
 
-let &runtimepath=&runtimepath . ',/Users/liam.mcnamara/.vim/plugin'
+let &runtimepath=&runtimepath . ',~/.vim/plugin'
 
 "autocmd VimEnter * NeoCompleteEnable " Enable NeoComplete at startup
 set runtimepath^=~/.vim/bundle/vim-erlang-omnicomplete

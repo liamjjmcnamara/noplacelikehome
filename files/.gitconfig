@@ -22,3 +22,5 @@
 	excludesfile = /Users/liam.mcnamara/.gitignore
 [commit]
 	verbose = true
+[init]
+	templatedir = ~/.git_template
