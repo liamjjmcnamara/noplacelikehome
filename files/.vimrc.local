@@ -34,9 +34,9 @@ cmap w!! w !sudo tee % > /dev/null
 nnoremap K kJ
 nnoremap Q @q
 nnoremap # *
-noremap n nzz
-noremap Nzz
-noremap T y$
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap T y$
 vnoremap // y/<C-R>"<CR>
 " buffer switching
 map <Leader>n :bn<cr>
