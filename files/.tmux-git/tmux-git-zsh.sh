@@ -6,6 +6,7 @@
 # from many github users. Thank you all.
 
 CONFIG_FILE=~/.tmux-git.conf
+source ~/.tmux_mode_indicator.tmux
 
 # Use a different readlink according the OS.
 # Kudos to https://github.com/npauzenga for the PR
@@ -132,7 +133,8 @@ update_tmux() {
             tmux set-window-option status-$TMUX_STATUS_LOCATION-attr none > /dev/null
         fi
 
-        tmux set-window-option status-$TMUX_STATUS_LOCATION "$TMUX_STATUS" > /dev/null
+        TMUX_MODE_INDICATOR="$(__print_tmux_mode_indicator)"
+        tmux set-window-option status-$TMUX_STATUS_LOCATION "$TMUX_STATUS $TMUX_MODE_INDICATOR" > /dev/null
 
     else
         if [[ $GIT_REPO ]]; then

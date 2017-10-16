@@ -78,13 +78,11 @@ precmd() { eval "$PROMPT_COMMAND" }
 
 # Vi mode
 bindkey -v
-bindkey -v
 bindkey '^R' history-incremental-search-backward
 bindkey "^A" beginning-of-line
 bindkey "^[[A"  up-line-or-history
 bindkey "^[[B"  down-line-or-history
 bindkey "^[[3~" delete-char
-bindkey -e
 bindkey '[C' forward-word
 bindkey '[D' backward-word
 bindkey '^e' end-of-line
