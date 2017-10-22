@@ -15,9 +15,10 @@
 	br = branch
 	ci = commit
 	st = status
-	cam = commit -S -am
+	cam = commit -p -S -m
 	cob = checkout -b
 	last = log -1 HEAD
+	cpm = commit -p -S -m
 [core]
 	excludesfile = /Users/liam.mcnamara/.gitignore
 [commit]
