@@ -79,8 +79,6 @@ let g:NERDTreeDirArrows  = 1
 let g:NERDTreeShowHidden = 0
 let g:tagbar_width = 30
 let g:tagbar_sort  = 0
-let g:necomplete#enable_at_startup = 1
-let g:neocomplcache_disable_auto_complete = 0
 let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_auto_colors = 0
 let g:indentLine_showFirstIndentLevel = '1'
@@ -223,6 +221,24 @@ augroup END
 
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
 
+augroup asyncomplete
+autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+\ 'name': 'omni',
+\ 'whitelist': ['*'],
+\ 'completor': function('asyncomplete#sources#omni#completor')
+\  }))
+autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
+    \ 'name': 'tags',
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#tags#completor'),
+    \ 'config': {
+    \    'max_file_size': 20000000,
+    \  },
+    \ }))
+augroup END
+let g:asyncomplete_remove_duplicates = 1
+
+
 "autocmd VimEnter * NeoCompleteEnable " Enable NeoComplete at startup
 set runtimepath^=~/.vim/bundle/vim-erlang-omnicomplete
 set omnifunc=syntaxcomplete#Complete
@@ -231,7 +247,7 @@ let &titlestring = expand('%:p')
 set title
 " Erlang
 set runtimepath^=~/.vim/bundle/vim-erlang-runtime
-set runtimepath^=/path/to/vim-erlang-tags
+"set runtimepath^=/path/to/vim-erlang-tags
 
 " this should reflect the kerl setting
 set runtimepath^=/usr/local/erlang/kredotp/bin/erl
