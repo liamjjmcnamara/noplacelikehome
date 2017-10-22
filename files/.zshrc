@@ -71,8 +71,8 @@ git config --global commit.verbose true
 # label a window in tmux and set git status
 if [[ -n $TMUX  ]]; then 
   PROMPT_COMMAND='$(tmux rename-window $(pwd|sed "s,$HOME,~,"|sed "s,.*/,," )/)'
-  if [ -e ~/.tmux-git/tmux-git-zsh.sh ]; then
-    source ~/.tmux-git/tmux-git-zsh.sh
+  if [ -e  ~/.tmux/tmux-git-zsh.sh ]; then
+    source ~/.tmux/tmux-git-zsh.sh
   fi
 fi
 precmd() { eval "$PROMPT_COMMAND" }
