@@ -4,7 +4,7 @@ __print_tmux_mode_indicator() {
   # Get values set by user in .tmux.conf or fallback to defaults
   local copy_mode_text="$(__get_tmux_option "@tmux_mode_indicator_copy_mode_text" "COPY")"
   local prefix_pressed_text="$(__get_tmux_option "@tmux_mode_indicator_prefix_pressed_text" "PREFIX")"
-  local left_edge_character="$(__get_tmux_option "@tmux_mode_indicator_left_edge_character" "")"
+  local left_edge_character="$(__get_tmux_option "@tmux_mode_indicator_left_edge_character" "")"
 
   NORMAL_COLOUR="$(__get_tmux_option "@tmux_mode_indicator_background" "colour6")"
   NORMAL_COLOUR="colour136"
