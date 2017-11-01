@@ -8,7 +8,6 @@ set number!
 set spell!
 set shiftwidth=2
 set wrap linebreak nolist
-set ttyfast
 set colorcolumn=81
 set list
 set clipboard=unnamed
@@ -18,15 +17,27 @@ set expandtab
 set timeoutlen=300 ttimeoutlen=300
 set ttimeoutlen=10
 set nobackup
+set ttyfast
 set tags=./tags;/
-set tags+=~/code/id/tags
-let g:Tlist_Show_One_File = 1
+"set tags+=~/code/id/tags
 
 " Folding
 set foldmethod=indent
 set foldenable
 set foldlevel=99
+
+set wildmenu
+set wildmode=list:longest,full
+
+" speed up
+set synmaxcol=120
+let g:matchparen_timeout = 20
+let g:matchparen_insert_timeout = 20
+
 nnoremap <space> za
+
+let &titlestring = expand('%:p')
+set title
 
 " Remaps
 nnoremap ; :
@@ -42,11 +53,16 @@ vnoremap // y/<C-R>"<CR>
 map <Leader>n :bn<cr>
 map <Leader>p :bp<cr>
 map <Leader>d :bd<cr>
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
+"nnoremap <Tab> :bnext<CR>
+"nnoremap <S-Tab> :bprevious<CR>
 " tag jumping
 nnoremap <Leader>k <C-]>
 nnoremap <Leader>j <C-T>
+
+nnoremap <Left>  :echo "No left for you!"<CR>
+nnoremap <Right> :echo "No right for you!"<CR>
+nnoremap <Up>    :echo "No up for you!"<CR>
+nnoremap <Down>  :echo "No down for you!"<CR>
 
 " Prompt for a command to run map
 map <Leader>vp :VimuxPromptCommand<CR>
@@ -95,7 +111,7 @@ let g:ale_echo_msg_error_str   = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
 "let g:ale_erlang_erlc_options = '-I../include -I../../*/include -I../.. -I../_build/default/lib -I~/code/id -I~/code/fredp'
-let g:ale_erlang_erlc_options = '-I../include  -I../_build/default/lib -I~/code/id -I~/code/fredp -I../..'
+let g:ale_erlang_erlc_options = '-I../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fredp -I../..'
 
 let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
@@ -120,13 +136,11 @@ let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#show_tabs    = 0
 let g:airline#extensions#tabline#tab_nr_type  = 1 " tab number
 let g:airline#extensions#tabline#show_splits  = 1
+let g:Tlist_Show_One_File = 1
 
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
- 
 " Line numbers
 "set cursorline!
 set norelativenumber
-set ttyfast
 highlight ColorColumn  ctermbg=234
 highlight LineNr       ctermbg=234 ctermfg=239
 highlight CursorLineNr ctermbg=234 ctermfg=239
@@ -164,6 +178,8 @@ nnoremap <silent> <c-\>l        :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\><bslash> :TmuxNavigatePrevious<cr>
 nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
 
+nnoremap <Leader>y :FZF<cr>
+
 unmap <Leader>nt
 unmap <Leader>q
 " vimprompt
@@ -191,6 +207,7 @@ augroup templates
   autocmd BufNewFile *.sh      0r ~/.vim/templates/skeleton.sh
   autocmd BufNewFile *.erl     0r ~/.vim/templates/skeleton.erl
   autocmd BufNewFile *.escript 0r ~/.vim/templates/skeleton.escript
+  autocmd BufNewFile *.py      0r ~/.vim/templates/python.escript
 augroup END
 
 augroup nerdtree
@@ -211,42 +228,83 @@ augroup tmux_integration
   autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
   autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
   autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
-  "autocmd WinEnter,FocusGained * :setlocal relativenumber
-  "autocmd WinLeave,FocusLost   * :setlocal norelativenumber
-  "autocmd InsertEnter          * :setlocal norelativenumber
-  "autocmd InsertLeave          * :setlocal relativenumber
   autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
   autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
 augroup END
 
+"nmap <leader><tab> <plug>(fzf-maps-n)
+
+let g:minimap_show='<leader>M'
+let g:minimap_update='minimap_update'
+let g:minimap_close='minimap_close'
+let g:minimap_toggle='minimap_toggle'
+"augroup miniview
+"  autocmd BufReadPost,FileReadPost,BufNewFile * call minimap#ShowMinimap()
+"augroup END
+
+
+let g:completor_python_binary = '/usr/bin/python'
+let g:completor_erlang_omni_trigger = '.*'
+
+"let g:asyncomplete_log_file='/tmp/asyn.log'
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+
+"call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    "\ 'name': 'buffer',
+    "\ 'whitelist': ['*'],
+    "\ 'blacklist': ['go'],
+    "\ 'completor': function('asyncomplete#sources#buffer#completor'),
+    "\ }))
+
+"call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
+    "\ 'name': 'tags',
+    "\ 'whitelist': ['*'],
+    "\ 'completor': function('asyncomplete#sources#tags#completor'),
+    "\ 'config': {
+    "\    'max_file_size': 20000000,
+    "\  },
+    "\ }))
+"call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+"\ 'name': 'omni',
+"\ 'whitelist': ['*'],
+"\ 'blacklist': ['html'],
+"\ 'completor': function('asyncomplete#sources#omni#completor')
+"\  }))
+"call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+"\ 'name': 'omni',
+"\ 'whitelist': ['*'],
+"\ 'blacklist': ['html'],
+"\ 'completor': function('asyncomplete#sources#omni#completor')
+"\  }))
+
+
+"augroup asyncomplete
+"autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+"\ 'name': 'omni',
+"\ 'whitelist': ['*'],
+"\ 'completor': function('asyncomplete#sources#omni#completor')
+"\  }))
+"autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
+    "\ 'name': 'tags',
+    "\ 'whitelist': ['*'],
+    "\ 'completor': function('asyncomplete#sources#tags#completor'),
+    "\ 'config': {
+    "\    'max_file_size': 20000000,
+    "\  },
+    "\ }))
+"augroup END
+"let g:asyncomplete_remove_duplicates = 1
+
+
+"inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
-
-augroup asyncomplete
-autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-\ 'name': 'omni',
-\ 'whitelist': ['*'],
-\ 'completor': function('asyncomplete#sources#omni#completor')
-\  }))
-autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
-    \ 'name': 'tags',
-    \ 'whitelist': ['*'],
-    \ 'completor': function('asyncomplete#sources#tags#completor'),
-    \ 'config': {
-    \    'max_file_size': 20000000,
-    \  },
-    \ }))
-augroup END
-let g:asyncomplete_remove_duplicates = 1
-
-
-"autocmd VimEnter * NeoCompleteEnable " Enable NeoComplete at startup
-set runtimepath^=~/.vim/bundle/vim-erlang-omnicomplete
-set omnifunc=syntaxcomplete#Complete
-
-let &titlestring = expand('%:p')
-set title
 " Erlang
 set runtimepath^=~/.vim/bundle/vim-erlang-runtime
+set runtimepath+=/usr/local/opt/fzf
+
 "set runtimepath^=/path/to/vim-erlang-tags
 
 " this should reflect the kerl setting

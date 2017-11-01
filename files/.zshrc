@@ -8,6 +8,7 @@ fi
 
 export PATH="/usr/local/sbin:$PATH"
 export PS1=$'[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
 setopt PROMPT_SUBST
 setopt AUTO_CD
@@ -91,6 +92,11 @@ CASE_SENSITIVE="true"
 
 if [ -e /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+if [ -e ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+  bindkey '^ ' autosuggest-accept
 fi
 
 if [ -e  "~/.iterm2_shell_integration.zsh" ]; then
