@@ -207,7 +207,7 @@ augroup templates
   autocmd BufNewFile *.sh      0r ~/.vim/templates/skeleton.sh
   autocmd BufNewFile *.erl     0r ~/.vim/templates/skeleton.erl
   autocmd BufNewFile *.escript 0r ~/.vim/templates/skeleton.escript
-  autocmd BufNewFile *.py      0r ~/.vim/templates/python.escript
+  autocmd BufNewFile *.py      0r ~/.vim/templates/python.py
 augroup END
 
 augroup nerdtree
