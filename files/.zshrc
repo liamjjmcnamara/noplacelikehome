@@ -9,6 +9,7 @@ fi
 export PATH="/usr/local/sbin:$PATH"
 export PS1=$'[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+export TILLER_NAMESPACE="id"
 
 setopt PROMPT_SUBST
 setopt AUTO_CD
@@ -56,6 +57,7 @@ alias gca="git commit -a"
 alias docker_purge="docker rm $( docker ps -q -f status=exited )"
 alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome.git"'
 alias r3="rebar3"
+alias prep='rebar3 dialyzer && elvis rock && echo "\n\033[0;32mLooks good!\033[0;0m\n"'
 
 git config --global alias.stat 'status --short --branch'
 git config --global alias.glog 'log --graph --abbrev-commit --decorate --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"'

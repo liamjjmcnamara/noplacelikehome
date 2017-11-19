@@ -182,6 +182,10 @@ nnoremap <Leader>y :FZF<cr>
 
 unmap <Leader>nt
 unmap <Leader>q
+unmap <Leader>fc
+unmap <Leader>ff
+unmap <Leader>fu
+unmap <Leader>tt
 " vimprompt
 map <Leader>q :VimuxPromptCommand<CR>
 map <Leader>w :call VimuxRunCommand("fc -e : -1")<CR>
@@ -299,6 +303,10 @@ let g:completor_erlang_omni_trigger = '.*'
 "inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 "inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+let g:tmuxcomplete#trigger = ''
 
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
 " Erlang
