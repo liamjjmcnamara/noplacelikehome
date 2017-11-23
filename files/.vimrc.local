@@ -48,6 +48,8 @@ nnoremap # *
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap T y$
+" Yank from the cursor to the end of the line, to be consistent with C and D.
+nnoremap Y y$
 vnoremap // y/<C-R>"<CR>
 " buffer switching
 map <Leader>n :bn<cr>
@@ -139,11 +141,9 @@ let g:airline#extensions#tabline#show_splits  = 1
 let g:Tlist_Show_One_File = 1
 
 " Line numbers
-"set cursorline!
-set norelativenumber
 highlight ColorColumn  ctermbg=234
 highlight LineNr       ctermbg=234 ctermfg=239
-highlight CursorLineNr ctermbg=234 ctermfg=239
+"highlight CursorLineNr ctermbg=234 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=202
 "highlight CursorLine   ctermbg=black
 highlight SpecialKey   ctermbg=234
@@ -163,6 +163,8 @@ highlight Pmenu     ctermbg=0 ctermfg=202
 " popup selected
 highlight PmenuSel  ctermbg=202 ctermfg=0
 highlight PmenuSbar ctermbg=0 ctermfg=202
+set norelativenumber
+set nocursorline
 
 inoremap jj <ESC>
 map <CR> o<Esc>
@@ -182,10 +184,7 @@ nnoremap <Leader>y :FZF<cr>
 
 unmap <Leader>nt
 unmap <Leader>q
-unmap <Leader>fc
-unmap <Leader>ff
 unmap <Leader>fu
-unmap <Leader>tt
 " vimprompt
 map <Leader>q :VimuxPromptCommand<CR>
 map <Leader>w :call VimuxRunCommand("fc -e : -1")<CR>
@@ -317,3 +316,10 @@ set runtimepath+=/usr/local/opt/fzf
 
 " this should reflect the kerl setting
 set runtimepath^=/usr/local/erlang/kredotp/bin/erl
+
+
+
+
+    " Map <Leader>ff to display all lines with keyword under cursor
+    " and ask which one to jump to
+    "nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>

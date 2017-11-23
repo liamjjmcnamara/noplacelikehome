@@ -10,6 +10,7 @@ export PATH="/usr/local/sbin:$PATH"
 export PS1=$'[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 export TILLER_NAMESPACE="id"
+export HELM_HOME="~/.helm"
 
 setopt PROMPT_SUBST
 setopt AUTO_CD
@@ -87,8 +88,8 @@ bindkey "^A" beginning-of-line
 bindkey "^[[A"  up-line-or-history
 bindkey "^[[B"  down-line-or-history
 bindkey "^[[3~" delete-char
-bindkey '[C' forward-word
-bindkey '[D' backward-word
+#bindkey '[C' vi-forward-word
+#bindkey '[D' vi-backward-word
 bindkey '^e' end-of-line
 CASE_SENSITIVE="true"
 
