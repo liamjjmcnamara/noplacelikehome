@@ -12,13 +12,13 @@
 	glog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
   ls = log --oneline
 	co = checkout
-	br = branch
 	ci = commit
 	st = status
 	cam = commit -p -S -m
 	cob = checkout -b
 	last = log -1 HEAD
 	cpm = commit -p -S -m
+	br = branch --sort=-committerdate
 [core]
 	excludesfile = /Users/liam.mcnamara/.gitignore
 [commit]
