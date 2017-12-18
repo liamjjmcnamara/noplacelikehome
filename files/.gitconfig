@@ -19,6 +19,7 @@
 	last = log -1 HEAD
 	cpm = commit -p -S -m
 	br = branch --sort=-committerdate
+	br = branch
 [core]
 	excludesfile = /Users/liam.mcnamara/.gitignore
 [commit]

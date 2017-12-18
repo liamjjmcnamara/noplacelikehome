@@ -25,12 +25,8 @@ set tags=./tags;/
 set foldmethod=indent
 set foldenable
 set foldlevel=99
-
-set wildmenu
 set wildmode=list:longest,full
-
-" speed up
-set synmaxcol=120
+set synmaxcol=130
 let g:matchparen_timeout = 20
 let g:matchparen_insert_timeout = 20
 
@@ -165,6 +161,7 @@ highlight PmenuSel  ctermbg=202 ctermfg=0
 highlight PmenuSbar ctermbg=0 ctermfg=202
 set norelativenumber
 set nocursorline
+set spellsuggest=best,10
 
 inoremap jj <ESC>
 map <CR> o<Esc>
@@ -182,6 +179,7 @@ nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
 
 nnoremap <Leader>y :FZF<cr>
 
+nnoremap z= i<C-X><C-S>
 unmap <Leader>nt
 unmap <Leader>q
 unmap <Leader>fu
