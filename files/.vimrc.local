@@ -1,6 +1,8 @@
 set encoding=utf-8
 scriptencoding utf-8
 
+colorscheme molokai_dark
+
 " Settings
 set nonumber
 set number!
@@ -220,8 +222,10 @@ augroup END
 
 augroup nerdtree
   autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeToggle | endif
 augroup END
+
+let g:vimsyn_embed='0'
 
 augroup filetypes
   autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
@@ -234,8 +238,7 @@ augroup END
 
 augroup tmux_integration
   autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
-  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
-  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
+  "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
   autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
   autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
 augroup END
