@@ -1,33 +1,3 @@
-" Modeline and Notes {
-" vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker spell:
-"
-"                    __ _ _____              _
-"         ___ _ __  / _/ |___ /      __   __(_)_ __ ___
-"        / __| '_ \| |_| | |_ \ _____\ \ / /| | '_ ` _ \
-"        \__ \ |_) |  _| |___) |_____|\ V / | | | | | | |
-"        |___/ .__/|_| |_|____/        \_/  |_|_| |_| |_|
-"            |_|
-"
-"   This is the personal .vimrc file of Steve Francia.
-"   While much of it is beneficial for general use, I would
-"   recommend picking out the parts you want and understand.
-"
-"   You can find me at http://spf13.com
-"
-"   Copyright 2014 Steve Francia
-"
-"   Licensed under the Apache License, Version 2.0 (the "License");
-"   you may not use this file except in compliance with the License.
-"   You may obtain a copy of the License at
-"
-"       http://www.apache.org/licenses/LICENSE-2.0
-"
-"   Unless required by applicable law or agreed to in writing, software
-"   distributed under the License is distributed on an "AS IS" BASIS,
-"   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-"   See the License for the specific language governing permissions and
-"   limitations under the License.
-" }
 
 " Environment {
 
@@ -38,26 +8,10 @@
         silent function! LINUX()
             return has('unix') && !has('macunix') && !has('win32unix')
         endfunction
-        silent function! WINDOWS()
-            return  (has('win32') || has('win64'))
-        endfunction
     " }
 
-    " Basics {
-        set nocompatible        " Must be first line
-        if !WINDOWS()
-            set shell=/bin/sh
-        endif
-    " }
+      set shell=/bin/sh
 
-    " Windows Compatible {
-        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-        " across (heterogeneous) systems easier.
-        if WINDOWS()
-          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-        endif
-    " }
-    
     " Arrow Key Fix {
         " https://github.com/spf13/spf13-vim/issues/780
         if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
@@ -80,24 +34,7 @@
 " }
 
 " General {
-
     set background=dark         " Assume a dark background
-
-    " Allow to trigger background
-    function! ToggleBG()
-        let s:tbg = &background
-        " Inversion
-        if s:tbg == "dark"
-            set background=light
-        else
-            set background=dark
-        endif
-    endfunction
-    noremap <leader>bg :call ToggleBG()<CR>
-
-    " if !has('gui')
-        "set term=$TERM          " Make arrow and other keys work
-    " endif
     filetype plugin indent on   " Automatically detect file types.
     syntax on                   " Syntax highlighting
     set mouse=a                 " Automatically enable mouse usage
@@ -121,7 +58,6 @@
         " Always switch to the current file directory
     endif
 
-    "set autowrite                       " Automatically write a file when leaving a modified buffer
     set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
     set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
     set virtualedit=onemore             " Allow for cursor beyond last character
@@ -187,7 +123,6 @@
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
-
     set cursorline                  " Highlight current line
 
     highlight clear SignColumn      " SignColumn should match background
@@ -198,7 +133,6 @@
         set ruler                   " Show the ruler
         set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
         set showcmd                 " Show partial commands in status line and
-                                    " Selected characters/lines in visual mode
     endif
 
     if has('statusline')
@@ -285,22 +219,6 @@
         let maplocalleader=g:spf13_localleader
     endif
 
-    " The default mappings for editing and applying the spf13 configuration
-    " are <leader>ev and <leader>sv respectively. Change them to your preference
-    " by adding the following to your .vimrc.before.local file:
-    "   let g:spf13_edit_config_mapping='<leader>ec'
-    "   let g:spf13_apply_config_mapping='<leader>sc'
-    if !exists('g:spf13_edit_config_mapping')
-        let s:spf13_edit_config_mapping = '<leader>ev'
-    else
-        let s:spf13_edit_config_mapping = g:spf13_edit_config_mapping
-    endif
-    if !exists('g:spf13_apply_config_mapping')
-        let s:spf13_apply_config_mapping = '<leader>sv'
-    else
-        let s:spf13_apply_config_mapping = g:spf13_apply_config_mapping
-    endif
-
     " Easier moving in tabs and windows
     " The lines conflict with the default digraph mapping of <C-K>
     " If you prefer that functionality, add the following to your
@@ -383,21 +301,6 @@
         cmap Tabe tabe
     endif
 
-    " Yank from the cursor to the end of the line, to be consistent with C and D.
-    nnoremap Y y$
-
-    " Code folding options
-    nmap <leader>f0 :set foldlevel=0<CR>
-    nmap <leader>f1 :set foldlevel=1<CR>
-    nmap <leader>f2 :set foldlevel=2<CR>
-    nmap <leader>f3 :set foldlevel=3<CR>
-    nmap <leader>f4 :set foldlevel=4<CR>
-    nmap <leader>f5 :set foldlevel=5<CR>
-    nmap <leader>f6 :set foldlevel=6<CR>
-    nmap <leader>f7 :set foldlevel=7<CR>
-    nmap <leader>f8 :set foldlevel=8<CR>
-    nmap <leader>f9 :set foldlevel=9<CR>
-
     " Most prefer to toggle search highlighting rather than clear the current
     " search results. To clear search highlighting rather than toggle it on
     " and off, add the following to your .vimrc.before.local file:
@@ -408,14 +311,10 @@
         nmap <silent> <leader>/ :set invhlsearch<CR>
     endif
 
-
-    " Find merge conflict markers
-    map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
-
     " Shortcuts
     " Change Working Directory to that of the current file
-    cmap cwd lcd %:p:h
-    cmap cd. lcd %:p:h
+    "cmap cwd lcd %:p:h
+    "cmap cd. lcd %:p:h
 
     " Visual shifting (does not exit Visual mode)
     vnoremap < <gv
@@ -439,14 +338,6 @@
     " Adjust viewports to the same size
     map <Leader>= <C-w>=
 
-    " Map <Leader>ff to display all lines with keyword under cursor
-    " and ask which one to jump to
-    nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
-
-    " Easier horizontal scrolling
-    map zl zL
-    map zh zH
-
     " Easier formatting
     nnoremap <silent> <leader>q gwip
 
@@ -457,58 +348,6 @@
 " }
 
 " Plugins {
-
-    " GoLang {
-        if count(g:spf13_bundle_groups, 'go')
-            let g:go_highlight_functions = 1
-            let g:go_highlight_methods = 1
-            let g:go_highlight_structs = 1
-            let g:go_highlight_operators = 1
-            let g:go_highlight_build_constraints = 1
-            let g:go_fmt_command = "goimports"
-            let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-            let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-            au FileType go nmap <Leader>s <Plug>(go-implements)
-            au FileType go nmap <Leader>i <Plug>(go-info)
-            au FileType go nmap <Leader>e <Plug>(go-rename)
-            au FileType go nmap <leader>r <Plug>(go-run)
-            au FileType go nmap <leader>b <Plug>(go-build)
-            au FileType go nmap <leader>t <Plug>(go-test)
-            au FileType go nmap <Leader>gd <Plug>(go-doc)
-            au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-            au FileType go nmap <leader>co <Plug>(go-coverage)
-        endif
-        " }
-
-
-    " TextObj Sentence {
-        if count(g:spf13_bundle_groups, 'writing')
-            augroup textobj_sentence
-              autocmd!
-              autocmd FileType markdown call textobj#sentence#init()
-              autocmd FileType textile call textobj#sentence#init()
-              autocmd FileType text call textobj#sentence#init()
-            augroup END
-        endif
-    " }
-
-    " TextObj Quote {
-        if count(g:spf13_bundle_groups, 'writing')
-            augroup textobj_quote
-                autocmd!
-                autocmd FileType markdown call textobj#quote#init()
-                autocmd FileType textile call textobj#quote#init()
-                autocmd FileType text call textobj#quote#init({'educate': 0})
-            augroup END
-        endif
-    " }
-
-    " PIV {
-        if isdirectory(expand("~/.vim/bundle/PIV"))
-            let g:DisableAutoPHPFolding = 0
-            let g:PIVAutoClose = 0
-        endif
-    " }
 
     " Misc {
         if isdirectory(expand("~/.vim/bundle/nerdtree"))
@@ -558,12 +397,6 @@
         if gitroot != ''
             let &tags = &tags . ',' . gitroot . '/.git/tags'
         endif
-    " }
-
-    " AutoCloseTag {
-        " Make it so AutoCloseTag works for xml and xhtml files as well
-        au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
-        nmap <Leader>ac <Plug>ToggleAutoCloseMappings
     " }
 
     " SnipMate {
@@ -654,8 +487,6 @@
             elseif executable('ack')
                 let s:ctrlp_fallback = 'ack %s --nocolor -f'
             " On Windows use "dir" as fallback command.
-            elseif WINDOWS()
-                let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
             else
                 let s:ctrlp_fallback = 'find %s -type f'
             endif
@@ -677,12 +508,6 @@
                 "funky
                 nnoremap <Leader>fu :CtrlPFunky<Cr>
             endif
-        endif
-    "}
-
-    " TagBar {
-        if isdirectory(expand("~/.vim/bundle/tagbar/"))
-            nnoremap <silent> <leader>tt :TagbarToggle<CR>
         endif
     "}
 
@@ -1032,13 +857,6 @@
         endif
     " }
 
-    " Wildfire {
-    let g:wildfire_objects = {
-                \ "*" : ["i'", 'i"', "i)", "i]", "i}", "ip"],
-                \ "html,xml" : ["at"],
-                \ }
-    " }
-
     " vim-airline {
         " Set configuration options for the statusline plugin vim-airline.
         " Use the powerline theme and optionally enable powerline symbols.
@@ -1077,8 +895,6 @@
                 set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
             elseif OSX() && has("gui_running")
                 set guifont=Andale\ Mono\ Regular:h12,Menlo\ Regular:h11,Consolas\ Regular:h12,Courier\ New\ Regular:h14
-            elseif WINDOWS() && has("gui_running")
-                set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
             endif
         endif
     else
@@ -1186,54 +1002,10 @@
     " e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
     " }
 
-    function! s:IsSpf13Fork()
-        let s:is_fork = 0
-        let s:fork_files = ["~/.vimrc.fork", "~/.vimrc.before.fork", "~/.vimrc.bundles.fork"]
-        for fork_file in s:fork_files
-            if filereadable(expand(fork_file, ":p"))
-                let s:is_fork = 1
-                break
-            endif
-        endfor
-        return s:is_fork
-    endfunction
-     
     function! s:ExpandFilenameAndExecute(command, file)
         execute a:command . " " . expand(a:file, ":p")
     endfunction
-     
-    function! s:EditSpf13Config()
-        call <SID>ExpandFilenameAndExecute("tabedit", "~/.vimrc")
-        call <SID>ExpandFilenameAndExecute("vsplit", "~/.vimrc.before")
-        call <SID>ExpandFilenameAndExecute("vsplit", "~/.vimrc.bundles")
-     
-        execute bufwinnr(".vimrc") . "wincmd w"
-        call <SID>ExpandFilenameAndExecute("split", "~/.vimrc.local")
-        wincmd l
-        call <SID>ExpandFilenameAndExecute("split", "~/.vimrc.before.local")
-        wincmd l
-        call <SID>ExpandFilenameAndExecute("split", "~/.vimrc.bundles.local")
-     
-        if <SID>IsSpf13Fork()
-            execute bufwinnr(".vimrc") . "wincmd w"
-            call <SID>ExpandFilenameAndExecute("split", "~/.vimrc.fork")
-            wincmd l
-            call <SID>ExpandFilenameAndExecute("split", "~/.vimrc.before.fork")
-            wincmd l
-            call <SID>ExpandFilenameAndExecute("split", "~/.vimrc.bundles.fork")
-        endif
-     
-        execute bufwinnr(".vimrc.local") . "wincmd w"
-    endfunction
-     
-    execute "noremap " . s:spf13_edit_config_mapping " :call <SID>EditSpf13Config()<CR>"
-    execute "noremap " . s:spf13_apply_config_mapping . " :source ~/.vimrc<CR>"
-" }
 
-" Use fork vimrc if available {
-    if filereadable(expand("~/.vimrc.fork"))
-        source ~/.vimrc.fork
-    endif
 " }
 
 " Use local vimrc if available {
