@@ -137,6 +137,19 @@ let g:airline#extensions#tabline#tab_nr_type  = 1 " tab number
 let g:airline#extensions#tabline#show_splits  = 1
 let g:Tlist_Show_One_File = 1
 
+" Change cursor shape between insert and normal mode in iTerm2.app
+if $TERM_PROGRAM =~# 'iTerm.app'
+  if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+  else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    let &t_SR = "\<esc>]50;CursorShape=2\x7" " Underline in replace mode
+  endif
+endif
+
 " Line numbers
 highlight LineNr       ctermbg=234 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=239
@@ -154,7 +167,8 @@ highlight ALEErrorSign   ctermbg=234 ctermfg=1
 highlight ALEWarningSign ctermbg=234 ctermfg=202
 " Syntastic
 highlight Error ctermbg=234 ctermfg=202
-highlight Warning ctermbg=234 ctermfg=202
+highlight Warning ctermbg=234 ctermfg=200
+highlight Todo ctermbg=234 ctermfg=208
 
 highlight Directory ctermfg='blue'
 " popup menu

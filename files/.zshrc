@@ -1,4 +1,5 @@
 # oh my zsh
+export LANG='en_US.UTF-8'
 export ZSH=$HOME/.oh-my-zsh
 plugins=(git osx)
 
