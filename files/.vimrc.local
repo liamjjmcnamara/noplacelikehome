@@ -197,9 +197,9 @@ nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
 nnoremap <Leader>y :FZF<cr>
 
 nnoremap z= i<C-X><C-S>
-unmap <Leader>nt
 unmap <Leader>q
-unmap <Leader>fu
+"unmap <Leader>nt
+"unmap <Leader>fu
 " vimprompt
 map <Leader>q :VimuxPromptCommand<CR>
 map <Leader>w :call VimuxRunCommand("fc -e : -1")<CR>
