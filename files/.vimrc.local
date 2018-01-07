@@ -3,7 +3,6 @@ scriptencoding utf-8
 
 " Settings
 set nonumber
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11j
 set number!
 set spell!
 set shiftwidth=2
@@ -11,7 +10,7 @@ set wrap linebreak nolist
 set colorcolumn=81
 set list
 set clipboard=unnamed
-set scrolloff=16 " Keep 3 lines below and above the cursor
+set scrolloff=16
 set tabstop=2
 set expandtab
 set timeoutlen=300 ttimeoutlen=300
@@ -19,9 +18,6 @@ set ttimeoutlen=10
 set nobackup
 set ttyfast
 set tags=./tags;/
-"set tags+=~/code/id/tags
-
-" Folding
 set foldmethod=indent
 set foldenable
 set foldlevel=99
@@ -29,15 +25,13 @@ set wildmode=list:longest,full
 set synmaxcol=130
 let g:matchparen_timeout = 20
 let g:matchparen_insert_timeout = 20
-
-nnoremap <space> za
-
 let &titlestring = expand('%:p')
 set title
 
 " Remaps
 nnoremap ; :
 cmap w!! w !sudo tee % > /dev/null
+nnoremap <space> za
 nnoremap K kJ
 nnoremap Q @q
 nnoremap # *
@@ -51,6 +45,7 @@ vnoremap // y/<C-R>"<CR>
 map <Leader>n :bn<cr>
 map <Leader>p :bp<cr>
 map <Leader>d :bd<cr>
+map <Leader>u :UndotreeToggle<cr>
 "nnoremap <Tab> :bnext<CR>
 "nnoremap <S-Tab> :bprevious<CR>
 " tag jumping
@@ -109,7 +104,6 @@ let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str   = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
-"let g:ale_erlang_erlc_options = '-I../include -I../../*/include -I../.. -I../_build/default/lib -I~/code/id -I~/code/fredp'
 let g:ale_erlang_erlc_options = '-I../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fredp -I../..'
 
 let g:lt_location_list_toggle_map = '<Leader>l'
@@ -120,11 +114,7 @@ let g:airline_section_c = ''
 let g:airline_section_y = '' "      (fileencoding, fileformat)
 let g:airline_section_error = '%q'
 let g:airline#extensions#bufferline#enabled = 1
-
-"ycm_error_count, syntastic, eclim)
 let g:airline_section_warning = '%{ALEGetStatusLine()}'
-"(ycm_warning_count, whitespace)
-
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:bufferline_modified = '+'
 let g:airline#extensions#tabline#enabled = 1
@@ -313,7 +303,6 @@ let g:completor_erlang_omni_trigger = '.*'
 "augroup END
 "let g:asyncomplete_remove_duplicates = 1
 
-
 "inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 "inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
@@ -331,10 +320,3 @@ set runtimepath+=/usr/local/opt/fzf
 
 " this should reflect the kerl setting
 set runtimepath^=/usr/local/erlang/kredotp/bin/erl
-
-
-
-
-    " Map <Leader>ff to display all lines with keyword under cursor
-    " and ask which one to jump to
-    "nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
