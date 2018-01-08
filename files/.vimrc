@@ -3,8 +3,6 @@ scriptencoding utf-8
 set shell=/bin/sh
 
 " Environment {
-
-" Identify platform {
 silent function! OSX()
     return has('macunix')
 endfunction
@@ -13,9 +11,8 @@ silent function! LINUX()
 endfunction
 
 
-" Arrow Key Fix {
-" https://github.com/spf13/spf13-vim/issues/780
-if &term[:4] == 'xterm' || &term[:5] == 'screen' || &term[:3] == 'rxvt'
+" Arrow Key Fix { https://github.com/spf13/spf13-vim/issues/780
+if &term[:4] ==? 'xterm' || &term[:5] ==? 'screen' || &term[:3] ==? 'rxvt'
     inoremap <silent> <C-[>OC <RIGHT>
 endif
 
@@ -53,87 +50,13 @@ endif
 
 set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
-set virtualedit=onemore             " Allow for cursor beyond last character
-set history=1000                    " Store a ton of history (default is 20)
-set spell                           " Spell checking on
-set hidden                          " Allow buffer switching without saving
-set iskeyword-=.                    " '.' is an end of word designator
-set iskeyword-=#                    " '#' is an end of word designator
-set iskeyword-=-                    " '-' is an end of word designator
-
-augroup gitpos
-  " Instead of reverting the cursor to the last position in the buffer, we
-  " set it to the first line when editing a git commit message
-  autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-augroup END
-
-" http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
-" Restore cursor to file position in previous editing session
-" To disable this, add the following to your .vimrc.before.local file:
-"   let g:spf13_no_restore_cursor = 1
-if !exists('g:spf13_no_restore_cursor')
-    function! ResCur()
-        if line("'\"") <= line("$")
-            silent! normal! g`"
-            return 1
-        endif
-    endfunction
-
-    augroup resCur
-        autocmd!
-        autocmd BufWinEnter * call ResCur()
-    augroup END
-endif
-
-" Setting up the directories {
-set backup                  " Backups are nice ...
-if has('persistent_undo')
-    set undofile                " So is persistent undo ...
-    set undolevels=1000         " Maximum number of changes that can be undone
-    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
-endif
-
-" To disable views add the following to your .vimrc.before.local file:
-"   let g:spf13_no_views = 1
-if !exists('g:spf13_no_views')
-    " Add exclusions to mkview and loadview
-    " eg: *.*, svn-commit.tmp
-    let g:skipview_files = [
-        \ '\[example pattern\]'
-        \ ]
-endif
-" }
-
-" Vim UI {
-
-if !exists('g:override_spf13_bundles') && filereadable(expand('~/.vim/bundle/vim-colors-solarized/colors/solarized.vim'))
-    let g:solarized_termcolors=256
-    let g:solarized_termtrans=1
-    let g:solarized_contrast='normal'
-    let g:solarized_visibility='normal'
-    color solarized             " Load a colorscheme
-endif
-
-if has('cmdline_info')
-    set ruler                   " Show the ruler
-    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
-    set showcmd                 " Show partial commands in status line and
-endif
-
-if has('statusline')
-    set laststatus=2
-
-    " Broken down into easily includeable segments
-    set statusline=%<%f\                     " Filename
-    set statusline+=%w%h%m%r                 " Options
-    if !exists('g:override_spf13_bundles')
-        set statusline+=%{fugitive#statusline()} " Git Hotness
-    endif
-    set statusline+=\ [%{&ff}/%Y]            " Filetype
-    set statusline+=\ [%{getcwd()}]          " Current dir
-    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-endif
-
+set virtualedit=onemore         " Allow for cursor beyond last character
+set history=1000                " Store a ton of history (default is 20)
+set spell                       " Spell checking on
+set hidden                      " Allow buffer switching without saving
+set iskeyword-=.                " '.' is an end of word designator
+set iskeyword-=#                " '#' is an end of word designator
+set iskeyword-=-                " '-' is an end of word designator
 set tabpagemax=15               " Only show 15 tabs
 set showmode                    " Display the current mode
 set cursorline                  " Highlight current line
@@ -166,29 +89,96 @@ set splitbelow                  " Puts new split windows to the bottom of the cu
 "set matchpairs+=<:>             " Match, to be used with %
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
-" Remove trailing whitespaces and ^M chars
-" To disable the stripping of whitespace, add the following to your
-" .vimrc.before.local file:
-"   let g:spf13_keep_trailing_whitespace = 1
+set nonumber
+set number!
+set spell!
+set shiftwidth=2
+set wrap linebreak nolist
+set colorcolumn=81
+set list
+set clipboard=unnamed
+set scrolloff=16
+set tabstop=2
+set expandtab
+set timeoutlen=300 ttimeoutlen=300
+set ttimeoutlen=10
+set nobackup
+set ttyfast
+set tags=./tags;/
+set foldmethod=indent
+set foldenable
+set foldlevel=99
+set wildmode=list:longest,full
+set synmaxcol=130
+let &titlestring = expand('%:p')
+set title
+set norelativenumber
+set nocursorline
+set spellsuggest=best,10
 
-augroup fileguff
-  autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
-  "autocmd FileType go autocmd BufWritePre <buffer> Fmt
-  autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
-  autocmd FileType haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
-  " preceding line best in a plugin but here for now.
 
-  autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+" http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
+" Restore cursor to file position in previous editing session
+" To disable this, add the following to your .vimrc.before.local file:
+"   let g:spf13_no_restore_cursor = 1
+if !exists('g:spf13_no_restore_cursor')
+    function! ResCur()
+        if line("'\"") <= line('$')
+            silent! normal! g`"
+            return 1
+        endif
+    endfunction
 
-  " Workaround vim-commentary for Haskell
-  autocmd FileType haskell setlocal commentstring=--\ %s
-  " Workaround broken colour highlighting in Haskell
-  autocmd FileType haskell,rust setlocal nospell
-augroup END
+    augroup resCur
+        autocmd!
+        autocmd BufWinEnter * call ResCur()
+    augroup END
+endif
 
-" }
+" Setting up the directories {
+set backup                  " Backups are nice ...
+if has('persistent_undo')
+    set undofile                " So is persistent undo ...
+    set undolevels=1000         " Maximum number of changes that can be undone
+    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
+endif
 
-" Key (re)Mappings {
+" To disable views add the following to your .vimrc.before.local file:
+"   let g:spf13_no_views = 1
+if !exists('g:spf13_no_views')
+    " Add exclusions to mkview and loadview
+    " eg: *.*, svn-commit.tmp
+    let g:skipview_files = [
+        \ '\[example pattern\]'
+        \ ]
+endif
+
+if !exists('g:override_spf13_bundles') && filereadable(expand('~/.vim/bundle/vim-colors-solarized/colors/solarized.vim'))
+    let g:solarized_termcolors=256
+    let g:solarized_termtrans=1
+    let g:solarized_contrast='normal'
+    let g:solarized_visibility='normal'
+    color solarized             " Load a colorscheme
+endif
+
+if has('cmdline_info')
+    set ruler                   " Show the ruler
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
+    set showcmd                 " Show partial commands in status line and
+endif
+
+if has('statusline')
+    set laststatus=2
+    " Broken down into easily includeable segments
+    set statusline=%<%f\                     " Filename
+    set statusline+=%w%h%m%r                 " Options
+    if !exists('g:override_spf13_bundles')
+        set statusline+=%{fugitive#statusline()} " Git Hotness
+    endif
+    set statusline+=\ [%{&ff}/%Y]            " Filetype
+    set statusline+=\ [%{getcwd()}]          " Current dir
+    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+endif
 
 " The default leader is '\', but many people prefer ',' as it's in a standard
 " location. To override this behavior and set it back to '\' (or any other
@@ -230,14 +220,14 @@ noremap k gk
 if !exists('g:spf13_no_wrapRelMotion')
     " Same for 0, home, end, etc
     function! WrapRelativeMotion(key, ...)
-        let vis_sel=""
+        let l:vis_sel=''
         if a:0
-            let vis_sel="gv"
+            let l:vis_sel='gv'
         endif
         if &wrap
-            execute "normal!" vis_sel . "g" . a:key
+            execute 'normal!' l:vis_sel . 'g' . a:key
         else
-            execute "normal!" vis_sel . a:key
+            execute 'normal!' l:vis_sel . a:key
         endif
     endfunction
 
@@ -260,32 +250,6 @@ if !exists('g:spf13_no_wrapRelMotion')
     vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
 endif
 
-" The following two lines conflict with moving to top and
-" bottom of the screen
-" If you prefer that functionality, add the following to your
-" .vimrc.before.local file:
-"   let g:spf13_no_fastTabs = 1
-if !exists('g:spf13_no_fastTabs')
-    map <S-H> gT
-    map <S-L> gt
-endif
-
-" Stupid shift key fixes
-if !exists('g:spf13_no_keyfixes')
-    if has('user_commands')
-        command! -bang -nargs=* -complete=file E e<bang> <args>
-        command! -bang -nargs=* -complete=file W w<bang> <args>
-        command! -bang -nargs=* -complete=file Wq wq<bang> <args>
-        command! -bang -nargs=* -complete=file WQ wq<bang> <args>
-        command! -bang Wa wa<bang>
-        command! -bang WA wa<bang>
-        command! -bang Q q<bang>
-        command! -bang QA qa<bang>
-        command! -bang Qa qa<bang>
-    endif
-
-    cmap Tabe tabe
-endif
 
 " Most prefer to toggle search highlighting rather than clear the current
 " search results. To clear search highlighting rather than toggle it on
@@ -331,202 +295,6 @@ nnoremap <silent> <leader>q gwip
 " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
 map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
-" }
-
-
-" NerdTree {
-if isdirectory(expand('~/.vim/plugged/nerdtree'))
-    map <C-e> <plug>NERDTreeTabsToggle<CR>
-    map <leader>e :NERDTreeFind<CR>
-    nmap <leader>nt :NERDTreeFind<CR>
-    let g:NERDShutUp=1
-
-    let NERDTreeShowBookmarks=1
-    let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-    let NERDTreeChDirMode=0
-    let NERDTreeQuitOnOpen=1
-    let NERDTreeMouseMode=2
-    let NERDTreeShowHidden=1
-    let NERDTreeKeepTreeInNewTab=1
-    let g:nerdtree_tabs_open_on_gui_startup=0
-endif
-" }
-
-" Rainbow {
-if isdirectory(expand("~/.vim/bundle/rainbow/"))
-    let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
-endif
-"}
-
-" Fugitive {
-if isdirectory(expand('~/.vim/bundle/vim-fugitive/'))
-    nnoremap <silent> <leader>gs :Gstatus<CR>
-    nnoremap <silent> <leader>gd :Gdiff<CR>
-    nnoremap <silent> <leader>gc :Gcommit<CR>
-    nnoremap <silent> <leader>gb :Gblame<CR>
-    nnoremap <silent> <leader>gl :Glog<CR>
-    nnoremap <silent> <leader>gp :Git push<CR>
-    nnoremap <silent> <leader>gr :Gread<CR>
-    nnoremap <silent> <leader>gw :Gwrite<CR>
-    nnoremap <silent> <leader>ge :Gedit<CR>
-    " Mnemonic _i_nteractive
-    nnoremap <silent> <leader>gi :Git add -p %<CR>
-    nnoremap <silent> <leader>gg :SignifyToggle<CR>
-endif
-"}
-
-" UndoTree 
-if isdirectory(expand('~/.vim/bundle/undotree/'))
-    nnoremap <Leader>u :UndotreeToggle<CR>
-    " If undotree is opened, it is likely one wants to interact with it.
-    let g:undotree_SetFocusWhenToggle=1
-endif
-
-if isdirectory(expand('~/.vim/bundle/vim-indent-guides/'))
-    let g:indent_guides_start_level = 2
-    let g:indent_guides_guide_size = 1
-    let g:indent_guides_enable_on_vim_startup = 1
-endif
-
-" See `:echo g:airline_theme_map` for some more choices
-" Default in terminal vim is 'dark'
-if isdirectory(expand('~/.vim/bundle/vim-airline-themes/'))
-    if !exists('g:airline_theme')
-        let g:airline_theme = 'solarized'
-    endif
-    if !exists('g:airline_powerline_fonts')
-        " Use the default set of separators with a few customizations
-        let g:airline_left_sep='›'  " Slightly fancier than '>'
-        let g:airline_right_sep='‹' " Slightly fancier than '<'
-    endif
-endif
-
-" Initialize directories {
-function! InitializeDirectories()
-    let parent = $HOME
-    let prefix = 'vim'
-    let dir_list = {
-                \ 'backup': 'backupdir',
-                \ 'views': 'viewdir',
-                \ 'swap': 'directory' }
-
-    if has('persistent_undo')
-        let dir_list['undo'] = 'undodir'
-    endif
-
-    " To specify a different directory in which to place the vimbackup,
-    " vimviews, vimundo, and vimswap files/directories, add the following to
-    " your .vimrc.before.local file:
-    "   let g:spf13_consolidated_directory = <full path to desired directory>
-    "   eg: let g:spf13_consolidated_directory = $HOME . '/.vim/'
-    if exists('g:spf13_consolidated_directory')
-        let common_dir = g:spf13_consolidated_directory . prefix
-    else
-        let common_dir = parent . '/.' . prefix
-    endif
-
-    for [dirname, settingname] in items(dir_list)
-        let directory = common_dir . dirname . '/'
-        if exists('*mkdir')
-            if !isdirectory(directory)
-                call mkdir(directory)
-            endif
-        endif
-        if !isdirectory(directory)
-            echo 'Warning: Unable to create backup directory: ' . directory
-            echo 'Try: mkdir -p ' . directory
-        else
-            let directory = substitute(directory, " ", "\\\\ ", "g")
-            exec 'set ' . settingname . '=' . directory
-        endif
-    endfor
-endfunction
-call InitializeDirectories()
-" }
-
-" Initialize NERDTree as needed {
-function! NERDTreeInitAsNeeded()
-    redir => bufoutput
-    buffers!
-    redir END
-    let idx = stridx(bufoutput, 'NERD_tree')
-    if idx > -1
-        NERDTreeMirror
-        NERDTreeFind
-        wincmd l
-    endif
-endfunction
-" }
-
-" Strip whitespace {
-function! StripTrailingWhitespace()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line('.')
-    let c = col('.')
-    " do the business:
-    %s/\s\+$//e
-    " clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
-" }
-
-" Shell command {
-function! s:RunShellCommand(cmdline)
-    botright new
-
-    setlocal buftype=nofile
-    setlocal bufhidden=delete
-    setlocal nobuflisted
-    setlocal noswapfile
-    setlocal nowrap
-    setlocal filetype=shell
-    setlocal syntax=shell
-
-    call setline(1, a:cmdline)
-    call setline(2, substitute(a:cmdline, '.', '=', 'g'))
-    execute 'silent $read !' . escape(a:cmdline, '%#')
-    setlocal nomodifiable
-    1
-endfunction
-
-command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
-" e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
-" }
-
-function! s:ExpandFilenameAndExecute(command, file)
-    execute a:command . " " . expand(a:file, ":p")
-endfunction
-
-
-" Settings
-set nonumber
-set number!
-set spell!
-set shiftwidth=2
-set wrap linebreak nolist
-set colorcolumn=81
-set list
-set clipboard=unnamed
-set scrolloff=16
-set tabstop=2
-set expandtab
-set timeoutlen=300 ttimeoutlen=300
-set ttimeoutlen=10
-set nobackup
-set ttyfast
-set tags=./tags;/
-set foldmethod=indent
-set foldenable
-set foldlevel=99
-set wildmode=list:longest,full
-set synmaxcol=130
-let g:matchparen_timeout = 20
-let g:matchparen_insert_timeout = 20
-let &titlestring = expand('%:p')
-set title
-
 " Remaps
 nnoremap ; :
 cmap w!! w !sudo tee % > /dev/null
@@ -562,6 +330,224 @@ map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 nnoremap <Leader>t :TagbarToggle<CR>
 nnoremap <Leader>f :NERDTreeToggle<CR>
+inoremap jj <ESC>
+
+nnoremap <silent> <c-\><Left>   :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-\><Down>   :TmuxNavigateDown<cr>
+nnoremap <silent> <c-\><Up>     :TmuxNavigateUp<cr>
+nnoremap <silent> <c-\><Right>  :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\>h        :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-\>j        :TmuxNavigateDown<cr>
+nnoremap <silent> <c-\>k        :TmuxNavigateUp<cr>
+nnoremap <silent> <c-\>l        :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\><bslash> :TmuxNavigatePrevious<cr>
+nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
+
+nnoremap <Leader>y :FZF<cr>
+
+nnoremap z= i<C-X><C-S>
+unmap <Leader>q
+"unmap <Leader>nt
+"unmap <Leader>fu
+map <CR> o<Esc>
+" vimprompt
+map <Leader>q :VimuxPromptCommand<CR>
+map <Leader>w :call VimuxRunCommand("fc -e : -1")<CR>
+map <Leader>W :VimuxRunLastCommand<CR>
+" Generate tags and cscope
+map <Leader>T :!tagscope<CR>
+
+
+" NerdTree {
+if isdirectory(expand('~/.vim/plugged/nerdtree'))
+    map <C-e> <plug>NERDTreeTabsToggle<CR>
+    map <leader>e :NERDTreeFind<CR>
+    nmap <leader>nt :NERDTreeFind<CR>
+    let g:NERDShutUp=1
+    let g:NERDTreeShowBookmarks=1
+    let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+    let g:NERDTreeChDirMode=0
+    let g:NERDTreeQuitOnOpen=1
+    let g:NERDTreeMouseMode=2
+    let g:NERDTreeShowHidden=1
+    let g:NERDTreeKeepTreeInNewTab=1
+    let g:nerdtree_tabs_open_on_gui_startup=0
+endif
+" }
+
+" The following two lines conflict with moving to top and
+" bottom of the screen
+" If you prefer that functionality, add the following to your
+" .vimrc.before.local file:
+"   let g:spf13_no_fastTabs = 1
+if !exists('g:spf13_no_fastTabs')
+    map <S-H> gT
+    map <S-L> gt
+endif
+
+" Stupid shift key fixes
+if !exists('g:spf13_no_keyfixes')
+    if has('user_commands')
+        command! -bang -nargs=* -complete=file E e<bang> <args>
+        command! -bang -nargs=* -complete=file W w<bang> <args>
+        command! -bang -nargs=* -complete=file Wq wq<bang> <args>
+        command! -bang -nargs=* -complete=file WQ wq<bang> <args>
+        command! -bang Wa wa<bang>
+        command! -bang WA wa<bang>
+        command! -bang Q q<bang>
+        command! -bang QA qa<bang>
+        command! -bang Qa qa<bang>
+    endif
+
+    cmap Tabe tabe
+endif
+
+" Rainbow {
+if isdirectory(expand('~/.vim/bundle/rainbow/'))
+    let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+endif
+"}
+
+" Fugitive {
+if isdirectory(expand('~/.vim/bundle/vim-fugitive/'))
+    nnoremap <silent> <leader>gs :Gstatus<CR>
+    nnoremap <silent> <leader>gd :Gdiff<CR>
+    nnoremap <silent> <leader>gc :Gcommit<CR>
+    nnoremap <silent> <leader>gb :Gblame<CR>
+    nnoremap <silent> <leader>gl :Glog<CR>
+    nnoremap <silent> <leader>gp :Git push<CR>
+    nnoremap <silent> <leader>gr :Gread<CR>
+    nnoremap <silent> <leader>gw :Gwrite<CR>
+    nnoremap <silent> <leader>ge :Gedit<CR>
+    nnoremap <silent> <leader>gi :Git add -p %<CR>
+    nnoremap <silent> <leader>gg :SignifyToggle<CR>
+endif
+"}
+
+" UndoTree 
+if isdirectory(expand('~/.vim/bundle/undotree/'))
+    nnoremap <Leader>u :UndotreeToggle<CR>
+    " If undotree is opened, it is likely one wants to interact with it.
+    let g:undotree_SetFocusWhenToggle=1
+endif
+
+if isdirectory(expand('~/.vim/bundle/vim-indent-guides/'))
+    let g:indent_guides_start_level = 2
+    let g:indent_guides_guide_size = 1
+    let g:indent_guides_enable_on_vim_startup = 1
+endif
+
+" See `:echo g:airline_theme_map` for some more choices
+" Default in terminal vim is 'dark'
+if isdirectory(expand('~/.vim/bundle/vim-airline-themes/'))
+    if !exists('g:airline_theme')
+        let g:airline_theme = 'solarized'
+    endif
+    if !exists('g:airline_powerline_fonts')
+        " Use the default set of separators with a few customizations
+        let g:airline_left_sep='›'  " Slightly fancier than '>'
+        let g:airline_right_sep='‹' " Slightly fancier than '<'
+    endif
+endif
+
+" Initialize directories {
+function! InitializeDirectories()
+    let l:parent = $HOME
+    let l:prefix = 'vim'
+    let l:dir_list = {
+                \ 'backup': 'backupdir',
+                \ 'views': 'viewdir',
+                \ 'swap': 'directory' }
+    if has('persistent_undo')
+        let l:dir_list['undo'] = 'undodir'
+    endif
+
+    " To specify a different directory in which to place the vimbackup,
+    " vimviews, vimundo, and vimswap files/directories, add the following to
+    " your .vimrc.before.local file:
+    "   let g:spf13_consolidated_directory = <full path to desired directory>
+    "   eg: let g:spf13_consolidated_directory = $HOME . '/.vim/'
+    if exists('g:spf13_consolidated_directory')
+        let l:common_dir = g:spf13_consolidated_directory . l:prefix
+    else
+        let l:common_dir = l:parent . '/.' . l:prefix
+    endif
+
+    for [l:dirname, l:settingname] in items(l:dir_list)
+        let l:directory = l:common_dir . l:dirname . '/'
+        if exists('*mkdir')
+            if !isdirectory(l:directory)
+                call mkdir(l:directory)
+            endif
+        endif
+        if !isdirectory(l:directory)
+            echo 'Warning: Unable to create backup directory: ' . l:directory
+            echo 'Try: mkdir -p ' . l:directory
+        else
+            let l:directory = substitute(l:directory, ' ', "\\\\ ", 'g')
+            exec 'set ' . l:settingname . '=' . l:directory
+        endif
+    endfor
+endfunction
+call InitializeDirectories()
+" }
+
+" Initialize NERDTree as needed {
+function! NERDTreeInitAsNeeded()
+    redir => bufoutput
+    buffers!
+    redir END
+    let l:idx = stridx(bufoutput, 'NERD_tree')
+    if l:idx > -1
+        NERDTreeMirror
+        NERDTreeFind
+        wincmd l
+    endif
+endfunction
+" }
+
+" Strip whitespace {
+function! StripTrailingWhitespace()
+    " Preparation: save last search, and cursor position.
+    let l:_s=@/
+    let l:l = line('.')
+    let l:c = col('.')
+    " do the business:
+    %s/\s\+$//e
+    " clean up: restore previous search history, and cursor position
+    let @/=l:_s
+    call cursor(l:l, l:c)
+endfunction
+" }
+
+" Shell command {
+function! s:RunShellCommand(cmdline)
+    botright new
+
+    setlocal buftype=nofile
+    setlocal bufhidden=delete
+    setlocal nobuflisted
+    setlocal noswapfile
+    setlocal nowrap
+    setlocal filetype=shell
+    setlocal syntax=shell
+
+    call setline(1, a:cmdline)
+    call setline(2, substitute(a:cmdline, '.', '=', 'g'))
+    execute 'silent $read !' . escape(a:cmdline, '%#')
+    setlocal nomodifiable
+    1
+endfunction
+
+command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
+" e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
+" }
+
+function! s:ExpandFilenameAndExecute(command, file)
+    execute a:command . ' ' . expand(a:file, ':p')
+endfunction
+
+
 
 " File extension colouring
 function! NERDTreeHighlightFile(extension, fg)
@@ -591,6 +577,8 @@ let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_auto_colors = 0
 let g:indentLine_showFirstIndentLevel = '1'
 let g:indentLine_concealcursor = 1
+let g:matchparen_timeout = 20
+let g:matchparen_insert_timeout = 20
 
 let g:indentLine_first_char    = '│'
 let g:indentLine_color_dark = 1 " (default: 2)
@@ -667,36 +655,32 @@ highlight Pmenu     ctermbg=0 ctermfg=202
 " popup selected
 highlight PmenuSel  ctermbg=202 ctermfg=0
 highlight PmenuSbar ctermbg=0 ctermfg=202
-set norelativenumber
-set nocursorline
-set spellsuggest=best,10
 
-inoremap jj <ESC>
-map <CR> o<Esc>
+" Remove trailing whitespaces and ^M chars
+" To disable the stripping of whitespace, add the following to your
+" .vimrc.before.local file:
+"   let g:spf13_keep_trailing_whitespace = 1
 
-nnoremap <silent> <c-\><Left>   :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-\><Down>   :TmuxNavigateDown<cr>
-nnoremap <silent> <c-\><Up>     :TmuxNavigateUp<cr>
-nnoremap <silent> <c-\><Right>  :TmuxNavigateRight<cr>
-nnoremap <silent> <c-\>h        :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-\>j        :TmuxNavigateDown<cr>
-nnoremap <silent> <c-\>k        :TmuxNavigateUp<cr>
-nnoremap <silent> <c-\>l        :TmuxNavigateRight<cr>
-nnoremap <silent> <c-\><bslash> :TmuxNavigatePrevious<cr>
-nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
+augroup fileguff
+  autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
+  "autocmd FileType go autocmd BufWritePre <buffer> Fmt
+  autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
+  autocmd FileType haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
+  " preceding line best in a plugin but here for now.
 
-nnoremap <Leader>y :FZF<cr>
+  autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 
-nnoremap z= i<C-X><C-S>
-unmap <Leader>q
-"unmap <Leader>nt
-"unmap <Leader>fu
-" vimprompt
-map <Leader>q :VimuxPromptCommand<CR>
-map <Leader>w :call VimuxRunCommand("fc -e : -1")<CR>
-map <Leader>W :VimuxRunLastCommand<CR>
-" Generate tags and cscope
-map <Leader>T :!tagscope<CR>
+  " Workaround vim-commentary for Haskell
+  autocmd FileType haskell setlocal commentstring=--\ %s
+  " Workaround broken colour highlighting in Haskell
+  autocmd FileType haskell,rust setlocal nospell
+augroup END
+
+augroup gitpos
+  " Instead of reverting the cursor to the last position in the buffer, we
+  " set it to the first line when editing a git commit message
+  autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+augroup END
 
 augroup FastEscape
   autocmd!
@@ -713,7 +697,7 @@ augroup END
 aug netrw_close
   au!
   au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw"|q|endif
-aug END
+augroup END
 
 " Skeleton templates
 augroup templates
@@ -751,21 +735,16 @@ let g:minimap_show='<leader>M'
 let g:minimap_update='minimap_update'
 let g:minimap_close='minimap_close'
 let g:minimap_toggle='minimap_toggle'
-"augroup miniview
-"  autocmd BufReadPost,FileReadPost,BufNewFile * call minimap#ShowMinimap()
-"augroup END
-
 
 let g:completor_python_binary = '/usr/bin/python'
 let g:completor_erlang_omni_trigger = '.*'
 
 " Use deoplete.
-"let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 3
 let g:deoplete#auto_complete_delay = 2
 let g:deoplete#max_menu_width = 20
-let g:tmuxcomplete#trigger = ''
 
+let g:tmuxcomplete#trigger = ''
 
 " For cscope
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
@@ -777,10 +756,8 @@ set runtimepath+=/usr/local/opt/fzf
 " this should reflect the kerl setting
 set runtimepath^=/usr/local/erlang/kredotp/bin/erl
 
-" Use local gvimrc if available and gui is running {
-    if has('gui_running')
-        if filereadable(expand('~/.gvimrc.local'))
-            source ~/.gvimrc.local
-        endif
+if has('gui_running')
+    if filereadable(expand('~/.gvimrc.local'))
+        source ~/.gvimrc.local
     endif
-" }
+endif
