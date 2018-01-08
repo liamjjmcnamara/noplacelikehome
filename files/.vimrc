@@ -769,6 +769,10 @@ augroup FastEscape
   "au InsertLeave * hi Normal ctermfg=232
 augroup END
 
+augroup DeopleteLazy
+  autocmd InsertEnter * call deoplete#enable()
+augroup END
+
 aug netrw_close
   au!
   au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw"|q|endif
@@ -821,6 +825,7 @@ let g:completor_erlang_omni_trigger = '.*'
 " Use deoplete.
 "let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 3
+let g:deoplete#auto_complete_delay = 2
 let g:deoplete#max_menu_width = 20
 let g:tmuxcomplete#trigger = ''
 
