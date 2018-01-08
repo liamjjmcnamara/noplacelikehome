@@ -225,8 +225,6 @@ augroup nerdtree
   "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeToggle | endif
 augroup END
 
-let g:vimsyn_embed='0'
-
 augroup filetypes
   autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
   autocmd FileType erlang setlocal shiftwidth=0 tabstop=2 softtabstop=2 sw=2 ts=2 sts=2
@@ -238,7 +236,8 @@ augroup END
 
 augroup tmux_integration
   autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
-  "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
   autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
   autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
 augroup END
@@ -311,15 +310,17 @@ let g:completor_erlang_omni_trigger = '.*'
 "inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 
 " Use deoplete.
-let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_start_length = 3
+let g:deoplete#max_menu_width = 20
 let g:tmuxcomplete#trigger = ''
 
+" For cscope
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
+
 " Erlang
 set runtimepath^=~/.vim/bundle/vim-erlang-runtime
 set runtimepath+=/usr/local/opt/fzf
-
-"set runtimepath^=/path/to/vim-erlang-tags
 
 " this should reflect the kerl setting
 set runtimepath^=/usr/local/erlang/kredotp/bin/erl
