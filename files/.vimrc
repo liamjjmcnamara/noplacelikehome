@@ -10,7 +10,6 @@ silent function! LINUX()
     return has('unix') && !has('macunix') && !has('win32unix')
 endfunction
 
-
 " Arrow Key Fix { https://github.com/spf13/spf13-vim/issues/780
 if &term[:4] ==? 'xterm' || &term[:5] ==? 'screen' || &term[:3] ==? 'rxvt'
     inoremap <silent> <C-[>OC <RIGHT>
@@ -116,25 +115,6 @@ set norelativenumber
 set nocursorline
 set spellsuggest=best,10
 
-
-" http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
-" Restore cursor to file position in previous editing session
-" To disable this, add the following to your .vimrc.before.local file:
-"   let g:spf13_no_restore_cursor = 1
-if !exists('g:spf13_no_restore_cursor')
-    function! ResCur()
-        if line("'\"") <= line('$')
-            silent! normal! g`"
-            return 1
-        endif
-    endfunction
-
-    augroup resCur
-        autocmd!
-        autocmd BufWinEnter * call ResCur()
-    augroup END
-endif
-
 " Setting up the directories {
 set backup                  " Backups are nice ...
 if has('persistent_undo')
@@ -153,14 +133,6 @@ if !exists('g:spf13_no_views')
         \ ]
 endif
 
-if !exists('g:override_spf13_bundles') && filereadable(expand('~/.vim/bundle/vim-colors-solarized/colors/solarized.vim'))
-    let g:solarized_termcolors=256
-    let g:solarized_termtrans=1
-    let g:solarized_contrast='normal'
-    let g:solarized_visibility='normal'
-    color solarized             " Load a colorscheme
-endif
-
 if has('cmdline_info')
     set ruler                   " Show the ruler
     set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
@@ -172,9 +144,6 @@ if has('statusline')
     " Broken down into easily includeable segments
     set statusline=%<%f\                     " Filename
     set statusline+=%w%h%m%r                 " Options
-    if !exists('g:override_spf13_bundles')
-        set statusline+=%{fugitive#statusline()} " Git Hotness
-    endif
     set statusline+=\ [%{&ff}/%Y]            " Filetype
     set statusline+=\ [%{getcwd()}]          " Current dir
     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
@@ -357,6 +326,23 @@ map <Leader>W :VimuxRunLastCommand<CR>
 " Generate tags and cscope
 map <Leader>T :!tagscope<CR>
 
+" Fugitive {
+if isdirectory(expand('~/.vim/plugged/vim-fugitive/'))
+    nnoremap <silent> <leader>gs :Gstatus<CR>
+    nnoremap <silent> <leader>gd :Gdiff<CR>
+    nnoremap <silent> <leader>gc :Gcommit<CR>
+    nnoremap <silent> <leader>gb :Gblame<CR>
+    nnoremap <silent> <leader>gl :Glog<CR>
+    nnoremap <silent> <leader>gp :Git push<CR>
+    nnoremap <silent> <leader>gr :Gread<CR>
+    nnoremap <silent> <leader>gw :Gwrite<CR>
+    nnoremap <silent> <leader>ge :Gedit<CR>
+    nnoremap <silent> <leader>gi :Git add -p %<CR>
+    nnoremap <silent> <leader>gg :SignifyToggle<CR>
+endif
+"}
+
+"nmap <leader><tab> <plug>(fzf-maps-n)
 
 " NerdTree {
 if isdirectory(expand('~/.vim/plugged/nerdtree'))
@@ -402,36 +388,14 @@ if !exists('g:spf13_no_keyfixes')
     cmap Tabe tabe
 endif
 
-" Rainbow {
-if isdirectory(expand('~/.vim/bundle/rainbow/'))
-    let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
-endif
-"}
-
-" Fugitive {
-if isdirectory(expand('~/.vim/bundle/vim-fugitive/'))
-    nnoremap <silent> <leader>gs :Gstatus<CR>
-    nnoremap <silent> <leader>gd :Gdiff<CR>
-    nnoremap <silent> <leader>gc :Gcommit<CR>
-    nnoremap <silent> <leader>gb :Gblame<CR>
-    nnoremap <silent> <leader>gl :Glog<CR>
-    nnoremap <silent> <leader>gp :Git push<CR>
-    nnoremap <silent> <leader>gr :Gread<CR>
-    nnoremap <silent> <leader>gw :Gwrite<CR>
-    nnoremap <silent> <leader>ge :Gedit<CR>
-    nnoremap <silent> <leader>gi :Git add -p %<CR>
-    nnoremap <silent> <leader>gg :SignifyToggle<CR>
-endif
-"}
-
 " UndoTree 
-if isdirectory(expand('~/.vim/bundle/undotree/'))
+if isdirectory(expand('~/.vim/plugged/undotree/'))
     nnoremap <Leader>u :UndotreeToggle<CR>
     " If undotree is opened, it is likely one wants to interact with it.
     let g:undotree_SetFocusWhenToggle=1
 endif
 
-if isdirectory(expand('~/.vim/bundle/vim-indent-guides/'))
+if isdirectory(expand('~/.vim/plugged/vim-indent-guides/'))
     let g:indent_guides_start_level = 2
     let g:indent_guides_guide_size = 1
     let g:indent_guides_enable_on_vim_startup = 1
@@ -439,7 +403,7 @@ endif
 
 " See `:echo g:airline_theme_map` for some more choices
 " Default in terminal vim is 'dark'
-if isdirectory(expand('~/.vim/bundle/vim-airline-themes/'))
+if isdirectory(expand('~/.vim/plugged/vim-airline-themes/'))
     if !exists('g:airline_theme')
         let g:airline_theme = 'solarized'
     endif
@@ -506,19 +470,6 @@ function! NERDTreeInitAsNeeded()
 endfunction
 " }
 
-" Strip whitespace {
-function! StripTrailingWhitespace()
-    " Preparation: save last search, and cursor position.
-    let l:_s=@/
-    let l:l = line('.')
-    let l:c = col('.')
-    " do the business:
-    %s/\s\+$//e
-    " clean up: restore previous search history, and cursor position
-    let @/=l:_s
-    call cursor(l:l, l:c)
-endfunction
-" }
 
 " Shell command {
 function! s:RunShellCommand(cmdline)
@@ -548,12 +499,12 @@ function! s:ExpandFilenameAndExecute(command, file)
 endfunction
 
 
-
 " File extension colouring
 function! NERDTreeHighlightFile(extension, fg)
  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
  exec 'autocmd filetype nerdtree highlight ' . a:extension . ' ctermfg='. a:fg .' guifg='. a:fg
 endfunction
+
 call NERDTreeHighlightFile('txt', 'white')
 call NERDTreeHighlightFile('erl', 'yellow')
 call NERDTreeHighlightFile('hrl', 'darkblue')
@@ -564,6 +515,7 @@ call NERDTreeHighlightFile('mk', 'white')
 call NERDTreeHighlightFile('Makefile', 'white')
 call NERDTreeHighlightFile('md', 'gray')
 call NERDTreeHighlightFile('config', 'darkred')
+
 let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
 let g:NERDTreeBookmarksSort = 0
 let g:NERDTreeWinSize    = 30
@@ -605,7 +557,6 @@ let g:airline_section_warning = '%{ALEGetStatusLine()}'
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:bufferline_modified = '+'
 let g:airline#extensions#tabline#enabled = 1
-" Show just the filename
 let g:airline#extensions#tabline#show_close_button = 1
 let g:airline#extensions#tabline#fnamemod     = ':t'
 let g:airline#extensions#tabline#show_buffers = 1
@@ -613,6 +564,22 @@ let g:airline#extensions#tabline#show_tabs    = 0
 let g:airline#extensions#tabline#tab_nr_type  = 1 " tab number
 let g:airline#extensions#tabline#show_splits  = 1
 let g:Tlist_Show_One_File = 1
+
+let g:minimap_show='<leader>M'
+let g:minimap_update='minimap_update'
+let g:minimap_close='minimap_close'
+let g:minimap_toggle='minimap_toggle'
+
+let g:completor_python_binary = '/usr/bin/python'
+let g:completor_erlang_omni_trigger = '.*'
+
+" Use deoplete.
+let g:deoplete#auto_complete_start_length = 3
+let g:deoplete#auto_complete_delay = 2
+let g:deoplete#max_menu_width = 20
+
+let g:tmuxcomplete#trigger = ''
+
 
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~# 'iTerm.app'
@@ -656,10 +623,19 @@ highlight Pmenu     ctermbg=0 ctermfg=202
 highlight PmenuSel  ctermbg=202 ctermfg=0
 highlight PmenuSbar ctermbg=0 ctermfg=202
 
-" Remove trailing whitespaces and ^M chars
-" To disable the stripping of whitespace, add the following to your
-" .vimrc.before.local file:
-"   let g:spf13_keep_trailing_whitespace = 1
+" Strip whitespace {
+function! StripTrailingWhitespace()
+    " Preparation: save last search, and cursor position.
+    let l:_s=@/
+    let l:l = line('.')
+    let l:c = col('.')
+    " do the business:
+    %s/\s\+$//e
+    " clean up: restore previous search history, and cursor position
+    let @/=l:_s
+    call cursor(l:l, l:c)
+endfunction
+" }
 
 augroup fileguff
   autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
@@ -686,8 +662,6 @@ augroup FastEscape
   autocmd!
   au InsertEnter * set timeoutlen=0
   au InsertLeave * set timeoutlen=1000
-  "au InsertEnter * hi Normal ctermfg=234
-  "au InsertLeave * hi Normal ctermfg=232
 augroup END
 
 augroup DeopleteLazy
@@ -729,28 +703,29 @@ augroup tmux_integration
   autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
 augroup END
 
-"nmap <leader><tab> <plug>(fzf-maps-n)
+" http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
+" Restore cursor to file position in previous editing session
+" To disable this, add the following to your .vimrc.before.local file:
+"   let g:spf13_no_restore_cursor = 1
+if !exists('g:spf13_no_restore_cursor')
+    function! ResCur()
+        if line("'\"") <= line('$')
+            silent! normal! g`"
+            return 1
+        endif
+    endfunction
 
-let g:minimap_show='<leader>M'
-let g:minimap_update='minimap_update'
-let g:minimap_close='minimap_close'
-let g:minimap_toggle='minimap_toggle'
-
-let g:completor_python_binary = '/usr/bin/python'
-let g:completor_erlang_omni_trigger = '.*'
-
-" Use deoplete.
-let g:deoplete#auto_complete_start_length = 3
-let g:deoplete#auto_complete_delay = 2
-let g:deoplete#max_menu_width = 20
-
-let g:tmuxcomplete#trigger = ''
+    augroup resCur
+        autocmd!
+        autocmd BufWinEnter * call ResCur()
+    augroup END
+endif
 
 " For cscope
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
 
 " Erlang
-set runtimepath^=~/.vim/bundle/vim-erlang-runtime
+set runtimepath^=~/.vim/plugged/vim-erlang-runtime
 set runtimepath+=/usr/local/opt/fzf
 
 " this should reflect the kerl setting
