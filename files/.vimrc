@@ -235,48 +235,32 @@ endif
 "cmap cwd lcd %:p:h
 "cmap cd. lcd %:p:h
 
-" Visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv
-
 " Allow using the repeat operator with a visual selection (!)
 " http://stackoverflow.com/a/8064607/127816
 vnoremap . :normal .<CR>
-
-" For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
 
 " Some helpers to edit mode
 " http://vimcasts.org/e/14
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
-map <leader>ew :e %%
-map <leader>es :sp %%
-map <leader>ev :vsp %%
-map <leader>et :tabe %%
-
-" Adjust viewports to the same size
-map <Leader>= <C-w>=
-
-" Easier formatting
-nnoremap <silent> <leader>q gwip
 
 " FIXME: Revert this f70be548
 " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
 map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
-" Remaps
 nnoremap ; :
 cmap w!! w !sudo tee % > /dev/null
 nnoremap <space> za
+vnoremap < <gv
+vnoremap > >gv
 nnoremap K kJ
 nnoremap Q @q
 nnoremap # *
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap T y$
-" Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
 vnoremap // y/<C-R>"<CR>
+inoremap jj <ESC>
 " buffer switching
 map <Leader>n :bn<cr>
 map <Leader>p :bp<cr>
@@ -287,19 +271,32 @@ nnoremap <S-Tab> :bprevious<CR>
 " tag jumping
 nnoremap <Leader>k <C-]>
 nnoremap <Leader>j <C-T>
+"unmap <Leader>q
+" vimprompt
+map <Leader>q :VimuxPromptCommand<CR>
+map <Leader>w :call VimuxRunCommand("fc -e : -1")<CR>
+map <Leader>W :VimuxRunLastCommand<CR>
+map <Leader>vp :VimuxPromptCommand<CR>
+map <Leader>vl :VimuxRunLastCommand<CR>
+nnoremap <Leader>t :TagbarToggle<CR>
+nnoremap <Leader>f :NERDTreeToggle<CR>
+" Generate tags and cscope
+map <Leader>T :!tagscope<CR>
 
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+map <Leader>ew :e %%
+map <Leader>es :sp %%
+map <Leader>ev :vsp %%
+map <Leader>et :tabe %%
+" Adjust viewports to the same size
+map <Leader>= <C-w>=
+
+" Easier formatting
+nnoremap <silent> <Leader>q gwip
 nnoremap <Left>  :echo "No left for you!"<CR>
 nnoremap <Right> :echo "No right for you!"<CR>
 nnoremap <Up>    :echo "No up for you!"<CR>
 nnoremap <Down>  :echo "No down for you!"<CR>
-
-" Prompt for a command to run map
-map <Leader>vp :VimuxPromptCommand<CR>
-" Run last command executed by VimuxRunCommand
-map <Leader>vl :VimuxRunLastCommand<CR>
-nnoremap <Leader>t :TagbarToggle<CR>
-nnoremap <Leader>f :NERDTreeToggle<CR>
-inoremap jj <ESC>
 
 nnoremap <silent> <c-\><Left>   :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-\><Down>   :TmuxNavigateDown<cr>
@@ -312,19 +309,8 @@ nnoremap <silent> <c-\>l        :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\><bslash> :TmuxNavigatePrevious<cr>
 nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
 
-nnoremap <Leader>y :FZF<cr>
-
 nnoremap z= i<C-X><C-S>
-unmap <Leader>q
-"unmap <Leader>nt
-"unmap <Leader>fu
 map <CR> o<Esc>
-" vimprompt
-map <Leader>q :VimuxPromptCommand<CR>
-map <Leader>w :call VimuxRunCommand("fc -e : -1")<CR>
-map <Leader>W :VimuxRunLastCommand<CR>
-" Generate tags and cscope
-map <Leader>T :!tagscope<CR>
 
 " Fugitive {
 if isdirectory(expand('~/.vim/plugged/vim-fugitive/'))
@@ -342,7 +328,8 @@ if isdirectory(expand('~/.vim/plugged/vim-fugitive/'))
 endif
 "}
 
-"nmap <leader><tab> <plug>(fzf-maps-n)
+nnoremap <Leader>y :FZF<cr>
+set runtimepath+=/usr/local/opt/fzf
 
 " NerdTree {
 if isdirectory(expand('~/.vim/plugged/nerdtree'))
@@ -360,16 +347,6 @@ if isdirectory(expand('~/.vim/plugged/nerdtree'))
     let g:nerdtree_tabs_open_on_gui_startup=0
 endif
 " }
-
-" The following two lines conflict with moving to top and
-" bottom of the screen
-" If you prefer that functionality, add the following to your
-" .vimrc.before.local file:
-"   let g:spf13_no_fastTabs = 1
-if !exists('g:spf13_no_fastTabs')
-    map <S-H> gT
-    map <S-L> gt
-endif
 
 " Stupid shift key fixes
 if !exists('g:spf13_no_keyfixes')
@@ -491,8 +468,6 @@ function! s:RunShellCommand(cmdline)
 endfunction
 
 command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
-" e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
-" }
 
 function! s:ExpandFilenameAndExecute(command, file)
     execute a:command . ' ' . expand(a:file, ':p')
@@ -555,7 +530,6 @@ let g:airline_section_error = '%q'
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline_section_warning = '%{ALEGetStatusLine()}'
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:bufferline_modified = '+'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_close_button = 1
 let g:airline#extensions#tabline#fnamemod     = ':t'
@@ -563,6 +537,7 @@ let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#show_tabs    = 0
 let g:airline#extensions#tabline#tab_nr_type  = 1 " tab number
 let g:airline#extensions#tabline#show_splits  = 1
+let g:bufferline_modified = '+'
 let g:Tlist_Show_One_File = 1
 
 let g:minimap_show='<leader>M'
@@ -603,7 +578,6 @@ highlight LineNr ctermbg=234 ctermfg=239
 "highlight CursorLine   ctermbg=black
 highlight SpecialKey ctermbg=234
 " Sign column for Git
-"highlight clear SignColumn
 highlight SignColumn ctermbg=234
 highlight DiffAdd    ctermbg=234
 highlight DiffDelete ctermbg=234
@@ -726,10 +700,9 @@ let &runtimepath=&runtimepath . ',~/.vim/plugin'
 
 " Erlang
 set runtimepath^=~/.vim/plugged/vim-erlang-runtime
-set runtimepath+=/usr/local/opt/fzf
 
 " this should reflect the kerl setting
-set runtimepath^=/usr/local/erlang/kredotp/bin/erl
+set runtimepath^=/usr/local/erlang/19.3/bin/erl
 
 if has('gui_running')
     if filereadable(expand('~/.gvimrc.local'))

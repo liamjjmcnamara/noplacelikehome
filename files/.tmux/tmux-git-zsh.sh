@@ -83,6 +83,13 @@ find_git_branch() {
     fi
 }
 
+find_git_tag() {
+  GIT_TAG=$(git describe --exact-match 2> /dev/null)
+  if [[ "$GIT_TAG" != "" ]]; then
+    GIT_TAG="⌦ $GIT_TAG "
+  fi
+}
+
 # Taken from https://github.com/jimeh/git-aware-prompt
 find_git_dirty() {
   local git_status=`git status --porcelain 2> /dev/null`
@@ -121,6 +128,7 @@ update_tmux() {
         # Get the info
         find_git_branch "$GIT_REPO"
         find_git_stash "$GIT_REPO"
+        find_git_tag
         find_git_dirty
 
         GIT_FLAGS=($GIT_STASH)
