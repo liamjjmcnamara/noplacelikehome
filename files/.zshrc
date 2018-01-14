@@ -1,6 +1,7 @@
 # oh my zsh
 export LANG='en_US.UTF-8'
 export ZSH=$HOME/.oh-my-zsh
+
 plugins=(git osx)
 
 if [ -e $ZSH/oh-my-zsh.sh ]; then
@@ -12,6 +13,11 @@ export PS1=$'[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 export TILLER_NAMESPACE="id"
 export HELM_HOME="~/.helm"
+export SAVEHIST=10000
+export HISTFILE=~/.zsh_history
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>/:'
+export KEYTIMEOUT=1
+export CASE_SENSITIVE="true"
 
 setopt PROMPT_SUBST
 setopt AUTO_CD
@@ -33,11 +39,6 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
-
-SAVEHIST=10000
-HISTFILE=~/.zsh_history
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>/:'
-KEYTIMEOUT=1
 
 alias ls="gls --color=auto"
 alias l="ls -l"
@@ -61,17 +62,17 @@ alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome
 alias r3="rebar3"
 alias prep='rebar3 dialyzer && elvis rock && echo "\n\033[0;32mLooks good!\033[0;0m\n"'
 
-git config --global alias.stat 'status --short --branch'
-git config --global alias.glog 'log --graph --abbrev-commit --decorate --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"'
-git config --global alias.co checkout
-git config --global alias.cob 'checkout -b'
-git config --global alias.br 'branch --sort=committerdate'
-git config --global alias.ci commit
-git config --global alias.cam 'commit -p -S -m'
-git config --global alias.cpm 'commit -p -S -m'
-git config --global alias.st status
-git config --global alias.last 'log -1 HEAD'
-git config --global commit.verbose true
+#git config --global alias.stat 'status --short --branch'
+#git config --global alias.glog 'log --graph --abbrev-commit --decorate --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"'
+#git config --global alias.co checkout
+#git config --global alias.cob 'checkout -b'
+#git config --global alias.br 'branch --sort=committerdate'
+#git config --global alias.ci commit
+#git config --global alias.cam 'commit -p -S -m'
+#git config --global alias.cpm 'commit -p -S -m'
+#git config --global alias.st status
+#git config --global alias.last 'log -1 HEAD'
+#git config --global commit.verbose true
 
 # label a window in tmux and set git status
 if [[ -n $TMUX  ]]; then 
@@ -92,7 +93,6 @@ bindkey "^[[3~" delete-char
 #bindkey '[C' vi-forward-word
 #bindkey '[D' vi-backward-word
 bindkey '^e' end-of-line
-CASE_SENSITIVE="true"
 
 if [ -e /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -118,7 +118,7 @@ if [ -e /usr/local/erlang/18.3/activate ]; then
 fi
 
 # kubernetes shell completion
-source <(kubectl completion zsh)
+# source <(kubectl completion zsh)
 
 if [ -e ~/.dircolors ]; then
   eval "$(dircolors ~/.dircolors)"
@@ -128,4 +128,3 @@ fi
 if [ -e ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
-

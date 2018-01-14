@@ -18,7 +18,7 @@
 	cob = checkout -b
 	last = log -1 HEAD
 	cpm = commit -p -S -m
-	br = branch --sort=-committerdate
+	br = branch --sort=committerdate
 [core]
 	excludesfile = /Users/liam.mcnamara/.gitignore
 [commit]
