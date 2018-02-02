@@ -38,6 +38,8 @@ if has('clipboard')
     endif
 endif
 
+set guifont=Roboto\ Mono\ for\ Powerline:h12
+
 " Most prefer to automatically switch to the current file directory when
 " a new buffer is opened; to prevent this behavior, add the following to
 " your .vimrc.before.local file:
@@ -572,23 +574,23 @@ endif
 colorscheme molokai_dark
 " Line numbers
 highlight visual ctermbg=240
-highlight LineNr ctermbg=234 ctermfg=239
+highlight LineNr ctermbg=235 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=202
 "highlight CursorLine   ctermbg=black
-highlight SpecialKey ctermbg=234
+highlight SpecialKey ctermbg=235
 " Sign column for Git
-highlight SignColumn ctermbg=234
-highlight DiffAdd    ctermbg=234
-highlight DiffDelete ctermbg=234
-highlight DiffChange ctermbg=234
+highlight SignColumn ctermbg=235
+highlight DiffAdd    ctermbg=235
+highlight DiffDelete ctermbg=235
+highlight DiffChange ctermbg=235
 " Lint ale
-highlight ALEErrorSign   ctermbg=234 ctermfg=1
-highlight ALEWarningSign ctermbg=234 ctermfg=202
+highlight ALEErrorSign   ctermbg=235 ctermfg=1
+highlight ALEWarningSign ctermbg=235 ctermfg=202
 " Syntastic
-highlight Error   ctermbg=234 ctermfg=202
-highlight Warning ctermbg=234 ctermfg=200
-highlight Todo    ctermbg=234 ctermfg=208
+highlight Error   ctermbg=235 ctermfg=202
+highlight Warning ctermbg=235 ctermfg=200
+highlight Todo    ctermbg=235 ctermfg=208
 
 highlight Directory ctermfg='blue'
 " popup menu

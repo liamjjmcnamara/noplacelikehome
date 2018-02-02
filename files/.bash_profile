@@ -14,6 +14,8 @@ if [ -f ~/.bashrc  ]; then
 	. ~/.bashrc
 fi
 
+export PATH="$PATH:/usr/local/bin"
+
 export HISTCONTROL=ignoreboth:erasedups
 export HISTFILESIZE=2000
 export PYTHONPATH="."

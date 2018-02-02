@@ -30,10 +30,13 @@ unsetopt LISTAMBIGUOUS
 # set VIMODE according to the current mode
 # https://dougblack.io/words/zsh-vi-mode.html
 function zle-line-init zle-keymap-select {
-    PS1=$'%{$FG[007]%}[%{$FG[015]%}yukon%{\e[0m%}%{$FG[007]%}]<%{\e[97m%}%~%b%{\e[0m%}%{$FG[007]%}>%{$FG[015]%}'
     case $KEYMAP in
-        #vicmd|main) PS1=$'[%{$FG[10]%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>';;
-        main) PS1=$'%{$FG[136]%}[%{$FG[015]%}yukon%{\e[0m%}%{$FG[136]%}]<%{\e[97m%}%~%b%{\e[0m%}%{$FG[136]%}>%{$FG[015]%}';;
+        vicmd)      PS1=$'%{$FG[007]%}[%{$FG[015]%}yukon%{\e[0m%}%{$FG[007]%}]<%{\e[97m%}%~%b%{\e[0m%}%{$FG[007]%}>%{$FG[015]%}'
+                    echo -ne "\e[4 q"
+                    ;;
+        viins|main) PS1=$'%{$FG[136]%}[%{$FG[015]%}yukon%{\e[0m%}%{$FG[136]%}]<%{\e[97m%}%~%b%{\e[0m%}%{$FG[136]%}>%{$FG[015]%}'
+                    echo -ne "\e[2 q"
+                    ;;
     esac
     zle reset-prompt
 }
