@@ -34,7 +34,7 @@ function zle-line-init zle-keymap-select {
         vicmd)      PS1=$'%{$FG[007]%}[%{$FG[015]%}yukon%{\e[0m%}%{$FG[007]%}]<%{\e[97m%}%~%b%{\e[0m%}%{$FG[007]%}>%{$FG[015]%}'
                     echo -ne "\e[4 q"
                     ;;
-        viins|main) PS1=$'%{$FG[136]%}[%{$FG[015]%}yukon%{\e[0m%}%{$FG[136]%}]<%{\e[97m%}%~%b%{\e[0m%}%{$FG[136]%}>%{$FG[015]%}'
+        viins|main) PS1=$'%(?.%{$FG[136]%}.%{$FG[001]%})[%{$FG[015]%}yukon%{\e[0m%}%(?.%{$FG[136]%}.%{$FG[001]%})]<%{\e[97m%}%~%b%{\e[0m%}%(?.%{$FG[136]%}.%{$FG[001]%})>%{$FG[015]%}'
                     echo -ne "\e[2 q"
                     ;;
     esac
