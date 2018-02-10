@@ -16,6 +16,7 @@ export HELM_HOME="~/.helm"
 export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>/:'
+export SEPCHARS='[/ ]'
 export KEYTIMEOUT=1
 export CASE_SENSITIVE="true"
 
@@ -40,8 +41,48 @@ function zle-line-init zle-keymap-select {
     esac
     zle reset-prompt
 }
+
+my-forward-word() {
+    if [[ "${BUFFER[CURSOR + 1]}" =~ "${SEPCHARS}" ]]; then
+        (( CURSOR += 1 ))
+        #return
+    fi
+    while [[ CURSOR -lt "${#BUFFER}" && ! "${BUFFER[CURSOR + 1]}" =~ "${SEPCHARS}" ]]; do
+        (( CURSOR += 1 ))
+    done
+    while [[ CURSOR -lt "${#BUFFER}" && "${BUFFER[CURSOR + 1]}" =~ "${SEPCHARS}" ]]; do
+        (( CURSOR += 1 ))
+    done
+}
+
+my-backward-word() {
+    while [[ CURSOR -gt 0 && "${BUFFER[CURSOR]}" =~ "${SEPCHARS}" ]]; do
+        (( CURSOR -= 1 ))
+    done
+    while [[ CURSOR -gt 0 && ! "${BUFFER[CURSOR]}" =~ "${SEPCHARS}" ]]; do
+        (( CURSOR -= 1 ))
+    done
+}
 zle -N zle-line-init
 zle -N zle-keymap-select
+zle -N my-forward-word
+zle -N my-backward-word
+
+# Vi mode
+bindkey -v
+bindkey '^R' history-incremental-search-backward
+bindkey "^A" beginning-of-line
+bindkey "^[[A"  up-line-or-history
+bindkey "^[[B"  down-line-or-history
+bindkey "^[[3~" delete-char
+bindkey '^e' end-of-line
+bindkey '^k' up-line-or-history
+bindkey '^j' down-line-or-history
+
+bindkey '^[f' my-forward-word
+bindkey '^[b' my-backward-word
+#bindkey '^[f' vi-forward-word
+#bindkey '^[b' vi-backward-word
 
 alias ls="gls --color=auto"
 alias l="ls -l"
@@ -65,20 +106,8 @@ alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome
 alias r3="rebar3"
 alias prep='rebar3 dialyzer && elvis rock && echo "\n\033[0;32mLooks good!\033[0;0m\n"'
 
-#git config --global alias.stat 'status --short --branch'
-#git config --global alias.glog 'log --graph --abbrev-commit --decorate --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)"'
-#git config --global alias.co checkout
-#git config --global alias.cob 'checkout -b'
-#git config --global alias.br 'branch --sort=committerdate'
-#git config --global alias.ci commit
-#git config --global alias.cam 'commit -p -S -m'
-#git config --global alias.cpm 'commit -p -S -m'
-#git config --global alias.st status
-#git config --global alias.last 'log -1 HEAD'
-#git config --global commit.verbose true
-
 # label a window in tmux and set git status
-if [[ -n $TMUX  ]]; then 
+if [[ -n $TMUX  ]]; then
   PROMPT_COMMAND='$(tmux rename-window $(pwd|sed "s,$HOME,~,"|sed "s,.*/,," )/)'
   if [ -e  ~/.tmux/tmux-git-zsh.sh ]; then
     source ~/.tmux/tmux-git-zsh.sh
@@ -86,16 +115,6 @@ if [[ -n $TMUX  ]]; then
 fi
 precmd() { eval "$PROMPT_COMMAND" }
 
-# Vi mode
-bindkey -v
-bindkey '^R' history-incremental-search-backward
-bindkey "^A" beginning-of-line
-bindkey "^[[A"  up-line-or-history
-bindkey "^[[B"  down-line-or-history
-bindkey "^[[3~" delete-char
-#bindkey '[C' vi-forward-word
-#bindkey '[D' vi-backward-word
-bindkey '^e' end-of-line
 
 if [ -e /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -119,9 +138,6 @@ fi
 if [ -e /usr/local/erlang/18.3/activate ]; then
   source /usr/local/erlang/18.3/activate
 fi
-
-# kubernetes shell completion
-# source <(kubectl completion zsh)
 
 if [ -e ~/.dircolors ]; then
   eval "$(dircolors ~/.dircolors)"
