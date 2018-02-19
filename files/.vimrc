@@ -45,107 +45,86 @@ if !exists('g:spf13_no_autochdir')
     " Always switch to the current file directory
 endif
 
-set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
-set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
-set virtualedit=onemore         " Allow for cursor beyond last character
-set history=1000                " Store a ton of history (default is 20)
-set spell                       " Spell checking on
+"set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
+"set matchpairs+=<:>             " Match, to be used with %
+let &titlestring = expand('%:p')
+set autoindent                  " Indent at the same level of the previous line
+set backspace=indent,eol,start  " Backspace for dummies
+set backup                  " Backups are nice ...
+set clipboard=unnamed
+set colorcolumn=81
+set cursorline                  " Highlight current line
+set expandtab
+set expandtab                   " Tabs are spaces, not tabs
+set foldenable
+set foldenable                  " Auto fold code
+set foldlevel=99
+set foldmethod=indent
 set hidden                      " Allow buffer switching without saving
-set iskeyword-=.                " '.' is an end of word designator
+set history=1000                " Store a ton of history (default is 20)
+set hlsearch                    " Highlight search terms
+set ignorecase                  " Case insensitive search
+set incsearch                   " Find as you type search
 set iskeyword-=#                " '#' is an end of word designator
 set iskeyword-=-                " '-' is an end of word designator
-set tabpagemax=15               " Only show 15 tabs
-set showmode                    " Display the current mode
-set cursorline                  " Highlight current line
-set backspace=indent,eol,start  " Backspace for dummies
+set iskeyword-=.                " '.' is an end of word designator
+set laststatus=2
 set linespace=0                 " No extra spaces between rows
-set number                      " Line numbers on
-set showmatch                   " Show matching brackets/parenthesis
-set incsearch                   " Find as you type search
-set hlsearch                    " Highlight search terms
-set winminheight=0              " Windows can be 0 line high
-set ignorecase                  " Case insensitive search
-set smartcase                   " Case sensitive when uc present
-set wildmenu                    " Show list instead of just completing
-set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
-set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
-set scrolljump=5                " Lines to scroll when cursor leaves screen
-set scrolloff=3                 " Minimum lines to keep above and below cursor
-set foldenable                  " Auto fold code
+set list
 set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
-set nowrap                      " Do not wrap long lines
-set autoindent                  " Indent at the same level of the previous line
-set shiftwidth=4                " Use indents of 4 spaces
-set expandtab                   " Tabs are spaces, not tabs
-set tabstop=4                   " An indentation every four columns
-set softtabstop=4               " Let backspace delete indent
-set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
-set splitright                  " Puts new vsplit windows to the right of the current
-set splitbelow                  " Puts new split windows to the bottom of the current
-"set matchpairs+=<:>             " Match, to be used with %
-set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
-"set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
-set nonumber
-set number!
-set spell!
-set shiftwidth=2
-set wrap linebreak nolist
-set colorcolumn=81
-set list
-set clipboard=unnamed
-set scrolloff=16
-set tabstop=2
-set expandtab
-set timeoutlen=300 ttimeoutlen=300
-set ttimeoutlen=10
 set nobackup
-set ttyfast
-set tags=./tags;/
-set foldmethod=indent
-set foldenable
-set foldlevel=99
-set wildmode=list:longest,full
-set synmaxcol=130
-let &titlestring = expand('%:p')
-set title
-set norelativenumber
 set nocursorline
+set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
+set nonumber
+set norelativenumber
+set nowrap                      " Do not wrap long lines
+set number                      " Line numbers on
+set number!
+set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
+set ruler                   " Show the ruler
+set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
+set scrolljump=5                " Lines to scroll when cursor leaves screen
+set scrolloff=16
+set scrolloff=3                 " Minimum lines to keep above and below cursor
+set shiftwidth=2
+set shiftwidth=4                " Use indents of 4 spaces
+set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
+set showcmd                 " Show partial commands in status line and
+set showmatch                   " Show matching brackets/parenthesis
+set showmode                    " Display the current mode
+set smartcase                   " Case sensitive when uc present
+set softtabstop=4               " Let backspace delete indent
+set spell                       " Spell checking on
+set spell!
 set spellsuggest=best,10
-
-" Setting up the directories
-set backup                  " Backups are nice ...
-if has('persistent_undo')
-    set undofile                " So is persistent undo ...
-    set undolevels=1000         " Maximum number of changes that can be undone
-    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
-endif
-
-" To disable views add the following to your .vimrc.before.local file:
-"   let g:spf13_no_views = 1
-if !exists('g:spf13_no_views')
-    " Add exclusions to mkview and loadview
-    " eg: *.*, svn-commit.tmp
-    let g:skipview_files = [
-        \ '\[example pattern\]'
-        \ ]
-endif
-
-if has('cmdline_info')
-    set ruler                   " Show the ruler
-    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
-    set showcmd                 " Show partial commands in status line and
-endif
-
-if has('statusline')
-    set laststatus=2
-    " Broken down into easily includeable segments
-    set statusline=%<%f\                     " Filename
-    set statusline+=%w%h%m%r                 " Options
-    set statusline+=\ [%{&ff}/%Y]            " Filetype
-    set statusline+=\ [%{getcwd()}]          " Current dir
-    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-endif
+set splitbelow                  " Puts new split windows to the bottom of the current
+set splitright                  " Puts new vsplit windows to the right of the current
+set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+set statusline+=%w%h%m%r                 " Options
+set statusline+=\ [%{&ff}/%Y]            " Filetype
+set statusline+=\ [%{getcwd()}]          " Current dir
+set statusline=%<%f\                     " Filename
+set synmaxcol=130
+set tabpagemax=15               " Only show 15 tabs
+set tabstop=2
+set tabstop=4                   " An indentation every four columns
+set tags=./tags;/
+set timeoutlen=300 ttimeoutlen=300
+set title
+set ttimeoutlen=10
+set ttyfast
+set undofile                " So is persistent undo ...
+set undolevels=1000         " Maximum number of changes that can be undone
+set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
+set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
+set virtualedit=onemore         " Allow for cursor beyond last character
+set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
+set wildmenu                    " Show list instead of just completing
+set wildmode=list:longest,full
+set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+set winminheight=0              " Windows can be 0 line high
+set wrap linebreak nolist
 
 " The default leader is '\', but many people prefer ',' as it's in a standard
 " location. To override this behavior and set it back to '\' (or any other
@@ -334,13 +313,13 @@ if isdirectory(expand('~/.vim/plugged/nerdtree'))
     map <leader>e :NERDTreeFind<CR>
     nmap <leader>nt :NERDTreeFind<CR>
     let g:NERDShutUp=1
-    let g:NERDTreeShowBookmarks=1
-    let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
     let g:NERDTreeChDirMode=0
-    let g:NERDTreeQuitOnOpen=1
-    let g:NERDTreeMouseMode=2
-    let g:NERDTreeShowHidden=1
+    let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
     let g:NERDTreeKeepTreeInNewTab=1
+    let g:NERDTreeMouseMode=2
+    let g:NERDTreeQuitOnOpen=1
+    let g:NERDTreeShowBookmarks=1
+    let g:NERDTreeShowHidden=1
     let g:nerdtree_tabs_open_on_gui_startup=0
 endif
 
@@ -400,7 +379,6 @@ function! InitializeDirectories()
     if has('persistent_undo')
         let l:dir_list['undo'] = 'undodir'
     endif
-
     " To specify a different directory in which to place the vimbackup,
     " vimviews, vimundo, and vimswap files/directories, add the following to
     " your .vimrc.before.local file:
@@ -429,7 +407,6 @@ function! InitializeDirectories()
     endfor
 endfunction
 call InitializeDirectories()
-" }
 
 " Initialize NERDTree as needed
 function! NERDTreeInitAsNeeded()
@@ -444,11 +421,9 @@ function! NERDTreeInitAsNeeded()
     endif
 endfunction
 
-
-" Shell command {
+" Shell command
 function! s:RunShellCommand(cmdline)
     botright new
-
     setlocal buftype=nofile
     setlocal bufhidden=delete
     setlocal nobuflisted
@@ -456,7 +431,6 @@ function! s:RunShellCommand(cmdline)
     setlocal nowrap
     setlocal filetype=shell
     setlocal syntax=shell
-
     call setline(1, a:cmdline)
     call setline(2, substitute(a:cmdline, '.', '=', 'g'))
     execute 'silent $read !' . escape(a:cmdline, '%#')
@@ -469,7 +443,6 @@ command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
 function! s:ExpandFilenameAndExecute(command, file)
     execute a:command . ' ' . expand(a:file, ':p')
 endfunction
-
 
 " File extension colouring
 function! NERDTreeHighlightFile(extension, fg)
