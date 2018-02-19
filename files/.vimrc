@@ -2,7 +2,7 @@ set encoding=utf-8
 scriptencoding utf-8
 set shell=/bin/sh
 
-" Environment {
+" Environment
 silent function! OSX()
     return has('macunix')
 endfunction
@@ -13,10 +13,6 @@ endfunction
 " Arrow Key Fix { https://github.com/spf13/spf13-vim/issues/780
 if &term[:4] ==? 'xterm' || &term[:5] ==? 'screen' || &term[:3] ==? 'rxvt'
     inoremap <silent> <C-[>OC <RIGHT>
-endif
-
-if filereadable(expand('~/.vimrc.before'))
-    source ~/.vimrc.before
 endif
 
 if filereadable(expand('~/.vimrc.bundles'))
@@ -117,7 +113,7 @@ set norelativenumber
 set nocursorline
 set spellsuggest=best,10
 
-" Setting up the directories {
+" Setting up the directories
 set backup                  " Backups are nice ...
 if has('persistent_undo')
     set undofile                " So is persistent undo ...
@@ -314,7 +310,7 @@ nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
 nnoremap z= i<C-X><C-S>
 map <CR> o<Esc>
 
-" Fugitive {
+" Fugitive
 if isdirectory(expand('~/.vim/plugged/vim-fugitive/'))
     nnoremap <silent> <leader>gs :Gstatus<CR>
     nnoremap <silent> <leader>gd :Gdiff<CR>
@@ -328,12 +324,11 @@ if isdirectory(expand('~/.vim/plugged/vim-fugitive/'))
     nnoremap <silent> <leader>gi :Git add -p %<CR>
     nnoremap <silent> <leader>gg :SignifyToggle<CR>
 endif
-"}
 
 nnoremap <Leader>y :FZF<cr>
 set runtimepath+=/usr/local/opt/fzf
 
-" NerdTree {
+" NerdTree
 if isdirectory(expand('~/.vim/plugged/nerdtree'))
     map <C-e> <plug>NERDTreeTabsToggle<CR>
     map <leader>e :NERDTreeFind<CR>
@@ -348,7 +343,6 @@ if isdirectory(expand('~/.vim/plugged/nerdtree'))
     let g:NERDTreeKeepTreeInNewTab=1
     let g:nerdtree_tabs_open_on_gui_startup=0
 endif
-" }
 
 " Stupid shift key fixes
 if !exists('g:spf13_no_keyfixes')
@@ -363,7 +357,6 @@ if !exists('g:spf13_no_keyfixes')
         command! -bang QA qa<bang>
         command! -bang Qa qa<bang>
     endif
-
     cmap Tabe tabe
 endif
 
@@ -379,6 +372,9 @@ if isdirectory(expand('~/.vim/plugged/vim-indent-guides/'))
     let g:indent_guides_guide_size = 1
     let g:indent_guides_enable_on_vim_startup = 1
 endif
+
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
 
 " See `:echo g:airline_theme_map` for some more choices
 " Default in terminal vim is 'dark'
@@ -435,19 +431,18 @@ endfunction
 call InitializeDirectories()
 " }
 
-" Initialize NERDTree as needed {
+" Initialize NERDTree as needed
 function! NERDTreeInitAsNeeded()
-    redir => bufoutput
+    redir => l:bufoutput
     buffers!
     redir END
-    let l:idx = stridx(bufoutput, 'NERD_tree')
+    let l:idx = stridx(l:bufoutput, 'NERD_tree')
     if l:idx > -1
         NERDTreeMirror
         NERDTreeFind
         wincmd l
     endif
 endfunction
-" }
 
 
 " Shell command {
