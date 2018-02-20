@@ -651,28 +651,26 @@ augroup END
 " Restore cursor to file position in previous editing session
 " To disable this, add the following to your .vimrc.before.local file:
 "   let g:spf13_no_restore_cursor = 1
-if !exists('g:spf13_no_restore_cursor')
-    function! ResCur()
-        if line("'\"") <= line('$')
-            silent! normal! g`"
-            return 1
-        endif
-    endfunction
+function! ResCur()
+    if line("'\"") <= line('$')
+        silent! normal! g`"
+        return 1
+    endif
+endfunction
 
-    augroup resCur
-        autocmd!
-        autocmd BufWinEnter * call ResCur()
-    augroup END
-endif
+augroup resCur
+    autocmd!
+    autocmd BufWinEnter * call ResCur()
+augroup END
 
 " For cscope
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
 
 " Erlang
-set runtimepath^=~/.vim/plugged/vim-erlang-runtime
+"set runtimepath^=~/.vim/plugged/vim-erlang-runtime
 
 " this should reflect the kerl setting
-set runtimepath^=/usr/local/erlang/19.3/bin/erl
+"set runtimepath^=/usr/local/erlang/19.3/bin/erl
 
 if has('gui_running')
     if filereadable(expand('~/.gvimrc.local'))
