@@ -54,9 +54,7 @@ set backup                  " Backups are nice ...
 set clipboard=unnamed
 set colorcolumn=81
 set cursorline                  " Highlight current line
-set expandtab
 set expandtab                   " Tabs are spaces, not tabs
-set foldenable
 set foldenable                  " Auto fold code
 set foldlevel=99
 set foldmethod=indent
@@ -71,16 +69,13 @@ set iskeyword-=.                " '.' is an end of word designator
 set laststatus=2
 set linespace=0                 " No extra spaces between rows
 set list
-set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 set nobackup
 set nocursorline
 set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
-set nonumber
 set norelativenumber
 set nowrap                      " Do not wrap long lines
 set number                      " Line numbers on
-set number!
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 set ruler                   " Show the ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
@@ -95,16 +90,14 @@ set showmatch                   " Show matching brackets/parenthesis
 set showmode                    " Display the current mode
 set smartcase                   " Case sensitive when uc present
 set softtabstop=4               " Let backspace delete indent
-set spell                       " Spell checking on
-set spell!
 set spellsuggest=best,10
 set splitbelow                  " Puts new split windows to the bottom of the current
 set splitright                  " Puts new vsplit windows to the right of the current
+set statusline =%<%f\                     " Filename
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 set statusline+=%w%h%m%r                 " Options
 set statusline+=\ [%{&ff}/%Y]            " Filetype
 set statusline+=\ [%{getcwd()}]          " Current dir
-set statusline=%<%f\                     " Filename
 set synmaxcol=130
 set tabpagemax=15               " Only show 15 tabs
 set tabstop=2
@@ -124,12 +117,11 @@ set wildmenu                    " Show list instead of just completing
 set wildmode=list:longest,full
 set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
 set winminheight=0              " Windows can be 0 line high
-set wrap linebreak nolist
+set wrap linebreak
 
 " The default leader is '\', but many people prefer ',' as it's in a standard
 " location. To override this behavior and set it back to '\' (or any other
 " character) add the following to your .vimrc.before.local file:
-"   let g:spf13_leader='\'
 if !exists('g:spf13_leader')
     let g:mapleader = ','
 else
@@ -163,38 +155,36 @@ noremap k gk
 " If you prefer the default behaviour, add the following to your
 " .vimrc.before.local file:
 "   let g:spf13_no_wrapRelMotion = 1
-if !exists('g:spf13_no_wrapRelMotion')
-    " Same for 0, home, end, etc
-    function! WrapRelativeMotion(key, ...)
-        let l:vis_sel=''
-        if a:0
-            let l:vis_sel='gv'
-        endif
-        if &wrap
-            execute 'normal!' l:vis_sel . 'g' . a:key
-        else
-            execute 'normal!' l:vis_sel . a:key
-        endif
-    endfunction
+" Same for 0, home, end, etc
+function! WrapRelativeMotion(key, ...)
+    let l:vis_sel=''
+    if a:0
+        let l:vis_sel='gv'
+    endif
+    if &wrap
+        execute 'normal!' l:vis_sel . 'g' . a:key
+    else
+        execute 'normal!' l:vis_sel . a:key
+    endif
+endfunction
 
-    " Map g* keys in Normal, Operator-pending, and Visual+select
-    noremap $ :call WrapRelativeMotion("$")<CR>
-    noremap <End> :call WrapRelativeMotion("$")<CR>
-    noremap 0 :call WrapRelativeMotion("0")<CR>
-    noremap <Home> :call WrapRelativeMotion("0")<CR>
-    noremap ^ :call WrapRelativeMotion("^")<CR>
-    " Overwrite the operator pending $/<End> mappings from above
-    " to force inclusive motion with :execute normal!
-    onoremap $ v:call WrapRelativeMotion("$")<CR>
-    onoremap <End> v:call WrapRelativeMotion("$")<CR>
-    " Overwrite the Visual+select mode mappings from above
-    " to ensure the correct vis_sel flag is passed to function
-    vnoremap $ :<C-U>call WrapRelativeMotion("$", 1)<CR>
-    vnoremap <End> :<C-U>call WrapRelativeMotion("$", 1)<CR>
-    vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<CR>
-    vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
-    vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
-endif
+" Map g* keys in Normal, Operator-pending, and Visual+select
+noremap $ :call WrapRelativeMotion("$")<CR>
+noremap <End> :call WrapRelativeMotion("$")<CR>
+noremap 0 :call WrapRelativeMotion("0")<CR>
+noremap <Home> :call WrapRelativeMotion("0")<CR>
+noremap ^ :call WrapRelativeMotion("^")<CR>
+" Overwrite the operator pending $/<End> mappings from above
+" to force inclusive motion with :execute normal!
+onoremap $ v:call WrapRelativeMotion("$")<CR>
+onoremap <End> v:call WrapRelativeMotion("$")<CR>
+" Overwrite the Visual+select mode mappings from above
+" to ensure the correct vis_sel flag is passed to function
+vnoremap $ :<C-U>call WrapRelativeMotion("$", 1)<CR>
+vnoremap <End> :<C-U>call WrapRelativeMotion("$", 1)<CR>
+vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<CR>
+vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
+vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
 
 
 " Most prefer to toggle search highlighting rather than clear the current
@@ -226,7 +216,7 @@ map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscr
 
 nnoremap ; :
 cmap w!! w !sudo tee % > /dev/null
-nnoremap <space> za
+"nnoremap <space> za
 vnoremap < <gv
 vnoremap > >gv
 nnoremap K kJ
@@ -594,6 +584,7 @@ augroup fileguff
   autocmd FileType haskell setlocal commentstring=--\ %s
   " Workaround broken colour highlighting in Haskell
   autocmd FileType haskell,rust setlocal nospell
+  autocmd FileType yaml setlocal cursorcolumn
 augroup END
 
 augroup gitpos

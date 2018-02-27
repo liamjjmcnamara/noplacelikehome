@@ -78,6 +78,7 @@ bindkey "^[[3~" delete-char
 bindkey '^e' end-of-line
 bindkey '^k' up-line-or-history
 bindkey '^j' down-line-or-history
+#bindkey -v '^?' vi-backward-delete-char
 
 bindkey '^[f' my-forward-word
 bindkey '^[b' my-backward-word

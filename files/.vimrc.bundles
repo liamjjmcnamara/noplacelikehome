@@ -6,6 +6,7 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'Valloric/ListToggle'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'bling/vim-bufferline'
 Plug 'christoomey/vim-tmux-navigator'
@@ -15,7 +16,6 @@ Plug 'kana/vim-fakeclip'
 Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
 Plug 'nightsense/stellarized'
 Plug 'roxma/nvim-yarp'
@@ -32,6 +32,10 @@ Plug 'vim-erlang/vim-erlang-tags'
 Plug 'w0rp/ale'
 Plug 'wellle/tmux-complete.vim'
 Plug 'yuttie/comfortable-motion.vim'
+" General version control plugin
+"Plug 'mhinz/vim-signify'
+"
+
 let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
 
 call plug#end()
