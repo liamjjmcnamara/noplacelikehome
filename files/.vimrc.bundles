@@ -13,6 +13,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'flazz/vim-colorschemes'
 Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-fakeclip'
+Plug 'kopischke/vim-fetch'
 Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }

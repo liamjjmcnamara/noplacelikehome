@@ -136,8 +136,8 @@ if [ -e ~/.kerl/.kerlrc ]; then
 fi
 
 # Erlang activation
-if [ -e /usr/local/erlang/18.3/activate ]; then
-  source /usr/local/erlang/18.3/activate
+if [ -e /usr/local/erlang/19.3/activate ]; then
+  source /usr/local/erlang/19.3/activate
 fi
 
 if [ -e ~/.dircolors ]; then

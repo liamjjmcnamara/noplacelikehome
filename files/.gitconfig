@@ -21,7 +21,10 @@
 	br = branch --sort=committerdate
 [core]
 	excludesfile = /Users/liam.mcnamara/.gitignore
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [commit]
 	verbose = true
 [init]
 	templatedir = ~/.git_template
+[color]
+	ui = true

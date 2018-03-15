@@ -294,6 +294,7 @@ if isdirectory(expand('~/.vim/plugged/vim-fugitive/'))
     nnoremap <silent> <leader>gg :SignifyToggle<CR>
 endif
 
+nnoremap <C-F> :FZF<cr>
 nnoremap <Leader>y :FZF<cr>
 set runtimepath+=/usr/local/opt/fzf
 
@@ -478,7 +479,7 @@ let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str   = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
-let g:ale_erlang_erlc_options = '-I../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fredp -I../..'
+let g:ale_erlang_erlc_options = '-I../include -I../../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fredp -I../..'
 
 let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
@@ -514,6 +515,8 @@ let g:deoplete#auto_complete_delay = 2
 let g:deoplete#max_menu_width = 20
 
 let g:tmuxcomplete#trigger = ''
+
+let g:comfortable_motion_no_default_key_mappings = 1
 
 
 " Change cursor shape between insert and normal mode in iTerm2.app
@@ -569,7 +572,21 @@ function! StripTrailingWhitespace()
     let @/=l:_s
     call cursor(l:l, l:c)
 endfunction
-" }
+
+" function to try appending filetypes on filename to open
+function! TryOpenExpand()
+  let l:file = @% . '.erl'
+  if filereadable(l:file)
+    execute 'bd'
+    execute 'open' l:file
+    set filetype=erlang
+  endif
+endfunction
+
+augroup expandfilename
+  "autocmd BufNewFile * call TryOpenExpand(@%)
+  autocmd BufNewFile * call TryOpenExpand()
+augroup END
 
 augroup fileguff
   autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif

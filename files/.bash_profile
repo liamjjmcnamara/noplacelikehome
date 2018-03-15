@@ -74,3 +74,5 @@ fi
 if [ -e ~/.bash_profile.local ]; then
   . ~/.bash_profile.local
 fi
+
+export PATH="$HOME/.cargo/bin:$PATH"
