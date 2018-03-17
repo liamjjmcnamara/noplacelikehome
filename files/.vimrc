@@ -145,10 +145,6 @@ if !exists('g:spf13_no_easyWindows')
     map <C-H> <C-W>h<C-W>_
 endif
 
-" Wrapped lines goes down/up to next row, rather than next line in file.
-noremap j gj
-noremap k gk
-
 " End/Start of line motion keys act relative to row/wrap width in the
 " presence of `:set wrap`, and relative to line for `:set nowrap`.
 " Default vim behaviour is to act relative to text line in both cases
@@ -186,17 +182,6 @@ vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<CR>
 vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
 vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
 
-
-" Most prefer to toggle search highlighting rather than clear the current
-" search results. To clear search highlighting rather than toggle it on
-" and off, add the following to your .vimrc.before.local file:
-"   let g:spf13_clear_search_highlight = 1
-if exists('g:spf13_clear_search_highlight')
-    nmap <silent> <leader>/ :nohlsearch<CR>
-else
-    nmap <silent> <leader>/ :set invhlsearch<CR>
-endif
-
 " Shortcuts
 " Change Working Directory to that of the current file
 "cmap cwd lcd %:p:h
@@ -207,13 +192,9 @@ endif
 vnoremap . :normal .<CR>
 cmap w!! w !sudo tee % >/dev/null
 
-" Some helpers to edit mode
-" http://vimcasts.org/e/14
-
-" FIXME: Revert this f70be548
-" fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
-map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
-
+" Wrapped lines goes down/up to next row, rather than next line in file.
+noremap j gj
+noremap k gk
 nnoremap ; :
 cmap w!! w !sudo tee % > /dev/null
 "nnoremap <space> za
@@ -278,6 +259,9 @@ nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
 
 nnoremap z= i<C-X><C-S>
 map <CR> o<Esc>
+
+inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 
 " Fugitive
 if isdirectory(expand('~/.vim/plugged/vim-fugitive/'))
