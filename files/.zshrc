@@ -130,19 +130,22 @@ if [ -e  "~/.iterm2_shell_integration.zsh" ]; then
   source "${HOME}/.iterm2_shell_integration.zsh"
 fi
 
+if [ -e ~/.dircolors ]; then
+  eval "$(dircolors ~/.dircolors)"
+fi
+
 # Pull kerl settings
 if [ -e ~/.kerl/.kerlrc ]; then
   source ~/.kerl/.kerlrc
 fi
 
 # Erlang activation
-if [ -e /usr/local/erlang/19.3/activate ]; then
-  source /usr/local/erlang/19.3/activate
+if [ -e /usr/local/erlang/20.3.1+kred1/activate ]; then
+  source /usr/local/erlang/20.3.1+kred1/activate
 fi
 
-if [ -e ~/.dircolors ]; then
-  eval "$(dircolors ~/.dircolors)"
-fi
+export ERL_AFLAGS="-kernel shell_history enabled"
+alias erl='erl -config ~/.erlhistory.config'
 
 # Allow local specifics
 if [ -e ~/.zshrc.local ]; then

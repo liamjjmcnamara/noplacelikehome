@@ -70,6 +70,7 @@ set laststatus=2
 set linespace=0                 " No extra spaces between rows
 set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+set fillchars+=vert:\ 
 set nobackup
 set nocursorline
 set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
@@ -490,18 +491,12 @@ let g:minimap_update='minimap_update'
 let g:minimap_close='minimap_close'
 let g:minimap_toggle='minimap_toggle'
 
-let g:completor_python_binary = '/usr/bin/python'
-let g:completor_erlang_omni_trigger = '.*'
-
-" Use deoplete.
 let g:deoplete#auto_complete_start_length = 3
 let g:deoplete#auto_complete_delay = 2
 let g:deoplete#max_menu_width = 20
-
 let g:tmuxcomplete#trigger = ''
-
 let g:comfortable_motion_no_default_key_mappings = 1
-
+let g:erlang_tags_auto_update = 1
 
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~# 'iTerm.app'
@@ -543,6 +538,7 @@ highlight Pmenu     ctermbg=0 ctermfg=202
 " popup selected
 highlight PmenuSel  ctermbg=202 ctermfg=0
 highlight PmenuSbar ctermbg=0 ctermfg=202
+highlight VertSplit ctermbg=235
 
 " Strip whitespace {
 function! StripTrailingWhitespace()
@@ -660,6 +656,7 @@ let &runtimepath=&runtimepath . ',~/.vim/plugin'
 
 " Erlang
 "set runtimepath^=~/.vim/plugged/vim-erlang-runtime
+set runtimepath^=~/.vim/plugged/vim-erlang-tags
 
 " this should reflect the kerl setting
 "set runtimepath^=/usr/local/erlang/19.3/bin/erl
