@@ -19,11 +19,8 @@ if filereadable(expand('~/.vimrc.bundles'))
     source ~/.vimrc.bundles
 endif
 
-set background=dark         " Assume a dark background
 filetype plugin indent on   " Automatically detect file types.
 syntax on                   " Syntax highlighting
-set mouse=a                 " Automatically enable mouse usage
-set mousehide               " Hide the mouse cursor while typing
 scriptencoding utf-8
 
 if has('clipboard')
@@ -34,7 +31,6 @@ if has('clipboard')
     endif
 endif
 
-set guifont=Roboto\ Mono\ for\ Powerline:h12
 
 " Most prefer to automatically switch to the current file directory when
 " a new buffer is opened; to prevent this behavior, add the following to
@@ -47,10 +43,14 @@ endif
 
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 "set matchpairs+=<:>             " Match, to be used with %
+set background=dark         " Assume a dark background
+set guifont=Roboto\ Mono\ for\ Powerline:h12
+set mouse=a                 " Automatically enable mouse usage
+set mousehide               " Hide the mouse cursor while typing
 let &titlestring = expand('%:p')
 set autoindent                  " Indent at the same level of the previous line
 set backspace=indent,eol,start  " Backspace for dummies
-set backup                  " Backups are nice ...
+set backup                      " Backups are nice ...
 set clipboard=unnamed
 set colorcolumn=81
 set cursorline                  " Highlight current line
@@ -78,15 +78,15 @@ set norelativenumber
 set nowrap                      " Do not wrap long lines
 set number                      " Line numbers on
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
-set ruler                   " Show the ruler
+set ruler                       " Show the ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
 set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=16
 set scrolloff=3                 " Minimum lines to keep above and below cursor
 set shiftwidth=2
 set shiftwidth=4                " Use indents of 4 spaces
-set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
-set showcmd                 " Show partial commands in status line and
+set shortmess+=filmnrxoOtT      " Abbrev. of messages (avoids 'hit enter')
+set showcmd                     " Show partial commands in status line and
 set showmatch                   " Show matching brackets/parenthesis
 set showmode                    " Display the current mode
 set smartcase                   " Case sensitive when uc present
@@ -101,7 +101,6 @@ set statusline+=\ [%{&ff}/%Y]            " Filetype
 set statusline+=\ [%{getcwd()}]          " Current dir
 set synmaxcol=130
 set tabpagemax=15               " Only show 15 tabs
-set tabstop=2
 set tabstop=4                   " An indentation every four columns
 set tags=./tags;/
 set timeoutlen=300 ttimeoutlen=300
@@ -115,7 +114,6 @@ set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatib
 set virtualedit=onemore         " Allow for cursor beyond last character
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 set wildmenu                    " Show list instead of just completing
-set wildmode=list:longest,full
 set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
 set winminheight=0              " Windows can be 0 line high
 set wrap linebreak
