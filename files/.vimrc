@@ -207,7 +207,6 @@ nnoremap N Nzz
 nnoremap T y$
 nnoremap Y y$
 vnoremap // y/<C-R>"<CR>
-inoremap jj <ESC>
 " buffer switching
 map <Leader>n :bn<cr>
 map <Leader>p :bp<cr>
