@@ -14,6 +14,7 @@
 	co = checkout
 	ci = commit
 	st = status
+	ca = commit -p -S
 	cam = commit -p -S -m
 	cob = checkout -b
 	last = log -1 HEAD

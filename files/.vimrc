@@ -102,7 +102,7 @@ set statusline+=\ [%{getcwd()}]          " Current dir
 set synmaxcol=130
 set tabpagemax=15               " Only show 15 tabs
 set tabstop=4                   " An indentation every four columns
-set tags=./tags;/
+set tags=./.tags;/
 set timeoutlen=300 ttimeoutlen=300
 set title
 set ttimeoutlen=10
@@ -494,6 +494,9 @@ let g:deoplete#max_menu_width = 20
 let g:tmuxcomplete#trigger = ''
 let g:comfortable_motion_no_default_key_mappings = 1
 let g:erlang_tags_auto_update = 1
+let g:erlang_tags_ignore = ['rel','_build/default/rel', '_build/test']
+let g:erlang_tags_outfile = './.tags'
+
 
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~# 'iTerm.app'

@@ -89,6 +89,7 @@ alias ls="gls --color=auto"
 alias l="ls -l"
 alias tt="tree -C -L 2 -F -A"
 alias t="tt"
+alias tt3="tree -C -L 3 -F -A"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
