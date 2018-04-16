@@ -461,7 +461,7 @@ let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str   = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
-let g:ale_erlang_erlc_options = '-I../include -I../../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fredp -I../..'
+let g:ale_erlang_erlc_options = '-I../include -I../src -I../../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fredp -I../..'
 
 let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
@@ -517,7 +517,7 @@ highlight visual ctermbg=240
 highlight LineNr ctermbg=235 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=202
-"highlight CursorLine   ctermbg=black
+highlight ColorColumn ctermbg=234
 highlight SpecialKey ctermbg=235
 " Sign column for Git
 highlight SignColumn ctermbg=235
