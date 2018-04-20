@@ -26,6 +26,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'semanser/vim-outdated-plugins'
 Plug 'severin-lemaignan/vim-minimap'
+Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-erlang/vim-erlang-compiler'
@@ -35,9 +36,6 @@ Plug 'vim-erlang/vim-erlang-tags'
 Plug 'w0rp/ale'
 Plug 'wellle/tmux-complete.vim'
 Plug 'yuttie/comfortable-motion.vim'
-" General version control plugin
-"Plug 'mhinz/vim-signify'
-"
 
 let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
 
