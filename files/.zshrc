@@ -96,6 +96,7 @@ alias ....='cd ../../..'
 alias lt="ls --sort=time"
 alias c="cd"
 alias v="vi"
+alias vls="vi"
 alias d="docker"
 alias g="git"
 alias gs="git status"
@@ -147,6 +148,8 @@ fi
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 alias erl='erl -config ~/.erlhistory.config'
+
+unsetopt share_history
 
 # Allow local specifics
 if [ -e ~/.zshrc.local ]; then

@@ -52,7 +52,7 @@ set autoindent                  " Indent at the same level of the previous line
 set backspace=indent,eol,start  " Backspace for dummies
 set backup                      " Backups are nice ...
 set clipboard=unnamed
-set colorcolumn=81
+set colorcolumn=81,101
 set cursorline                  " Highlight current line
 set expandtab                   " Tabs are spaces, not tabs
 set foldenable                  " Auto fold code
@@ -84,7 +84,6 @@ set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=16
 set scrolloff=3                 " Minimum lines to keep above and below cursor
 set shiftwidth=2
-set shiftwidth=4                " Use indents of 4 spaces
 set shortmess+=filmnrxoOtT      " Abbrev. of messages (avoids 'hit enter')
 set showcmd                     " Show partial commands in status line and
 set showmatch                   " Show matching brackets/parenthesis
@@ -436,7 +435,7 @@ call NERDTreeHighlightFile('config', 'darkred')
 
 let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
 let g:NERDTreeBookmarksSort = 0
-let g:NERDTreeWinSize    = 30
+let g:NERDTreeWinSize    = 35
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeMinimalUI  = 1
 let g:NERDTreeDirArrows  = 1
@@ -462,6 +461,7 @@ let g:ale_echo_msg_error_str   = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
 let g:ale_erlang_erlc_options = '-I../include -I../src -I../../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fredp -I../..'
+let g:ale_java_javac_options = '-sourcepath /Users/liam.mcnamara/code/dropwizard/scheme_app/src/gen/java;/Users/liam.mcnamara/code/dropwizard/scheme_app/src/main/java'
 
 let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
@@ -494,7 +494,7 @@ let g:deoplete#max_menu_width = 20
 let g:tmuxcomplete#trigger = ''
 let g:comfortable_motion_no_default_key_mappings = 1
 let g:erlang_tags_auto_update = 1
-let g:erlang_tags_ignore = ['rel','_build/default/rel', '_build/test']
+let g:erlang_tags_ignore = ['rel','_build/default/rel', '_build/test', '_build/docs']
 let g:erlang_tags_outfile = './.tags'
 
 
@@ -610,7 +610,8 @@ augroup templates
   autocmd BufNewFile *.sh      0r ~/.vim/templates/skeleton.sh
   autocmd BufNewFile *.erl     0r ~/.vim/templates/skeleton.erl
   autocmd BufNewFile *.escript 0r ~/.vim/templates/skeleton.escript
-  autocmd BufNewFile *.py      0r ~/.vim/templates/python.py
+  autocmd BufNewFile *.py      0r ~/.vim/templates/skeleton.py
+  autocmd BufNewFile *.java    0r ~/.vim/templates/skeleton.java
 augroup END
 
 augroup nerdtree

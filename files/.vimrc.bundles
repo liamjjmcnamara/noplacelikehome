@@ -20,8 +20,10 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'mileszs/ack.vim'
 Plug 'nightsense/stellarized'
+Plug 'robertbraeutigam/vim-java-tags-plugin'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'semanser/vim-outdated-plugins'
