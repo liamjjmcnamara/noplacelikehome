@@ -133,7 +133,7 @@ if [ -e  "~/.iterm2_shell_integration.zsh" ]; then
 fi
 
 if [ -e ~/.dircolors ]; then
-  eval "$(dircolors ~/.dircolors)"
+  eval $(dircolors ~/.dircolors)
 fi
 
 # Pull kerl settings

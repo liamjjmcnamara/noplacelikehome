@@ -419,19 +419,34 @@ endfunction
 " File extension colouring
 function! NERDTreeHighlightFile(extension, fg)
  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
- exec 'autocmd filetype nerdtree highlight ' . a:extension . ' ctermfg='. a:fg .' guifg='. a:fg
+ "exec 'autocmd filetype nerdtree highlight ' . a:extension . ' ctermfg='. a:fg .' guifg='. a:fg
+ exec 'autocmd filetype nerdtree highlight ' . a:extension . ' ctermfg='. a:fg
 endfunction
 
-call NERDTreeHighlightFile('txt', 'white')
+call NERDTreeHighlightFile('txt', 'gray')
 call NERDTreeHighlightFile('erl', 'yellow')
 call NERDTreeHighlightFile('hrl', 'darkblue')
 call NERDTreeHighlightFile('beam', 'darkgray')
+call NERDTreeHighlightFile('class', 'darkgray')
 call NERDTreeHighlightFile('log', 'darkgray')
 call NERDTreeHighlightFile('html', 'blue')
 call NERDTreeHighlightFile('mk', 'white')
 call NERDTreeHighlightFile('Makefile', 'white')
 call NERDTreeHighlightFile('md', 'gray')
 call NERDTreeHighlightFile('config', 'darkred')
+call NERDTreeHighlightFile('py', 'green')
+call NERDTreeHighlightFile('java', '226')
+call NERDTreeHighlightFile('png', '129')
+call NERDTreeHighlightFile('jpg', '129')
+call NERDTreeHighlightFile('gz', '88')
+call NERDTreeHighlightFile('jar', '88')
+
+"for g:ls_color in split($LS_COLORS,':')
+  "if match(g:ls_color,'^\*') > -1
+    "let g:fields = split(g:ls_color,';')
+    "call NERDTreeHighlightFile(g:fields[0][2:-4],fields[3])
+  "endif
+"endfor
 
 let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
 let g:NERDTreeBookmarksSort = 0
