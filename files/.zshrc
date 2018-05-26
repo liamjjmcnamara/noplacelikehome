@@ -1,9 +1,8 @@
-# oh my zsh
 export LANG='en_US.UTF-8'
-export ZSH=$HOME/.oh-my-zsh
 
+# oh my zsh
 plugins=(git osx)
-
+export ZSH=$HOME/.oh-my-zsh
 if [ -e $ZSH/oh-my-zsh.sh ]; then
   source $ZSH/oh-my-zsh.sh
 fi
@@ -104,7 +103,7 @@ alias gr="grep -sn"
 alias xg="xargs grep -sn"
 alias fxg="find . | xargs grep -sn"
 alias gca="git commit -a"
-alias docker_purge="docker rm $( docker ps -q -f status=exited )"
+alias docker_purge='docker rm $( docker ps -q -f status=exited )'
 alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome.git"'
 alias r3="rebar3"
 alias prep='rebar3 dialyzer && elvis rock && echo "\n\033[0;32mLooks good!\033[0;0m\n"'
@@ -150,6 +149,12 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 alias erl='erl -config ~/.erlhistory.config'
 
 unsetopt share_history
+
+fe() {
+  local files
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
 
 # Allow local specifics
 if [ -e ~/.zshrc.local ]; then

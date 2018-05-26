@@ -44,7 +44,7 @@ endif
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 "set matchpairs+=<:>             " Match, to be used with %
 set background=dark         " Assume a dark background
-set guifont=Roboto\ Mono\ for\ Powerline:h12
+set guifont=Roboto\ Mono\ Light\ Nerd\ Font\ Complete:h14
 set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
 let &titlestring = expand('%:p')
@@ -227,6 +227,7 @@ nnoremap <Leader>t :TagbarToggle<CR>
 nnoremap <Leader>f :NERDTreeToggle<CR>
 " Generate tags and cscope
 map <Leader>T :!tagscope<CR>
+map <Leader>z :terminal ++close zsh<CR>
 
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 map <Leader>ew :e %%
@@ -497,11 +498,6 @@ let g:airline#extensions#tabline#tab_nr_type  = 1 " tab number
 let g:airline#extensions#tabline#show_splits  = 1
 let g:bufferline_modified = '+'
 let g:Tlist_Show_One_File = 1
-
-let g:minimap_show='<leader>M'
-let g:minimap_update='minimap_update'
-let g:minimap_close='minimap_close'
-let g:minimap_toggle='minimap_toggle'
 
 let g:deoplete#auto_complete_start_length = 3
 let g:deoplete#auto_complete_delay = 2

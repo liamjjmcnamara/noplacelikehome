@@ -4,9 +4,10 @@ Plug 'Konfekt/FastFold'
 Plug 'Konfekt/FoldText'
 Plug 'Shougo/deoplete.nvim'
 Plug 'Valloric/ListToggle'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
+Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'benmills/vimux'
 Plug 'bling/vim-bufferline'
 Plug 'christoomey/vim-tmux-navigator'
@@ -20,21 +21,20 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'mileszs/ack.vim'
 Plug 'nightsense/stellarized'
-Plug 'robertbraeutigam/vim-java-tags-plugin'
+Plug 'robertbraeutigam/vim-java-tags-plugin', { 'for': 'java' }
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'semanser/vim-outdated-plugins'
-Plug 'severin-lemaignan/vim-minimap'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-erlang/vim-erlang-compiler'
-Plug 'vim-erlang/vim-erlang-omnicomplete'
-Plug 'vim-erlang/vim-erlang-runtime'
-Plug 'vim-erlang/vim-erlang-tags'
+Plug 'vim-erlang/vim-erlang-compiler',     { 'for': 'erlang' }
+Plug 'vim-erlang/vim-erlang-omnicomplete', { 'for': 'erlang' }
+Plug 'vim-erlang/vim-erlang-runtime',      { 'for': 'erlang' }
+Plug 'vim-erlang/vim-erlang-tags',         { 'for': 'erlang' }
 Plug 'w0rp/ale'
 Plug 'wellle/tmux-complete.vim'
 Plug 'yuttie/comfortable-motion.vim'

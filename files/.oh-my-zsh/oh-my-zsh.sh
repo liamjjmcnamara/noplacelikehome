@@ -9,7 +9,13 @@ fi
 fpath=($ZSH/functions $ZSH/completions $fpath)
 
 # Load all stock functions (from $fpath files) called below.
-autoload -U compaudit compinit
+#autoload -U compaudit compinit
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;
 
 : ${ZSH_DISABLE_COMPFIX:=true}
 
