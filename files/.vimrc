@@ -477,7 +477,8 @@ let g:ale_echo_msg_error_str   = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
 let g:ale_erlang_erlc_options = '-I../include -I../src -I../../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fredp -I../..'
-let g:ale_java_javac_options = '-sourcepath /Users/liam.mcnamara/code/dropwizard/scheme_app/src/gen/java;/Users/liam.mcnamara/code/dropwizard/scheme_app/src/main/java'
+"let g:ale_java_javac_options = '-sourcepath /Users/liam.mcnamara/code/dropwizard/scheme_app/src/gen/java;/Users/liam.mcnamara/code/dropwizard/scheme_app/src/main/java'
+let g:ale_java_javac_options = '-classpath .:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/classes/:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/scheme_app-0.1.0/WEB-INF/lib/*'
 
 let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
@@ -566,11 +567,18 @@ endfunction
 
 " function to try appending filetypes on filename to open
 function! TryOpenExpand()
-  let l:file = @% . '.erl'
-  if filereadable(l:file)
-    execute 'bd'
-    execute 'open' l:file
-    set filetype=erlang
+  if ! filereadable(@%)
+    let l:file_erlang = @% . '.erl'
+    let l:file_java= @% . '.java'
+    if filereadable(l:file_erlang)
+      execute 'bd'
+      execute 'open' l:file_erlang
+      set filetype=erlang
+    elseif filereadable(l:file_java)
+      execute 'bd'
+      execute 'open' l:file_java
+      set filetype=java
+    endif
   endif
 endfunction
 
