@@ -552,6 +552,26 @@ highlight PmenuSel  ctermbg=202 ctermfg=0
 highlight PmenuSbar ctermbg=0 ctermfg=202
 highlight VertSplit ctermbg=235
 
+fu! SaveSession()
+    "execute 'call mkdir(%:p:h/.vim)'
+    execute 'mksession! $HOME/.vim/session.vim'
+endfunction
+
+fu! RestoreSession()
+execute 'so $HOME/.vim/session.vim'
+if bufexists(1)
+    for l:buf in range(1, bufnr('$'))
+        if bufwinnr(l:buf) == -1
+            exec 'sbuffer ' . l:buf
+        endif
+    endfor
+endif
+endfunction
+
+augroup sessions
+  autocmd VimLeave * call SaveSession()
+augroup END
+
 " Strip whitespace {
 function! StripTrailingWhitespace()
     " Preparation: save last search, and cursor position.
