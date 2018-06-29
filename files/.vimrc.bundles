@@ -14,6 +14,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'flazz/vim-colorschemes'
 Plug 'gioele/vim-autoswap'
 Plug 'junegunn/fzf.vim'
+Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-fakeclip'
 Plug 'kopischke/vim-fetch'
 Plug 'kshenoy/vim-signature'
@@ -21,6 +22,8 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'mileszs/ack.vim'
 Plug 'nightsense/stellarized'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
 Plug 'robertbraeutigam/vim-java-tags-plugin', { 'for': 'java' }
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'

@@ -499,6 +499,8 @@ let g:airline#extensions#tabline#tab_nr_type  = 1 " tab number
 let g:airline#extensions#tabline#show_splits  = 1
 let g:bufferline_modified = '+'
 let g:Tlist_Show_One_File = 1
+let g:sneak#label = 1
+let g:sneak#s_next = 1
 
 let g:deoplete#auto_complete_start_length = 3
 let g:deoplete#auto_complete_delay = 2
@@ -693,6 +695,14 @@ augroup END
 
 " For cscope
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
+
+"if executable('erlang_ls')
+    "au User lsp_setup call lsp#register_server({
+        "\ 'name': 'erlang_ls',
+        "\ 'cmd': {server_info->['erlang_ls']},
+        "\ 'whitelist': ['erlang'],
+        "\ })
+"endif
 
 " Erlang
 "set runtimepath^=~/.vim/plugged/vim-erlang-runtime

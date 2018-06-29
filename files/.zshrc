@@ -18,6 +18,7 @@ export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>/:'
 export SEPCHARS='[/ ]'
 export KEYTIMEOUT=1
 export CASE_SENSITIVE="true"
+export PROMPT_EOL_MARK=""
 
 setopt PROMPT_SUBST
 setopt AUTO_CD
