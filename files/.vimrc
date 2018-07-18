@@ -98,7 +98,7 @@ set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 set statusline+=%w%h%m%r                 " Options
 set statusline+=\ [%{&ff}/%Y]            " Filetype
 set statusline+=\ [%{getcwd()}]          " Current dir
-set synmaxcol=130
+set synmaxcol=180
 set tabpagemax=15               " Only show 15 tabs
 set tabstop=4                   " An indentation every four columns
 set tags=./.tags;/
@@ -205,6 +205,8 @@ nnoremap n nzz
 nnoremap N Nzz
 nnoremap T y$
 nnoremap Y y$
+nnoremap d "_d
+vnoremap d "_d
 vnoremap // y/<C-R>"<CR>
 " buffer switching
 map <Leader>n :bn<cr>
@@ -465,6 +467,15 @@ let g:indentLine_concealcursor = 1
 let g:matchparen_timeout = 20
 let g:matchparen_insert_timeout = 20
 
+let g:deoplete#auto_complete_start_length = 3
+let g:deoplete#auto_complete_delay = 2
+let g:deoplete#max_menu_width = 20
+let g:tmuxcomplete#trigger = ''
+let g:comfortable_motion_no_default_key_mappings = 1
+let g:erlang_tags_auto_update = 1
+let g:erlang_tags_ignore = ['rel','_build/default/rel', '_build/test', '_build/docs']
+let g:erlang_tags_outfile = './.tags'
+
 let g:indentLine_first_char    = '│'
 let g:indentLine_color_dark = 1 " (default: 2)
 let g:indentLine_color_term = '239'
@@ -478,17 +489,29 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
 let g:ale_erlang_erlc_options = '-I../include -I../src -I../../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fredp -I../..'
 "let g:ale_java_javac_options = '-sourcepath /Users/liam.mcnamara/code/dropwizard/scheme_app/src/gen/java;/Users/liam.mcnamara/code/dropwizard/scheme_app/src/main/java'
-let g:ale_java_javac_options = '-classpath .:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/classes/:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/scheme_app-0.1.0/WEB-INF/lib/*'
+"let g:ale_java_javac_options = '-classpath .:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/classes/:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/scheme_app-0.1.0/WEB-INF/lib/*'
 
 let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
+
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   l:all_non_errors,
+    \   l:all_errors
+    \)
+endfunction
 
 let g:airline_theme='distinguished'
 let g:airline_section_c = ''
 let g:airline_section_y = '' "      (fileencoding, fileformat)
 let g:airline_section_error = '%q'
 let g:airline#extensions#bufferline#enabled = 1
-let g:airline_section_warning = '%{ALEGetStatusLine()}'
+let g:airline_section_warning = '%{LinterStatus()}'
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_close_button = 1
@@ -501,15 +524,7 @@ let g:bufferline_modified = '+'
 let g:Tlist_Show_One_File = 1
 let g:sneak#label = 1
 let g:sneak#s_next = 1
-
-let g:deoplete#auto_complete_start_length = 3
-let g:deoplete#auto_complete_delay = 2
-let g:deoplete#max_menu_width = 20
-let g:tmuxcomplete#trigger = ''
-let g:comfortable_motion_no_default_key_mappings = 1
-let g:erlang_tags_auto_update = 1
-let g:erlang_tags_ignore = ['rel','_build/default/rel', '_build/test', '_build/docs']
-let g:erlang_tags_outfile = './.tags'
+let g:autoswap_detect_tmux = 1
 
 
 " Change cursor shape between insert and normal mode in iTerm2.app
@@ -695,6 +710,16 @@ augroup END
 
 " For cscope
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
+
+let g:ale_completion_enabled = 1
+
+let g:ale_fixers = {'java': ['google_java_format']}
+
+" Language Client
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+    \ 'java' : ['java-lang-server'],
+    \ }
 
 "if executable('erlang_ls')
     "au User lsp_setup call lsp#register_server({

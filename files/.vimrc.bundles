@@ -2,12 +2,13 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'Konfekt/FastFold'
 Plug 'Konfekt/FoldText'
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'mikelue/vim-maven-plugin', { 'for': 'java' }
 Plug 'Valloric/ListToggle'
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
-Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+"Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'benmills/vimux'
 Plug 'bling/vim-bufferline'
 Plug 'christoomey/vim-tmux-navigator'
@@ -23,8 +24,8 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'mileszs/ack.vim'
 Plug 'nightsense/stellarized'
 Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'robertbraeutigam/vim-java-tags-plugin', { 'for': 'java' }
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'robertbraeutigam/vim-java-tags-plugin', { 'for': 'java' }
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'ryanoasis/vim-devicons'
@@ -41,7 +42,13 @@ Plug 'vim-erlang/vim-erlang-tags',         { 'for': 'erlang' }
 Plug 'w0rp/ale'
 Plug 'wellle/tmux-complete.vim'
 Plug 'yuttie/comfortable-motion.vim'
+Plug 'roxma/nvim-completion-manager'
 
+
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
 
 call plug#end()

@@ -104,6 +104,7 @@ alias gs="git status"
 alias gr="grep -sn"
 alias xg="xargs grep -sn"
 alias fxg="find . | xargs grep -sn"
+alias gxf="find . | xargs grep -sn"
 alias gca="git commit -a"
 alias docker_purge='docker rm $( docker ps -q -f status=exited )'
 alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome.git"'
