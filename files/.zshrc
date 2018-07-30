@@ -70,6 +70,8 @@ zle -N my-backward-word
 
 # Vi mode
 bindkey -v
+bindkey '^[f' my-forward-word
+bindkey '^[b' my-backward-word
 bindkey '^R' history-incremental-search-backward
 bindkey "^A" beginning-of-line
 bindkey "^[[A"  up-line-or-history
@@ -78,10 +80,10 @@ bindkey "^[[3~" delete-char
 bindkey '^e' end-of-line
 bindkey '^k' up-line-or-history
 bindkey '^j' down-line-or-history
+bindkey -r -M viins '^W'
+bindkey -Mviins '^W' backward-delete-word
 #bindkey -v '^?' vi-backward-delete-char
 
-bindkey '^[f' my-forward-word
-bindkey '^[b' my-backward-word
 #bindkey '^[f' vi-forward-word
 #bindkey '^[b' vi-backward-word
 
@@ -90,6 +92,7 @@ alias l="ls -l"
 alias tt="tree -C -L 2 -F -A"
 alias t="tt"
 alias tt3="tree -C -L 3 -F -A"
+alias tt4="tree -C -L 4 -F -A"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'

@@ -102,13 +102,14 @@ set synmaxcol=180
 set tabpagemax=15               " Only show 15 tabs
 set tabstop=4                   " An indentation every four columns
 set tags=./.tags;/
-set timeoutlen=300 ttimeoutlen=300
+set timeoutlen=300
 set title
 set ttimeoutlen=10
 set ttyfast
 set undofile                " So is persistent undo ...
 set undolevels=1000         " Maximum number of changes that can be undone
 set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
+set updatetime=100
 set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
 set virtualedit=onemore         " Allow for cursor beyond last character
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
@@ -262,21 +263,6 @@ map <CR> o<Esc>
 
 inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
-
-" Fugitive
-if isdirectory(expand('~/.vim/plugged/vim-fugitive/'))
-    nnoremap <silent> <leader>gs :Gstatus<CR>
-    nnoremap <silent> <leader>gd :Gdiff<CR>
-    nnoremap <silent> <leader>gc :Gcommit<CR>
-    nnoremap <silent> <leader>gb :Gblame<CR>
-    nnoremap <silent> <leader>gl :Glog<CR>
-    nnoremap <silent> <leader>gp :Git push<CR>
-    nnoremap <silent> <leader>gr :Gread<CR>
-    nnoremap <silent> <leader>gw :Gwrite<CR>
-    nnoremap <silent> <leader>ge :Gedit<CR>
-    nnoremap <silent> <leader>gi :Git add -p %<CR>
-    nnoremap <silent> <leader>gg :SignifyToggle<CR>
-endif
 
 nnoremap <C-F> :FZF<cr>
 nnoremap <Leader>y :FZF<cr>
@@ -439,6 +425,8 @@ call NERDTreeHighlightFile('md', 'gray')
 call NERDTreeHighlightFile('config', 'darkred')
 call NERDTreeHighlightFile('py', 'green')
 call NERDTreeHighlightFile('java', '226')
+call NERDTreeHighlightFile('groovy', '226')
+call NERDTreeHighlightFile('yml', '220')
 call NERDTreeHighlightFile('png', '129')
 call NERDTreeHighlightFile('jpg', '129')
 call NERDTreeHighlightFile('gz', '88')
@@ -712,7 +700,6 @@ augroup END
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
 
 let g:ale_completion_enabled = 1
-
 let g:ale_fixers = {'java': ['google_java_format']}
 
 " Language Client
