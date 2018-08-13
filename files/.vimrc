@@ -118,19 +118,8 @@ set wildmode=list:longest,full  " Command <Tab> completion, list matches, then l
 set winminheight=0              " Windows can be 0 line high
 set wrap linebreak
 
-" The default leader is '\', but many people prefer ',' as it's in a standard
-" location. To override this behavior and set it back to '\' (or any other
-" character) add the following to your .vimrc.before.local file:
-if !exists('g:spf13_leader')
-    let g:mapleader = ','
-else
-    let g:mapleader=g:spf13_leader
-endif
-if !exists('g:spf13_localleader')
-    let g:maplocalleader = '_'
-else
-    let g:maplocalleader=g:spf13_localleader
-endif
+let g:mapleader = ','
+let g:maplocalleader = '_'
 
 " Easier moving in tabs and windows
 " The lines conflict with the default digraph mapping of <C-K>
@@ -246,6 +235,7 @@ nnoremap <Left>  :echo "No left for you!"<CR>
 nnoremap <Right> :echo "No right for you!"<CR>
 nnoremap <Up>    :echo "No up for you!"<CR>
 nnoremap <Down>  :echo "No down for you!"<CR>
+inoremap <C-l> <Right>
 
 nnoremap <silent> <c-\><Left>   :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-\><Down>   :TmuxNavigateDown<cr>
@@ -535,15 +525,16 @@ highlight LineNr ctermbg=235 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=202
 highlight ColorColumn ctermbg=234
-highlight SpecialKey ctermbg=235
+highlight SpecialKey  ctermbg=235
 " Sign column for Git
-highlight SignColumn ctermbg=235
-highlight DiffAdd    ctermbg=235
-highlight DiffDelete ctermbg=235
-highlight DiffChange ctermbg=235
+highlight SignColumn  ctermbg=235
+highlight DiffAdd     ctermbg=235
+highlight DiffDelete  ctermbg=235
+highlight DiffChange  ctermbg=235
 " Lint ale
 highlight ALEErrorSign   ctermbg=235 ctermfg=1
 highlight ALEWarningSign ctermbg=235 ctermfg=202
+highlight ALEInfoSign    ctermbg=235
 " Syntastic
 highlight Error   ctermbg=235 ctermfg=202
 highlight Warning ctermbg=235 ctermfg=200
@@ -552,10 +543,9 @@ highlight Todo    ctermbg=235 ctermfg=208
 highlight Directory ctermfg='blue'
 " popup menu
 highlight Pmenu     ctermbg=0 ctermfg=202
-" popup selected
-highlight PmenuSel  ctermbg=202 ctermfg=0
-highlight PmenuSbar ctermbg=0 ctermfg=202
-highlight VertSplit ctermbg=235
+highlight PmenuSel    ctermbg=202 ctermfg=0
+highlight PmenuSbar   ctermbg=0 ctermfg=202
+highlight VertSplit   ctermbg=235
 
 fu! SaveSession()
     "execute 'call mkdir(%:p:h/.vim)'
@@ -660,7 +650,7 @@ augroup END
 
 augroup nerdtree
   autocmd StdinReadPre * let s:std_in=1
-  "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeToggle | endif
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | execute 'NERDTreeToggle'| endif
 augroup END
 
 augroup filetypes
@@ -704,6 +694,7 @@ let g:ale_fixers = {'java': ['google_java_format']}
 
 " Language Client
 let g:LanguageClient_autoStart = 1
+let g:LanguageClient_autoStop = 0
 let g:LanguageClient_serverCommands = {
     \ 'java' : ['java-lang-server'],
     \ }
