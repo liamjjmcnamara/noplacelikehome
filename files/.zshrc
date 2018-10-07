@@ -89,6 +89,7 @@ bindkey -Mviins '^W' backward-delete-word
 
 alias ls="gls --color=auto"
 alias l="ls -l"
+alias s='dirs -v | head -5'
 alias tt="tree -C -L 2 -F -A"
 alias t="tt"
 alias tt3="tree -C -L 3 -F -A"
@@ -113,6 +114,8 @@ alias docker_purge='docker rm $( docker ps -q -f status=exited )'
 alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome.git"'
 alias r3="rebar3"
 alias prep='rebar3 dialyzer && elvis rock && echo "\n\033[0;32mLooks good!\033[0;0m\n"'
+
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # label a window in tmux and set git status
 if [[ -n $TMUX  ]]; then

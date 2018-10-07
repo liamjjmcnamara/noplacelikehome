@@ -447,7 +447,7 @@ let g:matchparen_insert_timeout = 20
 
 let g:deoplete#auto_complete_start_length = 3
 let g:deoplete#auto_complete_delay = 2
-let g:deoplete#max_menu_width = 20
+let g:deoplete#max_menu_width = 30
 let g:tmuxcomplete#trigger = ''
 let g:comfortable_motion_no_default_key_mappings = 1
 let g:erlang_tags_auto_update = 1
