@@ -30,17 +30,17 @@ unsetopt LISTAMBIGUOUS
 
 # set VIMODE according to the current mode
 # https://dougblack.io/words/zsh-vi-mode.html
-function zle-line-init zle-keymap-select {
-    case $KEYMAP in
-        vicmd)      PS1=$'%{$FG[007]%}[%{$FG[015]%}yukon%{\e[0m%}%{$FG[007]%}]<%{\e[97m%}%~%b%{\e[0m%}%{$FG[007]%}>%{$FG[015]%}'
-                    echo -ne "\e[4 q"
-                    ;;
-        viins|main) PS1=$'%(?.%{$FG[136]%}.%{$FG[001]%})[%{$FG[015]%}yukon%{\e[0m%}%(?.%{$FG[136]%}.%{$FG[001]%})]<%{\e[97m%}%~%b%{\e[0m%}%(?.%{$FG[136]%}.%{$FG[001]%})>%{$FG[015]%}'
-                    echo -ne "\e[2 q"
-                    ;;
-    esac
-    zle reset-prompt
-}
+#function zle-line-init zle-keymap-select {
+    #case $KEYMAP in
+        #vicmd)      PS1=$'%{$FG[007]%}[%{$FG[015]%}yukon%{\e[0m%}%{$FG[007]%}]<%{\e[97m%}%~%b%{\e[0m%}%{$FG[007]%}>%{$FG[015]%}'
+                    #echo -ne "\e[4 q"
+                    #;;
+        #viins|main) PS1=$'%(?.%{$FG[136]%}.%{$FG[001]%})[%{$FG[015]%}yukon%{\e[0m%}%(?.%{$FG[136]%}.%{$FG[001]%})]<%{\e[97m%}%~%b%{\e[0m%}%(?.%{$FG[136]%}.%{$FG[001]%})>%{$FG[015]%}'
+                    #echo -ne "\e[2 q"
+                    #;;
+    #esac
+    #zle reset-prompt
+#}
 
 my-forward-word() {
     if [[ "${BUFFER[CURSOR + 1]}" =~ "${SEPCHARS}" ]]; then
@@ -64,7 +64,7 @@ my-backward-word() {
     done
 }
 zle -N zle-line-init
-zle -N zle-keymap-select
+#zle -N zle-keymap-select
 zle -N my-forward-word
 zle -N my-backward-word
 
@@ -121,7 +121,7 @@ alias prep='rebar3 dialyzer && elvis rock && echo "\n\033[0;32mLooks good!\033[0
 if [[ -n $TMUX  ]]; then
   PROMPT_COMMAND='$(tmux rename-window $(pwd|sed "s,$HOME,~,"|sed "s,.*/,," )/)'
   if [ -e  ~/.tmux/tmux-git-zsh.sh ]; then
-    source ~/.tmux/tmux-git-zsh.sh
+    #source ~/.tmux/tmux-git-zsh.sh
   fi
 fi
 precmd() { eval "$PROMPT_COMMAND" }
@@ -150,9 +150,9 @@ if [ -e ~/.kerl/.kerlrc ]; then
 fi
 
 # Erlang activation
-if [ -e /usr/local/erlang/20.3.1+kred1/activate ]; then
-  source /usr/local/erlang/20.3.1+kred1/activate
-fi
+#if [ -e /usr/local/erlang/20.3.1+kred1/activate ]; then
+  #source /usr/local/erlang/20.3.1+kred1/activate
+#fi
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 alias erl='erl -config ~/.erlhistory.config'
@@ -169,3 +169,27 @@ fe() {
 if [ -e ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
+
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship
+export SPACESHIP_PROMPT_ORDER=(dir git exec_time line_sep exit_code char)
+
+export SPACESHIP_PROMPT_ADD_NEWLINE=false
+export SPACESHIP_PROMPT_FIRST_PREFIX_SHOW="true"
+
+export SPACESHIP_CHAR_COLOR_FAILURE="160"
+#export SPACESHIP_TIME_SHOW="true"
+#export SPACESHIP_TIME_COLOR="grey"
+#export SPACESHIP_TIME_FORMAT="[%*]"
+#export SPACESHIP_TIME_SUFFIX=""
+
+export SPACESHIP_DIR_PREFIX="<"
+export SPACESHIP_DIR_SUFFIX="> "
+export SPACESHIP_DIR_COLOR="blue"
+
+export SPACESHIP_GIT_PREFIX=""
+export SPACESHIP_GIT_BRANCH_COLOR="136"
+export SPACESHIP_GIT_STATUS_COLOR="160"
+
+

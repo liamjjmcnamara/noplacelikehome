@@ -466,7 +466,7 @@ let g:ale_echo_msg_error_str   = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
 let g:ale_erlang_erlc_options = '-I../include -I../src -I../../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fredp -I../..'
-"let g:ale_java_javac_options = '-sourcepath /Users/liam.mcnamara/code/dropwizard/scheme_app/src/gen/java;/Users/liam.mcnamara/code/dropwizard/scheme_app/src/main/java'
+let g:ale_java_javac_options = '-sourcepath /Users/liam.mcnamara/code/scheme_app/src/gen/java;/Users/liam.mcnamara/code/scheme_app/src/main/java'
 "let g:ale_java_javac_options = '-classpath .:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/classes/:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/scheme_app-0.1.0/WEB-INF/lib/*'
 
 let g:lt_location_list_toggle_map = '<Leader>l'
