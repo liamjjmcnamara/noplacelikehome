@@ -524,6 +524,7 @@ highlight visual ctermbg=240
 highlight LineNr ctermbg=235 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=202
+highlight clear CursorLine
 highlight ColorColumn ctermbg=234
 highlight SpecialKey  ctermbg=235
 " Sign column for Git
@@ -660,6 +661,7 @@ augroup filetypes
   autocmd FileType nerdtree set norelativenumber
   autocmd FileType netrw    set nonumber
   autocmd FileType taglist  set nonumber norelativenumber
+  autocmd Filetype json let g:indentLine_setConceal = 0
 augroup END
 
 augroup tmux_integration
