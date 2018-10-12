@@ -33,10 +33,10 @@ unsetopt LISTAMBIGUOUS
 function zle-line-init zle-keymap-select {
     case $KEYMAP in
         viins|main) echo -ne "\e[2 q"
-                    export SPACESHIP_CHAR_COLOR_SUCCESS="33"
+                    export SPACESHIP_CHAR_COLOR_SUCCESS="136"
                     ;;
         vicmd)      echo -ne "\e[4 q"
-                    export SPACESHIP_CHAR_COLOR_SUCCESS="136"
+                    export SPACESHIP_CHAR_COLOR_SUCCESS="grey"
                     ;;
     esac
     zle reset-prompt
@@ -170,7 +170,7 @@ export SPACESHIP_PROMPT_ORDER=(time dir git exec_time battery line_sep exit_code
 export SPACESHIP_PROMPT_ADD_NEWLINE=false
 
 export SPACESHIP_CHAR_COLOR_FAILURE="160"
-export SPACESHIP_CHAR_COLOR_SUCCESS="33"
+export SPACESHIP_CHAR_COLOR_SUCCESS="136"
 export SPACESHIP_TIME_SHOW="true"
 export SPACESHIP_TIME_COLOR="grey"
 export SPACESHIP_TIME_FORMAT=""
