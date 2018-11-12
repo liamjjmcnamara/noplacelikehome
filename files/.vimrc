@@ -666,8 +666,8 @@ augroup END
 
 augroup tmux_integration
   autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
-  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
-  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
+  "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+  "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
   autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
   autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
 augroup END

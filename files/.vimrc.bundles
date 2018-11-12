@@ -34,6 +34,8 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'semanser/vim-outdated-plugins'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-vinegar'
+"Plug 'justinmk/vim-dirvish'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-erlang/vim-erlang-compiler',     { 'for': 'erlang' }

@@ -19,6 +19,16 @@ export SEPCHARS='[/ ]'
 export KEYTIMEOUT=1
 export CASE_SENSITIVE="true"
 export PROMPT_EOL_MARK=""
+export LESS='-F -i -J -M -R -W -x4 -X -z-4'
+export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
+# Set colors for less. Borrowed from https://wiki.archlinux.org/index.php/Color_output_in_console#less .
+export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
+export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
+export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 setopt PROMPT_SUBST
 setopt AUTO_CD
@@ -93,6 +103,7 @@ alias s='dirs -v | head -5'
 alias tt="tree -C -L 2 -F -A"
 alias t="tt"
 alias tt3="tree -C -L 3 -F -A"
+alias ttt="tree -C -L 3 -F -A"
 alias tt4="tree -C -L 4 -F -A"
 alias ..='cd ..'
 alias ...='cd ../..'
