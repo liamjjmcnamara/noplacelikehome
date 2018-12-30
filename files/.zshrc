@@ -30,6 +30,8 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
+export AWS_DEFAULT_REGION="eu-west-1"
+
 setopt PROMPT_SUBST
 setopt AUTO_CD
 setopt AUTO_PUSHD
@@ -158,9 +160,9 @@ if [ -e ~/.kerl/.kerlrc ]; then
 fi
 
 # Erlang activation
-#if [ -e /usr/local/erlang/20.3.1+kred1/activate ]; then
-  #source /usr/local/erlang/20.3.1+kred1/activate
-#fi
+if [ -e /usr/local/erlang/21.1/activate ]; then
+  source /usr/local/erlang/21.1/activate
+fi
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 alias erl='erl -config ~/.erlhistory.config'
@@ -191,6 +193,7 @@ export SPACESHIP_TIME_SUFFIX=""
 export SPACESHIP_DIR_PREFIX="<"
 export SPACESHIP_DIR_SUFFIX="> "
 export SPACESHIP_DIR_COLOR="33"
+export SPACESHIP_DIR_TRUNC="6"
 export SPACESHIP_DIR_TRUNC_PREFIX="…/"
 
 export SPACESHIP_GIT_PREFIX=""
