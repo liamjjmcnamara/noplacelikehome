@@ -1,0 +1,96 @@
+[submodule "files/.vim/pack/plugins/start/vim-airline"]
+	path = files/.vim/pack/plugins/start/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
+[submodule "files/.vim/pack/plugins/start/ale"]
+	path = files/.vim/pack/plugins/start/ale
+	url = https://github.com/w0rp/ale.git
+[submodule "files/.vim/pack/plugins/start/FastFold"]
+	path = files/.vim/pack/plugins/start/FastFold
+	url = https://github.com/Konfekt/FastFold.git
+[submodule "files/.vim/pack/plugins/start/FoldText"]
+	path = files/.vim/pack/plugins/start/FoldText
+	url = https://github.com/Konfekt/FoldText.git
+[submodule "files/.vim/pack/plugins/start/deoplete.nvim"]
+	path = files/.vim/pack/plugins/start/deoplete.nvim
+	url = https://github.com/Shougo/deoplete.nvim.git
+[submodule "files/.vim/pack/plugins/start/ListToggle"]
+	path = files/.vim/pack/plugins/start/ListToggle
+	url = https://github.com/Valloric/ListToggle.git
+[submodule "files/.vim/pack/plugins/start/indentLine"]
+	path = files/.vim/pack/plugins/start/indentLine
+	url = https://github.com/Yggdroot/indentLine.git
+[submodule "files/.vim/pack/plugins/start/vim-gitgutter"]
+	path = files/.vim/pack/plugins/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "files/.vim/pack/plugins/start/vimux"]
+	path = files/.vim/pack/plugins/start/vimux
+	url = https://github.com/benmills/vimux.git
+[submodule "files/.vim/pack/plugins/start/vim-bufferline"]
+	path = files/.vim/pack/plugins/start/vim-bufferline
+	url = https://github.com/bling/vim-bufferline.git
+[submodule "files/.vim/pack/plugins/start/vim-tmux-navigator"]
+	path = files/.vim/pack/plugins/start/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "files/.vim/pack/plugins/start/vim-colorschemes"]
+	path = files/.vim/pack/plugins/start/vim-colorschemes
+	url = https://github.com/flazz/vim-colorschemes.git
+[submodule "files/.vim/pack/plugins/start/vim-autoswap"]
+	path = files/.vim/pack/plugins/start/vim-autoswap
+	url = https://github.com/gioele/vim-autoswap.git
+[submodule "files/.vim/pack/plugins/start/fzf.vim"]
+	path = files/.vim/pack/plugins/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule "files/.vim/pack/plugins/start/vim-sneak"]
+	path = files/.vim/pack/plugins/start/vim-sneak
+	url = https://github.com/justinmk/vim-sneak.git
+[submodule "files/.vim/pack/plugins/start/vim-fakeclip"]
+	path = files/.vim/pack/plugins/start/vim-fakeclip
+	url = https://github.com/kana/vim-fakeclip.git
+[submodule "files/.vim/pack/plugins/start/vim-fetch"]
+	path = files/.vim/pack/plugins/start/vim-fetch
+	url = https://github.com/kopischke/vim-fetch.git
+[submodule "files/.vim/pack/plugins/start/vim-signature"]
+	path = files/.vim/pack/plugins/start/vim-signature
+	url = https://github.com/kshenoy/vim-signature.git
+[submodule "files/.vim/pack/plugins/start/ack.vim"]
+	path = files/.vim/pack/plugins/start/ack.vim
+	url = https://github.com/mileszs/ack.vim.git
+[submodule "files/.vim/pack/plugins/start/nvim-yarp"]
+	path = files/.vim/pack/plugins/start/nvim-yarp
+	url = https://github.com/roxma/nvim-yarp.git
+[submodule "files/.vim/pack/plugins/start/vim-hug-neovim-rpc"]
+	path = files/.vim/pack/plugins/start/vim-hug-neovim-rpc
+	url = https://github.com/roxma/vim-hug-neovim-rpc.git
+[submodule "files/.vim/pack/plugins/start/vim-devicons"]
+	path = files/.vim/pack/plugins/start/vim-devicons
+	url = https://github.com/ryanoasis/vim-devicons.git
+[submodule "files/.vim/pack/plugins/start/nerdcommenter"]
+	path = files/.vim/pack/plugins/start/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "files/.vim/pack/plugins/start/vim-outdated-plugins"]
+	path = files/.vim/pack/plugins/start/vim-outdated-plugins
+	url = https://github.com/semanser/vim-outdated-plugins.git
+[submodule "files/.vim/pack/plugins/start/vim-surround"]
+	path = files/.vim/pack/plugins/start/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "files/.vim/pack/plugins/start/vim-fugitive"]
+	path = files/.vim/pack/plugins/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "files/.vim/pack/plugins/start/vim-commentary"]
+	path = files/.vim/pack/plugins/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
+[submodule "files/.vim/pack/plugins/start/vim-airline-themes"]
+	path = files/.vim/pack/plugins/start/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes.git
+[submodule "files/.vim/pack/plugins/start/tmux-complete.vim"]
+	path = files/.vim/pack/plugins/start/tmux-complete.vim
+	url = https://github.com/wellle/tmux-complete.vim.git
+[submodule "files/.vim/pack/plugins/start/comfortable-motion.vim"]
+	path = files/.vim/pack/plugins/start/comfortable-motion.vim
+	url = https://github.com/yuttie/comfortable-motion.vim.git
+[submodule "files/.vim/pack/plugins/start/nvim-completion-manager"]
+	path = files/.vim/pack/plugins/start/nvim-completion-manager
+	url = https://github.com/roxma/nvim-completion-manager.git
+[submodule "files/.vim/pack/plugins/start/nerdtree"]
+	path = files/.vim/pack/plugins/start/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git

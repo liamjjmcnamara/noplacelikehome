@@ -15,9 +15,9 @@ if &term[:4] ==? 'xterm' || &term[:5] ==? 'screen' || &term[:3] ==? 'rxvt'
     inoremap <silent> <C-[>OC <RIGHT>
 endif
 
-if filereadable(expand('~/.vimrc.bundles'))
-    source ~/.vimrc.bundles
-endif
+"if filereadable(expand('~/.vimrc.bundles'))
+    "source ~/.vimrc.bundles
+"endif
 
 filetype plugin indent on   " Automatically detect file types.
 syntax on                   " Syntax highlighting
