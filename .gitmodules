@@ -67,9 +67,6 @@
 [submodule "files/.vim/pack/plugins/start/nerdcommenter"]
 	path = files/.vim/pack/plugins/start/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule "files/.vim/pack/plugins/start/vim-outdated-plugins"]
-	path = files/.vim/pack/plugins/start/vim-outdated-plugins
-	url = https://github.com/semanser/vim-outdated-plugins.git
 [submodule "files/.vim/pack/plugins/start/vim-surround"]
 	path = files/.vim/pack/plugins/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
