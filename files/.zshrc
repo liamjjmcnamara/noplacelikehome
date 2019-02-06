@@ -112,8 +112,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias lt="ls --sort=time"
 alias c="cd"
-alias v="vi"
-alias vls="vi"
+alias v="vim"
+alias vls="vim"
 alias vimsession="vim -S ~/.vim/session.vim"
 alias d="docker"
 alias bu="brew upgrade"
@@ -162,7 +162,7 @@ if [ -e ~/.kerl/.kerlrc ]; then
 fi
 
 # Enable python install shim layer
-pyenv init
+eval "$(pyenv init -)"
 
 # Erlang activation
 if [ -e /usr/local/erlang/21.1/activate ]; then
