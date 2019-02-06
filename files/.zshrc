@@ -143,8 +143,8 @@ if [ -e /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; 
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-if [ -e ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [ -e /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   bindkey '^ ' autosuggest-accept
 fi
 
@@ -152,14 +152,17 @@ if [ -e  "~/.iterm2_shell_integration.zsh" ]; then
   source "${HOME}/.iterm2_shell_integration.zsh"
 fi
 
-if [ -e ~/.dircolors ]; then
-  eval $(dircolors ~/.dircolors)
-fi
+#if [ -e ~/.dircolors ]; then
+  #eval $(dircolors ~/.dircolors)
+#fi
 
 # Pull kerl settings
 if [ -e ~/.kerl/.kerlrc ]; then
   source ~/.kerl/.kerlrc
 fi
+
+# Enable python install shim layer
+pyenv init
 
 # Erlang activation
 if [ -e /usr/local/erlang/21.1/activate ]; then
@@ -176,6 +179,8 @@ fe() {
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
 
 # Set Spaceship ZSH as a prompt
 autoload -U promptinit; promptinit
