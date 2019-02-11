@@ -1,7 +1,6 @@
 [user]
 	email = liam.mcnamara@klarna.com
 	name = Liam McNamara
-	signingkey = 3445DE15E1AD35B5
 [push]
 	default = current
 [credential]

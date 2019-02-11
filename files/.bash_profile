@@ -23,7 +23,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR="vim"
 export PATH="/usr/local/sbin:$PATH:$HOME/bin"
-export GPG_TTY=$(tty)
+#export GPG_TTY=$(tty)
 
 export PS1="[$HOST]<\W>"
 

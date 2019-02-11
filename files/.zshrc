@@ -130,6 +130,8 @@ alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome
 alias r3="rebar3"
 alias prep='rebar3 dialyzer && elvis rock && echo "\n\033[0;32mLooks good!\033[0;0m\n"'
 
+alias adfslogin='eval `aws-adfs-tool login -r Klarna_ADFS_scheme -a klarna-non-production -u liam.mcnamara --no-keyring`'
+
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # label a window in tmux and set git status

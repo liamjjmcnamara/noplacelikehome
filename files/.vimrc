@@ -430,6 +430,7 @@ call NERDTreeHighlightFile('jar', '88')
 "endfor
 
 let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
+let g:NERDTreeBookmarks = 1
 let g:NERDTreeBookmarksSort = 0
 let g:NERDTreeWinSize    = 35
 let g:NERDTreeQuitOnOpen = 1
