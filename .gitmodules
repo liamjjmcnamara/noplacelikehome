@@ -55,9 +55,6 @@
 [submodule "files/.vim/pack/plugins/start/nvim-yarp"]
 	path = files/.vim/pack/plugins/start/nvim-yarp
 	url = https://github.com/roxma/nvim-yarp.git
-[submodule "files/.vim/pack/plugins/start/vim-hug-neovim-rpc"]
-	path = files/.vim/pack/plugins/start/vim-hug-neovim-rpc
-	url = https://github.com/roxma/vim-hug-neovim-rpc.git
 [submodule "files/.vim/pack/plugins/start/vim-devicons"]
 	path = files/.vim/pack/plugins/start/vim-devicons
 	url = https://github.com/ryanoasis/vim-devicons.git
@@ -82,9 +79,6 @@
 [submodule "files/.vim/pack/plugins/start/comfortable-motion.vim"]
 	path = files/.vim/pack/plugins/start/comfortable-motion.vim
 	url = https://github.com/yuttie/comfortable-motion.vim.git
-[submodule "files/.vim/pack/plugins/start/nvim-completion-manager"]
-	path = files/.vim/pack/plugins/nvcm
-	url = https://github.com/roxma/nvim-completion-manager.git
 [submodule "files/.vim/pack/plugins/start/nerdtree"]
 	path = files/.vim/pack/plugins/start/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git

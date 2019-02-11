@@ -133,7 +133,6 @@ alias prep='rebar3 dialyzer && elvis rock && echo "\n\033[0;32mLooks good!\033[0
 alias adfslogin='eval `aws-adfs-tool login -r Klarna_ADFS_scheme -a klarna-non-production -u liam.mcnamara --no-keyring`'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
 
-
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # label a window in tmux and set git status

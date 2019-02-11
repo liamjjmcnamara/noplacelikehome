@@ -429,14 +429,14 @@ call NERDTreeHighlightFile('jar', '88')
   "endif
 "endfor
 
-let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
+"let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
 let g:NERDTreeBookmarks = 1
-let g:NERDTreeBookmarksSort = 0
-let g:NERDTreeWinSize    = 35
+"let g:NERDTreeBookmarksSort = 0
+"let g:NERDTreeWinSize    = 35
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeMinimalUI  = 1
-let g:NERDTreeDirArrows  = 1
-let g:NERDTreeShowHidden = 0
+"let g:NERDTreeDirArrows  = 1
+"let g:NERDTreeShowHidden = 0
 let g:tagbar_width = 30
 let g:tagbar_sort  = 0
 let g:indent_guides_enable_on_vim_startup = 0
@@ -519,7 +519,7 @@ if $TERM_PROGRAM =~# 'iTerm.app'
   endif
 endif
 
-colorscheme molokai_dark
+colorscheme molokai
 " Line numbers
 highlight visual ctermbg=240
 highlight LineNr ctermbg=235 ctermfg=239
