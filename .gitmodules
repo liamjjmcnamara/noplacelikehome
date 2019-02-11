@@ -88,3 +88,6 @@
 [submodule "files/.vim/pack/plugins/start/nerdtree"]
 	path = files/.vim/pack/plugins/start/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule "files/.vim/pack/plugins/start/vim-colorschemes"]
+	path = files/.vim/pack/plugins/start/vim-colorschemes
+	url = https://github.com/flazz/vim-colorschemes.git
