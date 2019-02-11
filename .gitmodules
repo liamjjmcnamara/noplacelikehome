@@ -88,3 +88,9 @@
 [submodule "files/.vim/pack/plugins/start/ncm2"]
 	path = files/.vim/pack/plugins/start/ncm2
 	url = https://github.com/ncm2/ncm2.git
+[submodule "files/.vim/pack/plugins/start/LanguageClient-neovim"]
+	path = files/.vim/pack/plugins/start/LanguageClient-neovim
+	url = https://github.com/autozimu/LanguageClient-neovim.git
+[submodule "files/.vim/pack/plugins/start/ctrlp.vim"]
+	path = files/.vim/pack/plugins/start/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim

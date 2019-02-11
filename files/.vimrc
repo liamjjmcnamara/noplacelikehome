@@ -505,6 +505,8 @@ let g:sneak#label = 1
 let g:sneak#s_next = 1
 let g:autoswap_detect_tmux = 1
 
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMRU'
 
 " Change cursor shape between insert and normal mode in iTerm2.app
 if $TERM_PROGRAM =~# 'iTerm.app'
@@ -519,6 +521,7 @@ if $TERM_PROGRAM =~# 'iTerm.app'
   endif
 endif
 
+let base16colorspace=256
 colorscheme molokai
 " Line numbers
 highlight visual ctermbg=240
@@ -667,8 +670,6 @@ augroup END
 
 augroup tmux_integration
   autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window \\<" . expand("%:t") . "\\>")
-  "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
-  "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
   autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
   autocmd BufEnter * call system("tmux rename-window \\<" . expand("%:t") . "\\>" )
 augroup END
@@ -699,7 +700,7 @@ let g:ale_fixers = {'java': ['google_java_format']}
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_autoStop = 0
 let g:LanguageClient_serverCommands = {
-    \ 'java' : ['java-lang-server'],
+    \ 'java' : ['jdtls'],
     \ }
 
 let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"

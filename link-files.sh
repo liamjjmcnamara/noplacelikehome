@@ -13,6 +13,3 @@ for f in $FILES; do
         echo "Warning: not making link, file already exists: $DEST"
     fi
 done;
-
-
-
