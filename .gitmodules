@@ -83,7 +83,7 @@
 	path = files/.vim/pack/plugins/start/comfortable-motion.vim
 	url = https://github.com/yuttie/comfortable-motion.vim.git
 [submodule "files/.vim/pack/plugins/start/nvim-completion-manager"]
-	path = files/.vim/pack/plugins/start/nvim-completion-manager
+	path = files/.vim/pack/plugins/nvcm
 	url = https://github.com/roxma/nvim-completion-manager.git
 [submodule "files/.vim/pack/plugins/start/nerdtree"]
 	path = files/.vim/pack/plugins/start/nerdtree
@@ -91,3 +91,6 @@
 [submodule "files/.vim/pack/plugins/start/vim-colorschemes"]
 	path = files/.vim/pack/plugins/start/vim-colorschemes
 	url = https://github.com/flazz/vim-colorschemes.git
+[submodule "files/.vim/pack/plugins/start/ncm2"]
+	path = files/.vim/pack/plugins/start/ncm2
+	url = https://github.com/ncm2/ncm2.git
