@@ -31,9 +31,6 @@
 [submodule "files/.vim/pack/plugins/start/vim-tmux-navigator"]
 	path = files/.vim/pack/plugins/start/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
-[submodule "files/.vim/pack/plugins/start/vim-colorschemes"]
-	path = files/.vim/pack/plugins/start/vim-colorschemes
-	url = https://github.com/flazz/vim-colorschemes.git
 [submodule "files/.vim/pack/plugins/start/vim-autoswap"]
 	path = files/.vim/pack/plugins/start/vim-autoswap
 	url = https://github.com/gioele/vim-autoswap.git
