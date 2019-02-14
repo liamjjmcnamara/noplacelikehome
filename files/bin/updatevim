@@ -1,0 +1,2 @@
+cd ~/.vim/pack/plugins/start
+git submodule update --remote

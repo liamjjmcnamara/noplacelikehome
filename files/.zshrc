@@ -95,7 +95,6 @@ bindkey '^j' down-line-or-history
 bindkey -r -M viins '^W'
 bindkey -Mviins '^W' backward-delete-word
 #bindkey -v '^?' vi-backward-delete-char
-
 #bindkey '^[f' vi-forward-word
 #bindkey '^[b' vi-backward-word
 
@@ -140,7 +139,6 @@ if [[ -n $TMUX  ]]; then
   PROMPT_COMMAND='$(tmux rename-window $(pwd|sed "s,$HOME,~,"|sed "s,.*/,," )/)'
 fi
 precmd() { eval "$PROMPT_COMMAND" }
-
 
 if [ -e /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

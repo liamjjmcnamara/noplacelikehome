@@ -1,0 +1,1 @@
+eval `aws ecr get-login --profile Klarna_ADFS_scheme@klarna-non-production --region eu-west-1 --no-include-email`
