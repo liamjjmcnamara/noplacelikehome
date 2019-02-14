@@ -44,7 +44,7 @@ endif
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 "set matchpairs+=<:>             " Match, to be used with %
 set background=dark         " Assume a dark background
-set guifont=Roboto\ Mono\ Light\ Nerd\ Font\ Complete:h14
+set guifont=Hack\ Regular\ Nerd\ Font\ Complete:h13
 set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
 let &titlestring = expand('%:p')
