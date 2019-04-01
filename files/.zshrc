@@ -128,9 +128,13 @@ alias docker_purge='docker rm $( docker ps -q -f status=exited )'
 alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome.git"'
 alias r3="rebar3"
 alias prep='rebar3 dialyzer && elvis rock && echo "\n\033[0;32mLooks good!\033[0;0m\n"'
+alias ww="vim -c VimwikiIndex"
 
 alias adfslogin='eval `aws-adfs-tool login -r Klarna_ADFS_scheme -a klarna-non-production -u liam.mcnamara --no-keyring`'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
+
+alias proxyon="export https_proxy=http://10.3.255.21:8080"
+alias proxyoff="unset https_proxy"
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 

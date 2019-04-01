@@ -94,3 +94,6 @@
 [submodule "files/.vim/pack/plugins/start/ctrlp.vim"]
 	path = files/.vim/pack/plugins/start/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim
+[submodule "files/.vim/pack/plugins/start/vimwiki"]
+	path = files/.vim/pack/plugins/start/vimwiki
+	url = https://github.com/vimwiki/vimwiki.git

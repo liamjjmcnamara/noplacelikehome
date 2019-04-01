@@ -47,7 +47,6 @@ set background=dark         " Assume a dark background
 set guifont=Hack\ Regular\ Nerd\ Font\ Complete:h13
 set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
-let &titlestring = expand('%:p')
 set autoindent                  " Indent at the same level of the previous line
 set backspace=indent,eol,start  " Backspace for dummies
 set backup                      " Backups are nice ...
@@ -215,10 +214,10 @@ map <Leader>w :call VimuxRunCommand("fc -e : -1")<CR>
 map <Leader>W :VimuxRunLastCommand<CR>
 map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
-nnoremap <Leader>t :TagbarToggle<CR>
+nnoremap <Leader>t "=strftime("[%Y-%m-%d %H:%M]")<CR>Pl
+nnoremap <Leader>T "=strftime("[%Y-%m-%d]")<CR>Pl
 nnoremap <Leader>f :NERDTreeToggle<CR>
 " Generate tags and cscope
-map <Leader>T :!tagscope<CR>
 map <Leader>z :terminal ++close zsh<CR>
 
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
@@ -429,6 +428,8 @@ call NERDTreeHighlightFile('jar', '88')
   "endif
 "endfor
 
+let &titlestring = expand('%:p')
+let g:airline_theme='disgusted'
 "let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
 let g:NERDTreeBookmarks = 1
 "let g:NERDTreeBookmarksSort = 0
@@ -470,6 +471,10 @@ let g:ale_erlang_erlc_options = '-I../include -I../src -I../../include  -I../_bu
 let g:ale_java_javac_options = '-sourcepath /Users/liam.mcnamara/code/scheme/scheme/app/src/gen/java;/Users/liam.mcnamara/code/scheme/scheme/app/src/main/java'
 "let g:ale_java_javac_options = '-classpath .:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/classes/:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/scheme_app-0.1.0/WEB-INF/lib/*'
 
+let g:vimwiki_list = [{'path': '~/.vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_global_ext = 0
+let g:vimwiki_markdown_link_ext = 1
+
 let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
 
@@ -485,7 +490,7 @@ function! LinterStatus() abort
     \)
 endfunction
 
-let g:airline_theme='distinguished'
+"let g:airline_theme='distinguished'
 let g:airline_section_c = ''
 let g:airline_section_y = '' "      (fileencoding, fileformat)
 let g:airline_section_error = '%q'
@@ -607,6 +612,10 @@ augroup expandfilename
   autocmd BufNewFile * call TryOpenExpand()
 augroup END
 
+augroup theme
+  autocmd VimEnter * AirlineTheme(disgusted)
+augroup END
+
 augroup fileguff
   autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
   "autocmd FileType go autocmd BufWritePre <buffer> Fmt
@@ -639,11 +648,6 @@ augroup DeopleteLazy
   autocmd InsertEnter * call deoplete#enable()
 augroup END
 
-aug netrw_close
-  au!
-  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw"|q|endif
-augroup END
-
 " Skeleton templates
 augroup templates
   autocmd BufNewFile *.sh      0r ~/.vim/templates/skeleton.sh
@@ -655,7 +659,7 @@ augroup END
 
 augroup nerdtree
   autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | execute 'NERDTreeToggle'| endif
+  "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | execute 'NERDTreeToggle'| endif
 augroup END
 
 augroup filetypes

@@ -1,2 +1,6 @@
 cd ~/.vim/pack/plugins/start
 git submodule update --remote
+
+cd LanguageClient-neovim
+git co next
+./install.sh
