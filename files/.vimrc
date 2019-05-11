@@ -471,10 +471,6 @@ let g:ale_erlang_erlc_options = '-I../include -I../src -I../../include  -I../_bu
 let g:ale_java_javac_options = '-sourcepath /Users/liam.mcnamara/code/scheme/scheme/app/src/gen/java;/Users/liam.mcnamara/code/scheme/scheme/app/src/main/java'
 "let g:ale_java_javac_options = '-classpath .:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/classes/:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/scheme_app-0.1.0/WEB-INF/lib/*'
 
-let g:vimwiki_list = [{'path': '~/.vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
-let g:vimwiki_global_ext = 0
-let g:vimwiki_markdown_link_ext = 1
-
 let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
 
@@ -665,7 +661,7 @@ augroup END
 augroup filetypes
   autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
   autocmd FileType erlang setlocal shiftwidth=0 tabstop=2 softtabstop=2 sw=2 ts=2 sts=2
-  autocmd FileType python setlocal shiftwidth=2 tabstop=2 noexpandtab
+  autocmd FileType python setlocal shiftwidth=1 tabstop=1 expandtab
   autocmd FileType nerdtree set norelativenumber
   autocmd FileType netrw    set nonumber
   autocmd FileType taglist  set nonumber norelativenumber
@@ -705,6 +701,7 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_autoStop = 0
 let g:LanguageClient_serverCommands = {
     \ 'java' : ['jdtls'],
+    \ 'erlang' : ['ls_erlang'],
     \ }
 
 let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
