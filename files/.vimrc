@@ -661,7 +661,7 @@ augroup END
 augroup filetypes
   autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
   autocmd FileType erlang setlocal shiftwidth=0 tabstop=2 softtabstop=2 sw=2 ts=2 sts=2
-  autocmd FileType python setlocal shiftwidth=1 tabstop=1 expandtab
+  autocmd FileType python setlocal shiftwidth=4 tabstop=1 expandtab
   autocmd FileType nerdtree set norelativenumber
   autocmd FileType netrw    set nonumber
   autocmd FileType taglist  set nonumber norelativenumber
