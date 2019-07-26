@@ -43,7 +43,7 @@ endif
 
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 "set matchpairs+=<:>             " Match, to be used with %
-set background=dark         " Assume a dark background
+"set background=dark         " Assume a dark background
 set guifont=Hack\ Regular\ Nerd\ Font\ Complete:h13
 set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
@@ -97,7 +97,7 @@ set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 set statusline+=%w%h%m%r                 " Options
 set statusline+=\ [%{&ff}/%Y]            " Filetype
 set statusline+=\ [%{getcwd()}]          " Current dir
-set synmaxcol=180
+set synmaxcol=250
 set tabpagemax=15               " Only show 15 tabs
 set tabstop=4                   " An indentation every four columns
 set tags=./.tags;/
@@ -429,7 +429,8 @@ call NERDTreeHighlightFile('jar', '88')
 "endfor
 
 let &titlestring = expand('%:p')
-let g:airline_theme='disgusted'
+"let g:airline_theme='disgusted'
+let g:airline_theme='distinguished'
 "let g:NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
 let g:NERDTreeBookmarks = 1
 "let g:NERDTreeBookmarksSort = 0
@@ -524,9 +525,10 @@ endif
 
 let base16colorspace=256
 colorscheme molokai
+highlight Normal ctermbg=NONE guibg=NONE
 " Line numbers
 highlight visual ctermbg=240
-highlight LineNr ctermbg=235 ctermfg=239
+highlight LineNr ctermbg=NONE ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=202
 highlight clear CursorLine
@@ -609,7 +611,8 @@ augroup expandfilename
 augroup END
 
 augroup theme
-  autocmd VimEnter * AirlineTheme(disgusted)
+  "autocmd VimEnter * AirlineTheme(disgusted)
+  autocmd VimEnter * AirlineTheme(distinguished)
 augroup END
 
 augroup fileguff

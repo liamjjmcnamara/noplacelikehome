@@ -97,3 +97,6 @@
 [submodule "files/.vim/pack/plugins/start/vimwiki"]
 	path = files/.vim/pack/plugins/start/vimwiki
 	url = https://github.com/vimwiki/vimwiki.git
+[submodule "files/.vim/pack/plugins/start/vim-hug-neovim-rpc"]
+	path = files/.vim/pack/plugins/start/vim-hug-neovim-rpc
+	url = https://github.com/roxma/vim-hug-neovim-rpc.git
