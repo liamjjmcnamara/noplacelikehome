@@ -29,3 +29,5 @@
 	templatedir = ~/.git_template
 [color]
 	ui = true
+[diff]
+	noprefix = true

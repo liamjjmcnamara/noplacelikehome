@@ -525,10 +525,9 @@ endif
 
 let base16colorspace=256
 colorscheme molokai
-highlight Normal ctermbg=NONE guibg=NONE
 " Line numbers
 highlight visual ctermbg=240
-highlight LineNr ctermbg=NONE ctermfg=239
+highlight LineNr ctermbg=235 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=239
 "highlight CursorLineNr ctermbg=234 ctermfg=202
 highlight clear CursorLine
@@ -704,7 +703,7 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_autoStop = 0
 let g:LanguageClient_serverCommands = {
     \ 'java' : ['jdtls'],
-    \ 'erlang' : ['ls_erlang'],
+    \ 'erlang' : ['tcp://127.0.0.1:8888'],
     \ }
 
 let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
