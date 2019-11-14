@@ -1,11 +1,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
-
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'Shougo/deoplete.nvim'
 Plug 'Yggdroot/indentLine'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'flazz/vim-colorschemes'
@@ -17,6 +12,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'wellle/tmux-complete.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'ryanoasis/vim-devicons'
+Plug 'hyhugh/coc-erlang_ls', {'do': 'yarn install --frozen-lockfile'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
@@ -24,7 +20,6 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
-
 call plug#end()
 
 set encoding=utf-8
@@ -43,10 +38,6 @@ endfunction
 if &term[:4] ==? 'xterm' || &term[:5] ==? 'screen' || &term[:3] ==? 'rxvt'
     inoremap <silent> <C-[>OC <RIGHT>
 endif
-
-"if filereadable(expand('~/.vimrc.bundles'))
-    "source ~/.vimrc.bundles
-"endif
 
 filetype plugin indent on   " Automatically detect file types.
 syntax on                   " Syntax highlighting
@@ -198,11 +189,6 @@ vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<CR>
 vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
 vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
 
-" Shortcuts
-" Change Working Directory to that of the current file
-"cmap cwd lcd %:p:h
-"cmap cd. lcd %:p:h
-
 " Allow using the repeat operator with a visual selection (!)
 " http://stackoverflow.com/a/8064607/127816
 vnoremap . :normal .<CR>
@@ -309,7 +295,6 @@ endfunction
 noremap ` :call MonkeyTerminalToggle()<CR>
 tnoremap ` <C-\><C-n>:call MonkeyTerminalToggle()<CR>
 
-
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 map <Leader>ew :e %%
 map <Leader>es :sp %%
@@ -329,6 +314,7 @@ inoremap <C-l> <Right>
 nnoremap <silent> <c-\><Left>   :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-\><Down>   :TmuxNavigateDown<cr>
 nnoremap <silent> <c-\><Up>     :TmuxNavigateUp<cr>
+
 nnoremap <silent> <c-\><Right>  :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\>h        :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-\>j        :TmuxNavigateDown<cr>
@@ -336,12 +322,10 @@ nnoremap <silent> <c-\>k        :TmuxNavigateUp<cr>
 nnoremap <silent> <c-\>l        :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\><bslash> :TmuxNavigatePrevious<cr>
 nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
-
-nnoremap z= i<C-X><C-S>
-map <CR> o<Esc>
-
 inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+nnoremap z= i<C-X><C-S>
+map <CR> o<Esc>
 
 nnoremap <C-F> :FZF<cr>
 nnoremap <Leader>y :FZF<cr>
@@ -377,13 +361,6 @@ if !exists('g:spf13_no_keyfixes')
         command! -bang Qa qa<bang>
     endif
     cmap Tabe tabe
-endif
-
-" UndoTree 
-if isdirectory(expand('~/.vim/plugged/undotree/'))
-    nnoremap <Leader>u :UndotreeToggle<CR>
-    " If undotree is opened, it is likely one wants to interact with it.
-    let g:undotree_SetFocusWhenToggle=1
 endif
 
 if isdirectory(expand('~/.vim/plugged/vim-indent-guides/'))
@@ -487,7 +464,6 @@ endfunction
 " File extension colouring
 function! NERDTreeHighlightFile(extension, fg)
  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
- "exec 'autocmd filetype nerdtree highlight ' . a:extension . ' ctermfg='. a:fg .' guifg='. a:fg
  exec 'autocmd filetype nerdtree highlight ' . a:extension . ' ctermfg='. a:fg
 endfunction
 
@@ -538,9 +514,6 @@ let g:indentLine_concealcursor = 1
 let g:matchparen_timeout = 20
 let g:matchparen_insert_timeout = 20
 
-let g:deoplete#auto_complete_start_length = 3
-let g:deoplete#auto_complete_delay = 2
-let g:deoplete#max_menu_width = 35
 let g:tmuxcomplete#trigger = ''
 let g:comfortable_motion_no_default_key_mappings = 1
 let g:erlang_tags_auto_update = 1
@@ -560,7 +533,6 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
 let g:ale_erlang_erlc_options = '-I../include -I../src -I../../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fredp -I../..'
 let g:ale_java_javac_options = '-sourcepath /Users/liam.mcnamara/code/scheme/scheme/app/src/gen/java;/Users/liam.mcnamara/code/scheme/scheme/app/src/main/java'
-"let g:ale_java_javac_options = '-classpath .:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/classes/:/Users/liam.mcnamara/code/scheme/scheme_app_java/target/scheme_app-0.1.0/WEB-INF/lib/*'
 
 let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
@@ -618,8 +590,7 @@ colorscheme molokai
 " Line numbers
 highlight visual ctermbg=240
 highlight LineNr ctermbg=235 ctermfg=239
-"highlight CursorLineNr ctermbg=234 ctermfg=239
-"highlight CursorLineNr ctermbg=234 ctermfg=202
+highlight Directory ctermfg='blue'
 highlight clear CursorLine
 highlight ColorColumn ctermbg=234
 highlight SpecialKey  ctermbg=235
@@ -632,17 +603,14 @@ highlight DiffChange  ctermbg=235
 highlight ALEErrorSign   ctermbg=235 ctermfg=1
 highlight ALEWarningSign ctermbg=235 ctermfg=202
 highlight ALEInfoSign    ctermbg=235
-" Syntastic
 highlight Error   ctermbg=235 ctermfg=202
 highlight Warning ctermbg=235 ctermfg=200
 highlight Todo    ctermbg=235 ctermfg=208
-
-highlight Directory ctermfg='blue'
 " popup menu
-highlight Pmenu     ctermbg=0 ctermfg=202
-highlight PmenuSel    ctermbg=202 ctermfg=0
-highlight PmenuSbar   ctermbg=0 ctermfg=202
-highlight VertSplit   ctermbg=235
+highlight Pmenu     ctermbg=235 ctermfg=202
+highlight PmenuSel  ctermbg=202 ctermfg=0
+highlight PmenuSbar ctermbg=0 ctermfg=202
+highlight VertSplit ctermbg=235
 
 fu! SaveSession()
     "execute 'call mkdir(%:p:h/.vim)'
@@ -699,11 +667,6 @@ augroup expandfilename
   autocmd BufNewFile * call TryOpenExpand()
 augroup END
 
-"augroup theme
-  ""autocmd VimEnter * AirlineTheme(disgusted)
-  "autocmd VimEnter * AirlineTheme(distinguished)
-"augroup END
-
 augroup fileguff
   autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
   "autocmd FileType go autocmd BufWritePre <buffer> Fmt
@@ -730,10 +693,6 @@ augroup FastEscape
   autocmd!
   au InsertEnter * set timeoutlen=0
   au InsertLeave * set timeoutlen=1000
-augroup END
-
-augroup DeopleteLazy
-  autocmd InsertEnter * call deoplete#enable()
 augroup END
 
 " Skeleton templates
@@ -784,43 +743,24 @@ augroup END
 
 " For cscope
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
-
 let g:ale_completion_enabled = 1
 let g:ale_fixers = {'java': ['google_java_format']}
 
-" Language Client
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_autoStop = 0
-let g:LanguageClient_serverCommands = {
-    \ 'java' : ['jdtls'],
-    \ 'erlang' : ['tcp://127.0.0.1:10000'],
-    \ }
+call coc#config('coc.preferences', {
+\   'diagnostic.errorSign'  : '🕱',
+\   'diagnostic.warningSign': '⚠',
+\   'diagnostic.infoSign'   : '',
+\   'diagnostic.hintSign'   : 'ﯦ',
+\   'snippetIndicator'      :' ',
+\   'messageLevel': 'warning'
+\ })
 
-let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
-let $NVIM_NCM_LOG_LEVEL="DEBUG"
-let $NVIM_NCM_MULTI_THREAD=0
-
-"if executable('erlang_ls')
-    "au User lsp_setup call lsp#register_server({
-        "\ 'name': 'erlang_ls',
-        "\ 'cmd': {server_info->['erlang_ls']},
-        "\ 'whitelist': ['erlang'],
-        "\ })
-"endif
+nmap <leader>p <Plug>(coc-definition)
+nmap <leader>cd <Plug>(coc-definition)
+nmap <leader>ci <Plug>(coc-definition)
 
 " Erlang
 "set runtimepath^=~/.vim/plugged/vim-erlang-runtime
 set runtimepath^=~/.vim/plugged/vim-erlang-tags
 set runtimepath^=~/.vim/plugged/vim-erlang-tags
-
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-
-" this should reflect the kerl setting
-"set runtimepath^=/usr/local/erlang/19.3/bin/erl
-
-"augroup theme
-  ""autocmd VimEnter * AirlineTheme(disgusted)
-  "autocmd VimEnter * AirlineTheme(distinguished)
-"augroup END
-
 

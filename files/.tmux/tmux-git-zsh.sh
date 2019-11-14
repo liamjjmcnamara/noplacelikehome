@@ -118,6 +118,9 @@ update_tmux() {
     CMD=" /usr/local/opt/coreutils/bin/greadlink -e $(pwd)"
     CWD=`eval ${CMD}`
 
+    if [ "$CWD" = "/Users/liam.mcnamara/code/kredcore/kred" ]; then
+      exit 0
+    fi
     find_git_repo
 
     LASTREPO_LEN=${#TMUX_GIT_LASTREPO}

@@ -1,6 +1,6 @@
 set encoding=utf-8
 scriptencoding utf-8
-set shell=/bin/sh
+set shell=/bin/zsh
 
 " Environment
 silent function! OSX()
@@ -45,13 +45,12 @@ endif
 "set matchpairs+=<:>             " Match, to be used with %
 "set background=dark         " Assume a dark background
 set guifont=Hack\ Regular\ Nerd\ Font\ Complete:h13
-set mouse=a                 " Automatically enable mouse usage
-set mousehide               " Hide the mouse cursor while typing
 set autoindent                  " Indent at the same level of the previous line
 set backspace=indent,eol,start  " Backspace for dummies
 set backup                      " Backups are nice ...
 set clipboard=unnamed
 set colorcolumn=81,101
+set conceallevel=0
 set cursorline                  " Highlight current line
 set expandtab                   " Tabs are spaces, not tabs
 set foldenable                  " Auto fold code
@@ -61,6 +60,8 @@ set hidden                      " Allow buffer switching without saving
 set history=1000                " Store a ton of history (default is 20)
 set hlsearch                    " Highlight search terms
 set ignorecase                  " Case insensitive search
+set mouse=a                 " Automatically enable mouse usage
+set mousehide               " Hide the mouse cursor while typing
 set incsearch                   " Find as you type search
 set iskeyword-=#                " '#' is an end of word designator
 set iskeyword-=-                " '-' is an end of word designator
@@ -150,6 +151,8 @@ function! WrapRelativeMotion(key, ...)
         execute 'normal!' l:vis_sel . a:key
     endif
 endfunction
+
+nnoremap <leader>gd <Plug>(coc-definition)
 
 " Map g* keys in Normal, Operator-pending, and Visual+select
 noremap $ :call WrapRelativeMotion("$")<CR>
