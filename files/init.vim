@@ -234,6 +234,12 @@ nnoremap <Leader>T "=strftime("[%Y-%m-%d]")<CR>Pl
 nnoremap <Leader>f :NERDTreeToggle<CR>
 " Generate tags and cscope
 
+nnoremap <leader>p <Plug>(coc-definition)
+nnoremap <leader>cd <Plug>(coc-definition)
+nnoremap <leader>ci <Plug>(coc-definition)
+nnoremap <leader>cr <Plug>(coc-references)
+nnoremap <silent> <leader>ch :call CocAction('doHover')<CR>
+
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
 let s:monkey_terminal_window = -1
@@ -531,8 +537,8 @@ let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str   = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
-let g:ale_erlang_erlc_options = '-I../include -I../src -I../../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fredp -I../..'
-let g:ale_java_javac_options = '-sourcepath /Users/liam.mcnamara/code/scheme/scheme/app/src/gen/java;/Users/liam.mcnamara/code/scheme/scheme/app/src/main/java'
+let g:ale_erlang_erlc_options = '-I../include -I../src -I../../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fred -I../..'
+"let g:ale_java_javac_options = '-sourcepath /Users/liam.mcnamara/code/scheme/scheme/app/src/gen/java;/Users/liam.mcnamara/code/scheme/scheme/app/src/main/java'
 
 let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
@@ -754,10 +760,6 @@ call coc#config('coc.preferences', {
 \   'snippetIndicator'      :' ',
 \   'messageLevel': 'warning'
 \ })
-
-nmap <leader>p <Plug>(coc-definition)
-nmap <leader>cd <Plug>(coc-definition)
-nmap <leader>ci <Plug>(coc-definition)
 
 " Erlang
 "set runtimepath^=~/.vim/plugged/vim-erlang-runtime
