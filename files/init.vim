@@ -1,18 +1,18 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'Yggdroot/indentLine'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
+Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'flazz/vim-colorschemes'
-Plug 'junegunn/fzf.vim'
-Plug 'kopischke/vim-fetch'
 Plug 'gioele/vim-autoswap'
-Plug 'benmills/vimux'
-Plug 'kshenoy/vim-signature'
-Plug 'wellle/tmux-complete.vim'
-Plug 'justinmk/vim-sneak'
-Plug 'ryanoasis/vim-devicons'
 Plug 'hyhugh/coc-erlang_ls', {'do': 'yarn install --frozen-lockfile'}
+Plug 'junegunn/fzf.vim'
+Plug 'justinmk/vim-sneak'
+Plug 'kopischke/vim-fetch'
+Plug 'kshenoy/vim-signature'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lsp'
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
@@ -20,6 +20,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
+Plug 'wellle/tmux-complete.vim'
 call plug#end()
 
 set encoding=utf-8
@@ -333,6 +334,10 @@ inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 nnoremap z= i<C-X><C-S>
 map <CR> o<Esc>
+
+" CoC
+nnoremap <leader>gd CocAction('jumpDefinition')
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 nnoremap <C-F> :FZF<cr>
 nnoremap <Leader>y :FZF<cr>
@@ -747,6 +752,9 @@ augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
+
+let g:python3_host_prog='/usr/local/bin/python3'
+let g:python_host_prog='/usr/bin/python'
 
 " For cscope
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
