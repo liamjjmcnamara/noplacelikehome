@@ -537,10 +537,10 @@ highlight clear CursorLine
 highlight ColorColumn ctermbg=234
 highlight SpecialKey  ctermbg=235
 " Sign column for Git
-highlight SignColumn  ctermbg=235
-highlight DiffAdd     ctermbg=235
-highlight DiffDelete  ctermbg=235
-highlight DiffChange  ctermbg=235
+highlight SignColumn ctermbg=235
+highlight DiffAdd    ctermbg=235
+highlight DiffDelete ctermbg=235
+highlight DiffChange ctermbg=235
 " Lint ale
 highlight ALEErrorSign   ctermbg=235 ctermfg=1
 highlight ALEWarningSign ctermbg=235 ctermfg=202
@@ -553,9 +553,9 @@ highlight Todo    ctermbg=235 ctermfg=208
 highlight Directory ctermfg='blue'
 " popup menu
 highlight Pmenu     ctermbg=0 ctermfg=202
-highlight PmenuSel    ctermbg=202 ctermfg=0
-highlight PmenuSbar   ctermbg=0 ctermfg=202
-highlight VertSplit   ctermbg=235
+highlight PmenuSel  ctermbg=202 ctermfg=0
+highlight PmenuSbar ctermbg=0 ctermfg=202
+highlight VertSplit ctermbg=235
 
 fu! SaveSession()
     "execute 'call mkdir(%:p:h/.vim)'

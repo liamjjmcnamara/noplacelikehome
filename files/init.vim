@@ -86,6 +86,7 @@ set iskeyword-=#                " '#' is an end of word designator
 set iskeyword-=-                " '-' is an end of word designator
 set iskeyword-=.                " '.' is an end of word designator
 set laststatus=2
+set cmdheight=1
 set linespace=0                 " No extra spaces between rows
 set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
