@@ -236,13 +236,13 @@ nnoremap <Leader>t "=strftime("[%Y-%m-%d %H:%M]")<CR>Pl
 nnoremap <Leader>T "=strftime("[%Y-%m-%d]")<CR>Pl
 nnoremap <Leader>f :NERDTreeToggle<CR>
 
-nnoremap <leader>p <Plug>(coc-definition)
-nnoremap <leader>cd <Plug>(coc-definition)
-nnoremap <leader>ci <Plug>(coc-definition)
-nnoremap <leader>cr <Plug>(coc-references)
+"nnoremap <leader>p <Plug>(coc-definition)
+"nnoremap <leader>cd <Plug>(coc-definition)
+"nnoremap <leader>ci <Plug>(coc-definition)
+"nnoremap <leader>cr <Plug>(coc-references)
 nnoremap <silent> <leader>ch :call CocAction('doHover')<CR>
-nnoremap <leader>gd CocAction('jumpDefinition')
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <leader>cd :call CocAction('jumpDefinition')<CR>
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
@@ -605,7 +605,9 @@ colorscheme molokai
 highlight visual ctermbg=240
 highlight LineNr ctermbg=235 ctermfg=239
 highlight CursorLine ctermbg=none ctermfg=none guibg=none guifg=none
-highlight CursorLineNr ctermbg=235 ctermfg=202 guibg=#262626 guifg=#d75f01
+highlight CursorLineNr ctermbg=235 ctermfg=239 guibg=#727272 guifg=#000000
+highlight CursorLineNr ctermbg=235 ctermfg=239 guibg=#d75f01 guifg=#000000
+highlight NormalFloat ctermbg=234 ctermfg=202 guibg=#383838 guifg=#d75f01
 highlight Directory ctermfg='blue'
 highlight ColorColumn ctermbg=234
 highlight SpecialKey  ctermbg=235
