@@ -1,4 +1,5 @@
 call plug#begin('~/.local/share/nvim/plugged')
+"Plug 'neovim/nvim-lsp'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
@@ -11,7 +12,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'kopischke/vim-fetch'
 Plug 'kshenoy/vim-signature'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neovim/nvim-lsp'
+Plug 'roxma/nvim-yarp'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -234,13 +235,14 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 nnoremap <Leader>t "=strftime("[%Y-%m-%d %H:%M]")<CR>Pl
 nnoremap <Leader>T "=strftime("[%Y-%m-%d]")<CR>Pl
 nnoremap <Leader>f :NERDTreeToggle<CR>
-" Generate tags and cscope
 
 nnoremap <leader>p <Plug>(coc-definition)
 nnoremap <leader>cd <Plug>(coc-definition)
 nnoremap <leader>ci <Plug>(coc-definition)
 nnoremap <leader>cr <Plug>(coc-references)
 nnoremap <silent> <leader>ch :call CocAction('doHover')<CR>
+nnoremap <leader>gd CocAction('jumpDefinition')
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
@@ -336,9 +338,6 @@ nnoremap z= i<C-X><C-S>
 map <CR> o<Esc>
 
 " CoC
-nnoremap <leader>gd CocAction('jumpDefinition')
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
 nnoremap <C-F> :FZF<cr>
 nnoremap <Leader>y :FZF<cr>
 set runtimepath+=/usr/local/opt/fzf
@@ -538,12 +537,13 @@ let g:indentLine_color_term = '239'
 let g:indentLine_faster = '1'
 let g:indentLine_char   = ' '
 let g:AutoPairs = {}
+let g:ale_enabled=0
 let g:ale_sign_error   = '⤬'
 let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str   = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_statusline_format = ['%d⤬', '%d⚠', '⬥ ok']
-let g:ale_erlang_erlc_options = '-I../include -I../src -I../../include  -I../_build/default/lib -I../_build/test/lib -I~/code/id -I~/code/fred -I../..'
+let g:ale_erlang_erlc_options = '-I../include -I../src -I../../include  -I../_build/default/lib -I../_build/test/lib -I~/code/kredcore/kred -Ilib/*/include'
 "let g:ale_java_javac_options = '-sourcepath /Users/liam.mcnamara/code/scheme/scheme/app/src/gen/java;/Users/liam.mcnamara/code/scheme/scheme/app/src/main/java'
 
 let g:lt_location_list_toggle_map = '<Leader>l'
@@ -598,12 +598,15 @@ if $TERM_PROGRAM =~# 'iTerm.app'
 endif
 
 let base16colorspace=256
+set cursorline
+set termguicolors
 colorscheme molokai
 " Line numbers
 highlight visual ctermbg=240
 highlight LineNr ctermbg=235 ctermfg=239
+highlight CursorLine ctermbg=none ctermfg=none guibg=none guifg=none
+highlight CursorLineNr ctermbg=235 ctermfg=202 guibg=#262626 guifg=#d75f01
 highlight Directory ctermfg='blue'
-highlight clear CursorLine
 highlight ColorColumn ctermbg=234
 highlight SpecialKey  ctermbg=235
 " Sign column for Git
@@ -612,8 +615,8 @@ highlight DiffAdd     ctermbg=235
 highlight DiffDelete  ctermbg=235
 highlight DiffChange  ctermbg=235
 " Lint ale
-highlight ALEErrorSign   ctermbg=235 ctermfg=1
-highlight ALEWarningSign ctermbg=235 ctermfg=202
+highlight ALEErrorSign   ctermbg=235 ctermfg=1 guibg=#262626 guifg=#870f00
+highlight ALEWarningSign ctermbg=235 ctermfg=202 guibg=#262626 guifg=#d75f01
 highlight ALEInfoSign    ctermbg=235
 highlight Error   ctermbg=235 ctermfg=202
 highlight Warning ctermbg=235 ctermfg=200
