@@ -1,3 +1,4 @@
+
 call plug#begin('~/.local/share/nvim/plugged')
 "Plug 'neovim/nvim-lsp'
 Plug 'Yggdroot/indentLine'
@@ -236,13 +237,13 @@ nnoremap <Leader>t "=strftime("[%Y-%m-%d %H:%M]")<CR>Pl
 nnoremap <Leader>T "=strftime("[%Y-%m-%d]")<CR>Pl
 nnoremap <Leader>f :NERDTreeToggle<CR>
 
-"nnoremap <leader>p <Plug>(coc-definition)
-"nnoremap <leader>cd <Plug>(coc-definition)
-"nnoremap <leader>ci <Plug>(coc-definition)
-"nnoremap <leader>cr <Plug>(coc-references)
+nnoremap <leader>p <Plug>(coc-definition)
+nnoremap <leader>cd <Plug>(coc-definition)
+nnoremap <leader>ci <Plug>(coc-definition)
+nnoremap <leader>cr <Plug>(coc-references)
 nnoremap <silent> <leader>ch :call CocAction('doHover')<CR>
 nnoremap <silent> <leader>cd :call CocAction('jumpDefinition')<CR>
-"nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
@@ -537,7 +538,6 @@ let g:indentLine_color_term = '239'
 let g:indentLine_faster = '1'
 let g:indentLine_char   = ' '
 let g:AutoPairs = {}
-let g:ale_enabled=0
 let g:ale_sign_error   = '⤬'
 let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str   = 'E'
@@ -624,8 +624,8 @@ highlight Error   ctermbg=235 ctermfg=202
 highlight Warning ctermbg=235 ctermfg=200
 highlight Todo    ctermbg=235 ctermfg=208
 " popup menu
-highlight Pmenu     ctermbg=235 ctermfg=202
-highlight PmenuSel  ctermbg=202 ctermfg=0
+highlight Pmenu     ctermbg=235 ctermfg=202 guibg=#383838 guifg=#d75f01
+highlight PmenuSel  ctermbg=202 ctermfg=0 guibg=#727272 guifg=#d75f01
 highlight PmenuSbar ctermbg=0 ctermfg=202
 highlight VertSplit ctermbg=235
 
@@ -766,17 +766,68 @@ let &runtimepath=&runtimepath . ',~/.vim/plugin'
 let g:ale_completion_enabled = 1
 let g:ale_fixers = {'java': ['google_java_format']}
 
-call coc#config('coc.preferences', {
-\   'diagnostic.errorSign'  : '🕱',
-\   'diagnostic.warningSign': '⚠',
-\   'diagnostic.infoSign'   : '',
-\   'diagnostic.hintSign'   : 'ﯦ',
-\   'snippetIndicator'      :' ',
-\   'messageLevel': 'warning'
-\ })
+"call coc#config('coc.preferences', {
+"\   'diagnostic.errorSign'  : '🕱',
+"\   'diagnostic.warningSign': '⚠',
+"\   'diagnostic.infoSign'   : '',
+"\   'diagnostic.hintSign'   : 'ﯦ',
+"\   'snippetIndicator'      :' ',
+"\   'messageLevel': 'warning'
+"\ })
 
 " Erlang
 "set runtimepath^=~/.vim/plugged/vim-erlang-runtime
 set runtimepath^=~/.vim/plugged/vim-erlang-tags
 set runtimepath^=~/.vim/plugged/vim-erlang-tags
 
+"function! SetupErlangLs()
+"lua << EOF
+  "local nvim_lsp = require'nvim_lsp'
+  "local configs = require'nvim_lsp/configs'
+  "require'nvim_lsp'.pyls.setup{
+    "cmd = {"python3", "/Users/liam.mcnamara", "--log-file", "/tmp/pyls.txt", "--verbose"}
+  "}
+"EOF
+"endfunction
+
+"call SetupErlangLs()
+
+"autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+"lua << EOF
+"require'nvim_lsp'.pyls.setup{
+    "cmd = {"python3", "/home/matej/.bin/rols", "--log-file", "/tmp/rols-log.txt", "--verbose"}
+"}
+"-- require'nvim_lsp'.pyls.setup{}
+"require'nvim_lsp'.clangd.setup{}
+"require'nvim_lsp'.sumneko_lua.setup{
+    "cmd = {"/home/matej/archiv/knihovna/repos/lua-language-server/bin/Linux/lua-language-server", "-E", "/home/matej/archiv/knihovna/repos/lua-language-server/main.lua"},
+    "settings = {
+        "Lua = {
+            "diagnostics = {
+                "globals = {"vim", "vis"}
+            "}
+        "}
+    "}
+"}
+"EOF
+
+"function! LSPRename()
+    "let s:newName = input('Enter new name: ', expand('<cword>'))
+    "echom "s:newName = " . s:newName
+    "lua vim.lsp.buf.rename(s:newName)
+"endfunction
+
+"function! LSPSetMappings()
+    "setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    "nnoremap <silent> <buffer> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+    "nnoremap <silent> <buffer> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+    "nnoremap <silent> <buffer> K     <cmd>lua vim.lsp.buf.hover()<CR>
+    "nnoremap <silent> <buffer> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+    "nnoremap <silent> <buffer> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+    "nnoremap <silent> <buffer> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+    "nnoremap <silent> <buffer> gr    <cmd>lua vim.lsp.buf.references()<CR>
+    "" nnoremap <silent> <buffer> <F2> :call LSPRename()<CR>
+"endfunction
+
+"au FileType lua,sh,c,python,rust :call LSPSetMappings()
