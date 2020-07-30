@@ -31,3 +31,5 @@
 	ui = true
 [diff]
 	noprefix = true
+[pull]
+	rebase = false

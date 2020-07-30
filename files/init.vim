@@ -243,7 +243,45 @@ nnoremap <leader>ci <Plug>(coc-definition)
 nnoremap <leader>cr <Plug>(coc-references)
 nnoremap <silent> <leader>ch :call CocAction('doHover')<CR>
 nnoremap <silent> <leader>cd :call CocAction('jumpDefinition')<CR>
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+noremap ` :call MonkeyTerminalToggle()<CR>
+tnoremap ` <C-\><C-n>:call MonkeyTerminalToggle()<CR>
+
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
+map <Leader>ew :e %%
+map <Leader>es :sp %%
+map <Leader>ev :vsp %%
+map <Leader>et :tabe %%
+" Adjust viewports to the same size
+map <Leader>= <C-w>=
+
+" Easier formatting
+nnoremap <silent> <Leader>q gwip
+nnoremap <Left>  :echo "No left for you!"<CR>
+nnoremap <Right> :echo "No right for you!"<CR>
+nnoremap <Up>    :echo "No up for you!"<CR>
+nnoremap <Down>  :echo "No down for you!"<CR>
+inoremap <C-l> <Right>
+
+nnoremap <silent> <c-\><Left>   :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-\><Down>   :TmuxNavigateDown<cr>
+nnoremap <silent> <c-\><Up>     :TmuxNavigateUp<cr>
+
+nnoremap <silent> <c-\><Right>  :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\>h        :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-\>j        :TmuxNavigateDown<cr>
+nnoremap <silent> <c-\>k        :TmuxNavigateUp<cr>
+nnoremap <silent> <c-\>l        :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\><bslash> :TmuxNavigatePrevious<cr>
+nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
+inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+nnoremap z= i<C-X><C-S>
+map <CR> o<Esc>
+
+nnoremap <C-F> :FZF<cr>
+nnoremap <Leader>y :FZF<cr>
+set runtimepath+=/usr/local/opt/fzf
 
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
@@ -303,76 +341,36 @@ function! MonkeyTerminalExec(cmd)
   wincmd p
 endfunction
 
-noremap ` :call MonkeyTerminalToggle()<CR>
-tnoremap ` <C-\><C-n>:call MonkeyTerminalToggle()<CR>
-
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
-map <Leader>ew :e %%
-map <Leader>es :sp %%
-map <Leader>ev :vsp %%
-map <Leader>et :tabe %%
-" Adjust viewports to the same size
-map <Leader>= <C-w>=
-
-" Easier formatting
-nnoremap <silent> <Leader>q gwip
-nnoremap <Left>  :echo "No left for you!"<CR>
-nnoremap <Right> :echo "No right for you!"<CR>
-nnoremap <Up>    :echo "No up for you!"<CR>
-nnoremap <Down>  :echo "No down for you!"<CR>
-inoremap <C-l> <Right>
-
-nnoremap <silent> <c-\><Left>   :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-\><Down>   :TmuxNavigateDown<cr>
-nnoremap <silent> <c-\><Up>     :TmuxNavigateUp<cr>
-
-nnoremap <silent> <c-\><Right>  :TmuxNavigateRight<cr>
-nnoremap <silent> <c-\>h        :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-\>j        :TmuxNavigateDown<cr>
-nnoremap <silent> <c-\>k        :TmuxNavigateUp<cr>
-nnoremap <silent> <c-\>l        :TmuxNavigateRight<cr>
-nnoremap <silent> <c-\><bslash> :TmuxNavigatePrevious<cr>
-nnoremap <silent> <c-\><c-h>    :TmuxNavigateLeft<cr>
-inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
-nnoremap z= i<C-X><C-S>
-map <CR> o<Esc>
-
-" CoC
-nnoremap <C-F> :FZF<cr>
-nnoremap <Leader>y :FZF<cr>
-set runtimepath+=/usr/local/opt/fzf
-
 " NerdTree
 if isdirectory(expand('~/.vim/plugged/nerdtree'))
-    map <C-e> <plug>NERDTreeTabsToggle<CR>
-    map <leader>e :NERDTreeFind<CR>
-    nmap <leader>nt :NERDTreeFind<CR>
-    let g:NERDShutUp=1
-    let g:NERDTreeChDirMode=0
-    let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-    let g:NERDTreeKeepTreeInNewTab=1
-    let g:NERDTreeMouseMode=2
-    let g:NERDTreeQuitOnOpen=1
-    let g:NERDTreeShowBookmarks=1
-    let g:NERDTreeShowHidden=1
-    let g:nerdtree_tabs_open_on_gui_startup=0
+  map <C-e> <plug>NERDTreeTabsToggle<CR>
+  map <leader>e :NERDTreeFind<CR>
+  nmap <leader>nt :NERDTreeFind<CR>
+  let g:NERDShutUp=1
+  let g:NERDTreeChDirMode=0
+  let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+  let g:NERDTreeKeepTreeInNewTab=1
+  let g:NERDTreeMouseMode=2
+  let g:NERDTreeQuitOnOpen=1
+  let g:NERDTreeShowBookmarks=1
+  let g:NERDTreeShowHidden=1
+  let g:nerdtree_tabs_open_on_gui_startup=0
 endif
 
 " Stupid shift key fixes
 if !exists('g:spf13_no_keyfixes')
-    if has('user_commands')
-        command! -bang -nargs=* -complete=file E e<bang> <args>
-        command! -bang -nargs=* -complete=file W w<bang> <args>
-        command! -bang -nargs=* -complete=file Wq wq<bang> <args>
-        command! -bang -nargs=* -complete=file WQ wq<bang> <args>
-        command! -bang Wa wa<bang>
-        command! -bang WA wa<bang>
-        command! -bang Q q<bang>
-        command! -bang QA qa<bang>
-        command! -bang Qa qa<bang>
-    endif
-    cmap Tabe tabe
+  if has('user_commands')
+    command! -bang -nargs=* -complete=file E e<bang> <args>
+    command! -bang -nargs=* -complete=file W w<bang> <args>
+    command! -bang -nargs=* -complete=file Wq wq<bang> <args>
+    command! -bang -nargs=* -complete=file WQ wq<bang> <args>
+    command! -bang Wa wa<bang>
+    command! -bang WA wa<bang>
+    command! -bang Q q<bang>
+    command! -bang QA qa<bang>
+    command! -bang Qa qa<bang>
+  endif
+  cmap Tabe tabe
 endif
 
 if isdirectory(expand('~/.vim/plugged/vim-indent-guides/'))
@@ -387,84 +385,84 @@ let g:airline#extensions#tabline#enabled = 1
 " See `:echo g:airline_theme_map` for some more choices
 " Default in terminal vim is 'dark'
 if isdirectory(expand('~/.vim/plugged/vim-airline-themes/'))
-    if !exists('g:airline_theme')
-        let g:airline_theme = 'solarized'
-    endif
-    if !exists('g:airline_powerline_fonts')
-        " Use the default set of separators with a few customizations
-        let g:airline_left_sep='›'  " Slightly fancier than '>'
-        let g:airline_right_sep='‹' " Slightly fancier than '<'
-    endif
+  if !exists('g:airline_theme')
+    let g:airline_theme = 'solarized'
+  endif
+  if !exists('g:airline_powerline_fonts')
+    " Use the default set of separators with a few customizations
+    let g:airline_left_sep='›'  " Slightly fancier than '>'
+    let g:airline_right_sep='‹' " Slightly fancier than '<'
+  endif
 endif
 
 " Initialize directories {
 function! InitializeDirectories()
-    let l:parent = $HOME
-    let l:prefix = 'vim'
-    let l:dir_list = {
-                \ 'backup': 'backupdir',
-                \ 'views': 'viewdir',
-                \ 'swap': 'directory' }
-    if has('persistent_undo')
-        let l:dir_list['undo'] = 'undodir'
-    endif
-    " To specify a different directory in which to place the vimbackup,
-    " vimviews, vimundo, and vimswap files/directories, add the following to
-    " your .vimrc.before.local file:
-    "   let g:spf13_consolidated_directory = <full path to desired directory>
-    "   eg: let g:spf13_consolidated_directory = $HOME . '/.vim/'
-    if exists('g:spf13_consolidated_directory')
-        let l:common_dir = g:spf13_consolidated_directory . l:prefix
-    else
-        let l:common_dir = l:parent . '/.' . l:prefix
-    endif
+  let l:parent = $HOME
+  let l:prefix = 'vim'
+  let l:dir_list = {
+              \ 'backup': 'backupdir',
+              \ 'views': 'viewdir',
+              \ 'swap': 'directory' }
+  if has('persistent_undo')
+    let l:dir_list['undo'] = 'undodir'
+  endif
+  " To specify a different directory in which to place the vimbackup,
+  " vimviews, vimundo, and vimswap files/directories, add the following to
+  " your .vimrc.before.local file:
+  "   let g:spf13_consolidated_directory = <full path to desired directory>
+  "   eg: let g:spf13_consolidated_directory = $HOME . '/.vim/'
+  if exists('g:spf13_consolidated_directory')
+    let l:common_dir = g:spf13_consolidated_directory . l:prefix
+  else
+    let l:common_dir = l:parent . '/.' . l:prefix
+  endif
 
-    for [l:dirname, l:settingname] in items(l:dir_list)
-        let l:directory = l:common_dir . l:dirname . '/'
-        if exists('*mkdir')
-            if !isdirectory(l:directory)
-                call mkdir(l:directory)
-            endif
-        endif
-        if !isdirectory(l:directory)
-            echo 'Warning: Unable to create backup directory: ' . l:directory
-            echo 'Try: mkdir -p ' . l:directory
-        else
-            let l:directory = substitute(l:directory, ' ', "\\\\ ", 'g')
-            exec 'set ' . l:settingname . '=' . l:directory
-        endif
-    endfor
+  for [l:dirname, l:settingname] in items(l:dir_list)
+    let l:directory = l:common_dir . l:dirname . '/'
+    if exists('*mkdir')
+      if !isdirectory(l:directory)
+          call mkdir(l:directory)
+      endif
+    endif
+    if !isdirectory(l:directory)
+      echo 'Warning: Unable to create backup directory: ' . l:directory
+      echo 'Try: mkdir -p ' . l:directory
+    else
+      let l:directory = substitute(l:directory, ' ', "\\\\ ", 'g')
+      exec 'set ' . l:settingname . '=' . l:directory
+    endif
+  endfor
 endfunction
 call InitializeDirectories()
 
 " Initialize NERDTree as needed
 function! NERDTreeInitAsNeeded()
-    redir => l:bufoutput
-    buffers!
-    redir END
-    let l:idx = stridx(l:bufoutput, 'NERD_tree')
-    if l:idx > -1
-        NERDTreeMirror
-        NERDTreeFind
-        wincmd l
-    endif
+  redir => l:bufoutput
+  buffers!
+  redir END
+  let l:idx = stridx(l:bufoutput, 'NERD_tree')
+  if l:idx > -1
+    NERDTreeMirror
+    NERDTreeFind
+    wincmd l
+  endif
 endfunction
 
 " Shell command
 function! s:RunShellCommand(cmdline)
-    botright new
-    setlocal buftype=nofile
-    setlocal bufhidden=delete
-    setlocal nobuflisted
-    setlocal noswapfile
-    setlocal nowrap
-    setlocal filetype=shell
-    setlocal syntax=shell
-    call setline(1, a:cmdline)
-    call setline(2, substitute(a:cmdline, '.', '=', 'g'))
-    execute 'silent $read !' . escape(a:cmdline, '%#')
-    setlocal nomodifiable
-    1
+  botright new
+  setlocal buftype=nofile
+  setlocal bufhidden=delete
+  setlocal nobuflisted
+  setlocal noswapfile
+  setlocal nowrap
+  setlocal filetype=shell
+  setlocal syntax=shell
+  call setline(1, a:cmdline)
+  call setline(2, substitute(a:cmdline, '.', '=', 'g'))
+  execute 'silent $read !' . escape(a:cmdline, '%#')
+  setlocal nomodifiable
+  1
 endfunction
 
 command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
@@ -475,8 +473,8 @@ endfunction
 
 " File extension colouring
 function! NERDTreeHighlightFile(extension, fg)
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
- exec 'autocmd filetype nerdtree highlight ' . a:extension . ' ctermfg='. a:fg
+  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+  exec 'autocmd filetype nerdtree highlight ' . a:extension . ' ctermfg='. a:fg
 endfunction
 
 call NERDTreeHighlightFile('txt', 'gray')
@@ -521,8 +519,6 @@ let g:tagbar_width = 30
 let g:tagbar_sort  = 0
 let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_auto_colors = 0
-let g:indentLine_showFirstIndentLevel = '1'
-let g:indentLine_concealcursor = 1
 let g:matchparen_timeout = 20
 let g:matchparen_insert_timeout = 20
 
@@ -532,11 +528,15 @@ let g:erlang_tags_auto_update = 1
 let g:erlang_tags_ignore = ['rel','_build/default/rel', '_build/test', '_build/docs']
 let g:erlang_tags_outfile = './.tags'
 
+let g:indentLine_showFirstIndentLevel = '1'
+let g:indentLine_concealcursor = 1
 let g:indentLine_first_char    = '│'
 let g:indentLine_color_dark = 1 " (default: 2)
 let g:indentLine_color_term = '239'
 let g:indentLine_faster = '1'
 let g:indentLine_char   = ' '
+let g:indentLine_setConceal = 0
+
 let g:AutoPairs = {}
 let g:ale_sign_error   = '⤬'
 let g:ale_sign_warning = '⚠'
@@ -550,15 +550,15 @@ let g:lt_location_list_toggle_map = '<Leader>l'
 let g:lt_quickfix_list_toggle_map = '<Leader>x'
 
 function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
 
-    return l:counts.total == 0 ? 'OK' : printf(
-    \   '%dW %dE',
-    \   l:all_non_errors,
-    \   l:all_errors
-    \)
+  return l:counts.total == 0 ? 'OK' : printf(
+  \   '%dW %dE',
+  \   l:all_non_errors,
+  \   l:all_errors
+  \)
 endfunction
 
 "let g:airline_theme='distinguished'
@@ -612,17 +612,17 @@ highlight Directory ctermfg='blue'
 highlight ColorColumn ctermbg=234
 highlight SpecialKey  ctermbg=235
 " Sign column for Git
-highlight SignColumn  ctermbg=235
-highlight DiffAdd     ctermbg=235
-highlight DiffDelete  ctermbg=235
-highlight DiffChange  ctermbg=235
+highlight DiffAdd    ctermbg=235
+highlight SignColumn ctermbg=235
+highlight DiffDelete ctermbg=235
+highlight DiffChange ctermbg=235
 " Lint ale
 highlight ALEErrorSign   ctermbg=235 ctermfg=1 guibg=#262626 guifg=#870f00
-highlight ALEWarningSign ctermbg=235 ctermfg=202 guibg=#262626 guifg=#d75f01
 highlight ALEInfoSign    ctermbg=235
+highlight ALEWarningSign ctermbg=235 ctermfg=202 guibg=#262626 guifg=#d75f01
 highlight Error   ctermbg=235 ctermfg=202
-highlight Warning ctermbg=235 ctermfg=200
 highlight Todo    ctermbg=235 ctermfg=208
+highlight Warning ctermbg=235 ctermfg=200
 " popup menu
 highlight Pmenu     ctermbg=235 ctermfg=202 guibg=#383838 guifg=#d75f01
 highlight PmenuSel  ctermbg=202 ctermfg=0 guibg=#727272 guifg=#d75f01
@@ -637,11 +637,11 @@ endfunction
 fu! RestoreSession()
 execute 'so $HOME/.vim/session.vim'
 if bufexists(1)
-    for l:buf in range(1, bufnr('$'))
-        if bufwinnr(l:buf) == -1
-            exec 'sbuffer ' . l:buf
-        endif
-    endfor
+  for l:buf in range(1, bufnr('$'))
+    if bufwinnr(l:buf) == -1
+      exec 'sbuffer ' . l:buf
+    endif
+  endfor
 endif
 endfunction
 
@@ -651,15 +651,15 @@ augroup END
 
 " Strip whitespace {
 function! StripTrailingWhitespace()
-    " Preparation: save last search, and cursor position.
-    let l:_s=@/
-    let l:l = line('.')
-    let l:c = col('.')
-    " do the business:
-    %s/\s\+$//e
-    " clean up: restore previous search history, and cursor position
-    let @/=l:_s
-    call cursor(l:l, l:c)
+  " Preparation: save last search, and cursor position.
+  let l:_s=@/
+  let l:l = line('.')
+  let l:c = col('.')
+  " do the business:
+  %s/\s\+$//e
+  " clean up: restore previous search history, and cursor position
+  let @/=l:_s
+  call cursor(l:l, l:c)
 endfunction
 
 " function to try appending filetypes on filename to open
@@ -714,11 +714,11 @@ augroup END
 
 " Skeleton templates
 augroup templates
-  autocmd BufNewFile *.sh      0r ~/.vim/templates/skeleton.sh
-  autocmd BufNewFile *.erl     0r ~/.vim/templates/skeleton.erl
+  autocmd BufNewFile *.sh 0r ~/.vim/templates/skeleton.sh
+  autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
+  autocmd BufNewFile *.erl 0r ~/.vim/templates/skeleton.erl
+  autocmd BufNewFile *.java 0r ~/.vim/templates/skeleton.java
   autocmd BufNewFile *.escript 0r ~/.vim/templates/skeleton.escript
-  autocmd BufNewFile *.py      0r ~/.vim/templates/skeleton.py
-  autocmd BufNewFile *.java    0r ~/.vim/templates/skeleton.java
 augroup END
 
 augroup nerdtree
@@ -727,13 +727,13 @@ augroup nerdtree
 augroup END
 
 augroup filetypes
-  autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
+  autocmd Filetype json set conceallevel=0
+  autocmd FileType netrw set nonumber
   autocmd FileType erlang setlocal shiftwidth=0 tabstop=2 softtabstop=2 sw=2 ts=2 sts=2
-  autocmd FileType python setlocal shiftwidth=4 tabstop=1 expandtab
+  autocmd FileType python setlocal shiftwidth=4 tabstop=2 expandtab
+  autocmd FileType taglist set nonumber norelativenumber
   autocmd FileType nerdtree set norelativenumber
-  autocmd FileType netrw    set nonumber
-  autocmd FileType taglist  set nonumber norelativenumber
-  autocmd Filetype json let g:indentLine_setConceal = 0
+  autocmd FileType c,cpp,h,hpp setlocal foldmethod=syntax
 augroup END
 
 augroup tmux_integration
@@ -747,15 +747,20 @@ augroup END
 " To disable this, add the following to your .vimrc.before.local file:
 "   let g:spf13_no_restore_cursor = 1
 function! ResCur()
-    if line("'\"") <= line('$')
-        silent! normal! g`"
-        return 1
-    endif
+  if line("'\"") <= line('$')
+    silent! normal! g`"
+    return 1
+  endif
 endfunction
 
 augroup resCur
-    autocmd!
-    autocmd BufWinEnter * call ResCur()
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
+augroup END
+
+augroup avro
+  au!
+  autocmd BufNewFile,BufRead *.avsc set syntax=json
 augroup END
 
 let g:python3_host_prog='/usr/local/bin/python3'
@@ -779,6 +784,7 @@ let g:ale_fixers = {'java': ['google_java_format']}
 "set runtimepath^=~/.vim/plugged/vim-erlang-runtime
 set runtimepath^=~/.vim/plugged/vim-erlang-tags
 set runtimepath^=~/.vim/plugged/vim-erlang-tags
+set conceallevel=0
 
 "function! SetupErlangLs()
 "lua << EOF
