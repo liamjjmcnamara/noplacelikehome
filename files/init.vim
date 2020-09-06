@@ -12,6 +12,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'kopischke/vim-fetch'
 Plug 'kshenoy/vim-signature'
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'roxma/nvim-yarp'
 Plug 'ryanoasis/vim-devicons'
@@ -236,6 +237,7 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 nnoremap <Leader>t "=strftime("[%Y-%m-%d %H:%M]")<CR>Pl
 nnoremap <Leader>T "=strftime("[%Y-%m-%d]")<CR>Pl
 nnoremap <Leader>f :NERDTreeToggle<CR>
+"nnoremap <leader>f <cmd>CHADopen<cr>
 
 nnoremap <leader>p <Plug>(coc-definition)
 nnoremap <leader>cd <Plug>(coc-definition)
@@ -380,7 +382,6 @@ if isdirectory(expand('~/.vim/plugged/vim-indent-guides/'))
 endif
 
 let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 1
 
 " See `:echo g:airline_theme_map` for some more choices
 " Default in terminal vim is 'dark'
@@ -565,16 +566,14 @@ endfunction
 let g:airline_section_c = ''
 let g:airline_section_y = '' "      (fileencoding, fileformat)
 let g:airline_section_error = '%q'
-let g:airline#extensions#bufferline#enabled = 1
 let g:airline_section_warning = '%{LinterStatus()}'
-let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_close_button = 1
-let g:airline#extensions#tabline#fnamemod     = ':t'
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#show_tabs    = 0
-let g:airline#extensions#tabline#tab_nr_type  = 1 " tab number
-let g:airline#extensions#tabline#show_splits  = 1
+let g:airline#extensions#tabline#show_tab_type = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#bufferline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#fnamemod = ':~p'
+
 let g:bufferline_modified = '+'
 let g:Tlist_Show_One_File = 1
 let g:sneak#label = 1
