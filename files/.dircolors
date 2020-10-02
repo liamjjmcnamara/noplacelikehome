@@ -85,7 +85,7 @@ TERM xterm-debian
 NORMAL 01;38;5;244 # no color code at all
 #FILE 00 # regular file: use no color at all
 RESET 0 # reset to "normal" color
-DIR 01;34;5;61 # directory 01;34
+DIR 00;38;5;33 # directory 01;34
 LINK 01;38;5;37 # symbolic link. (If you set this to 'target' instead of a
  # numerical value, the color is as for the file pointed to.)
 MULTIHARDLINK 00 # regular file with more than one link
@@ -144,6 +144,7 @@ EXEC 01;32;5;64
 .erl    00;38;5;226
 .java   00;38;5;226
 .groovy 00;38;5;222
+.json   00;38;5;222
 .class  00;38;5;26
 .h      00;38;5;26
 .hrl    00;38;5;26
@@ -234,6 +235,7 @@ EXEC 01;32;5;64
 .class      00;38;5;240
 .cache      00;38;5;240
 .beam       00;38;5;240
+.config 00;38;5;240
 
 # Audio formats (orange)
 .aac    00;38;5;126
@@ -282,6 +284,7 @@ EXEC 01;32;5;64
 .anx 01;38;5;126
 .ogv 01;38;5;126
 .ogx 01;38;5;126
+*Dockerfile 01;38;5;126
 
 .txt 01;38;5;255
 

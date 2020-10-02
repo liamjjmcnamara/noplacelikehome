@@ -17,7 +17,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'roxma/nvim-yarp'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -236,7 +235,9 @@ map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 nnoremap <Leader>t "=strftime("[%Y-%m-%d %H:%M]")<CR>Pl
 nnoremap <Leader>T "=strftime("[%Y-%m-%d]")<CR>Pl
-nnoremap <Leader>f :NERDTreeToggle<CR>
+"nnoremap <Leader>f :NERDTreeToggle<CR>
+nnoremap <leader>f <cmd>CHADopen<cr>
+
 "nnoremap <leader>f <cmd>CHADopen<cr>
 
 nnoremap <leader>p <Plug>(coc-definition)
@@ -343,21 +344,8 @@ function! MonkeyTerminalExec(cmd)
   wincmd p
 endfunction
 
-" NerdTree
-if isdirectory(expand('~/.vim/plugged/nerdtree'))
-  map <C-e> <plug>NERDTreeTabsToggle<CR>
-  map <leader>e :NERDTreeFind<CR>
-  nmap <leader>nt :NERDTreeFind<CR>
-  let g:NERDShutUp=1
-  let g:NERDTreeChDirMode=0
-  let g:NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-  let g:NERDTreeKeepTreeInNewTab=1
-  let g:NERDTreeMouseMode=2
-  let g:NERDTreeQuitOnOpen=1
-  let g:NERDTreeShowBookmarks=1
-  let g:NERDTreeShowHidden=1
-  let g:nerdtree_tabs_open_on_gui_startup=0
-endif
+let g:chadtree_settings = {}
+let g:chadtree_settings['width'] = 30
 
 " Stupid shift key fixes
 if !exists('g:spf13_no_keyfixes')
@@ -477,33 +465,6 @@ function! NERDTreeHighlightFile(extension, fg)
   exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
   exec 'autocmd filetype nerdtree highlight ' . a:extension . ' ctermfg='. a:fg
 endfunction
-
-call NERDTreeHighlightFile('txt', 'gray')
-call NERDTreeHighlightFile('erl', 'yellow')
-call NERDTreeHighlightFile('hrl', 'darkblue')
-call NERDTreeHighlightFile('beam', 'darkgray')
-call NERDTreeHighlightFile('class', 'darkgray')
-call NERDTreeHighlightFile('log', 'darkgray')
-call NERDTreeHighlightFile('html', 'blue')
-call NERDTreeHighlightFile('mk', 'white')
-call NERDTreeHighlightFile('Makefile', 'white')
-call NERDTreeHighlightFile('md', 'gray')
-call NERDTreeHighlightFile('config', 'darkred')
-call NERDTreeHighlightFile('py', 'green')
-call NERDTreeHighlightFile('java', '226')
-call NERDTreeHighlightFile('groovy', '226')
-call NERDTreeHighlightFile('yml', '220')
-call NERDTreeHighlightFile('png', '129')
-call NERDTreeHighlightFile('jpg', '129')
-call NERDTreeHighlightFile('gz', '88')
-call NERDTreeHighlightFile('jar', '88')
-
-"for g:ls_color in split($LS_COLORS,':')
-  "if match(g:ls_color,'^\*') > -1
-    "let g:fields = split(g:ls_color,';')
-    "call NERDTreeHighlightFile(g:fields[0][2:-4],fields[3])
-  "endif
-"endfor
 
 let &titlestring = expand('%:p')
 "let g:airline_theme='disgusted'
@@ -762,7 +723,7 @@ augroup avro
   autocmd BufNewFile,BufRead *.avsc set syntax=json
 augroup END
 
-let g:python3_host_prog='/usr/local/bin/python3'
+let g:python3_host_prog = '/usr/bin/python3'
 let g:python_host_prog='/usr/bin/python'
 
 " For cscope
