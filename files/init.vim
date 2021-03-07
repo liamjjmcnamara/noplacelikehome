@@ -12,7 +12,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'kopischke/vim-fetch'
 Plug 'kshenoy/vim-signature'
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'roxma/nvim-yarp'
 Plug 'ryanoasis/vim-devicons'
@@ -105,7 +105,7 @@ set ruler                       " Show the ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
 set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=16
-set scrolloff=3                 " Minimum lines to keep above and below cursor
+set scrolloff=4                 " Minimum lines to keep above and below cursor
 set shiftwidth=2
 set shortmess+=filmnrxoOtT      " Abbrev. of messages (avoids 'hit enter')
 set showcmd                     " Show partial commands in status line and
@@ -116,7 +116,7 @@ set softtabstop=4               " Let backspace delete indent
 set spellsuggest=best,10
 set splitbelow                  " Puts new split windows to the bottom of the current
 set splitright                  " Puts new vsplit windows to the right of the current
-set statusline =%<%f\                     " Filename
+set statusline =%<%f\                    " Filename
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 set statusline+=%w%h%m%r                 " Options
 set statusline+=\ [%{&ff}/%Y]            " Filetype
@@ -236,9 +236,7 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 nnoremap <Leader>t "=strftime("[%Y-%m-%d %H:%M]")<CR>Pl
 nnoremap <Leader>T "=strftime("[%Y-%m-%d]")<CR>Pl
 "nnoremap <Leader>f :NERDTreeToggle<CR>
-nnoremap <leader>f <cmd>CHADopen<cr>
-
-"nnoremap <leader>f <cmd>CHADopen<cr>
+nnoremap <leader>f <cmd>CHADopen<CR>
 
 nnoremap <leader>p <Plug>(coc-definition)
 nnoremap <leader>cd <Plug>(coc-definition)
@@ -282,9 +280,9 @@ inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 nnoremap z= i<C-X><C-S>
 map <CR> o<Esc>
 
+set runtimepath+=/usr/local/opt/fzf
 nnoremap <C-F> :FZF<cr>
 nnoremap <Leader>y :FZF<cr>
-set runtimepath+=/usr/local/opt/fzf
 
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
@@ -344,8 +342,8 @@ function! MonkeyTerminalExec(cmd)
   wincmd p
 endfunction
 
-let g:chadtree_settings = {}
-let g:chadtree_settings['width'] = 30
+"let g:chadtree_settings = {}
+"let g:chadtree_settings['width'] = 30
 
 " Stupid shift key fixes
 if !exists('g:spf13_no_keyfixes')
@@ -533,7 +531,8 @@ let g:airline#extensions#tabline#show_tab_type = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#bufferline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#fnamemod = ':~p'
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 
 let g:bufferline_modified = '+'
 let g:Tlist_Show_One_File = 1
@@ -723,8 +722,8 @@ augroup avro
   autocmd BufNewFile,BufRead *.avsc set syntax=json
 augroup END
 
-let g:python3_host_prog = '/usr/bin/python3'
-let g:python_host_prog='/usr/bin/python'
+let g:python3_host_prog = '/Users/liam.mcnamara/.pyenv/shims/python3'
+let g:python_host_prog = '/Users/liam.mcnamara/.pyenv/shims/python'
 
 " For cscope
 let &runtimepath=&runtimepath . ',~/.vim/plugin'
