@@ -1,6 +1,7 @@
 [user]
 	email = liam.mcnamara@klarna.com
 	name = Liam McNamara
+	signingkey = 527628682C39AC8A7ACEF4209ADA16CA52F30361
 [push]
 	default = current
 [credential]
@@ -22,9 +23,10 @@
 [core]
 	excludesfile = /Users/liam.mcnamara/.gitignore
 	pager = diff-so-fancy | less --tabs=4 -RFX
+	editor = nvim
 [commit]
 	verbose = true
-	gpgsign = false
+	gpgsign = true
 [init]
 	templatedir = ~/.git_templates
 [color]

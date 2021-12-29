@@ -7,7 +7,7 @@ if [ -e $ZSH/oh-my-zsh.sh ]; then
   source $ZSH/oh-my-zsh.sh
 fi
 
-export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/opt/make/libexec/gnubin:$PATH"
 export PS1=$'[%{\e[97m%}yukon%{\e[0m%}]<%{\e[97m%}%~%b%{\e[0m%}>'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 export TILLER_NAMESPACE="id"
@@ -111,15 +111,16 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias lt="ls --sort=time"
 alias c="cd"
-alias v="vim"
-alias vls="vim"
-alias vimsession="vim -S ~/.vim/session.vim"
+alias v="nvim"
+alias vi="nvim"
+alias vls="nvim"
+alias vimsession="nvim -S ~/.vim/session.vim"
 alias d="docker"
 alias bu="brew upgrade"
 alias g="git"
 alias gs="git status"
 alias gp="git pull"
-alias gr="grep -sn"
+alias gr='cd "$(git rev-parse --show-toplevel)"'
 alias xg="xargs grep -sn"
 alias fxg="find . | xargs grep -sn"
 alias gxf="find . | xargs grep -sn"
@@ -129,6 +130,18 @@ alias noplace='echo "git clone https://github.com/liamjjmcnamara/noplacelikehome
 alias r3="rebar3"
 alias prep='rebar3 dialyzer && elvis rock && echo "\n\033[0;32mLooks good!\033[0;0m\n"'
 alias ww="vim -c VimwikiIndex"
+
+alias refund="cd ~/code/kfc/refund_engine"
+alias ref="cd ~/code/kfc/refund_engine"
+alias kred="cd ~/code/kredcore/kred"
+alias fred="cd ~/code/fred/fred"
+
+alias adfslogin.scheme='eval `aws-adfs-tool login -r Klarna_ADFS_scheme -a klarna-non-production -u liam.mcnamara --no-keyring`'
+alias adfslogin='eval `aws-adfs-tool login -r Klarna_ADFS_phoenix -a klarna-non-production -u liam.mcnamara --no-keyring`'
+alias awslogin.scheme='eval `aws-login-tool login -r Klarna_ADFS_scheme -a klarna-non-production -u liam.mcnamara`'
+alias awslogin='eval `aws-login-tool login -r Klarna_ADFS_phoenix -a klarna-non-production -u liam.mcnamara`'
+alias awslogin.refund='eval `aws-login-tool login -r iam-sync/refund-engine/refund-engine.IdP_admin -a 257910327049`'
+alias updatedb='sudo /usr/libexec/locate.updatedb'
 
 alias adfslogin='eval `aws-adfs-tool login -r Klarna_ADFS_scheme -a klarna-non-production -u liam.mcnamara --no-keyring`'
 alias updatedb='sudo /usr/libexec/locate.updatedb'
@@ -157,9 +170,9 @@ if [ -e  "~/.iterm2_shell_integration.zsh" ]; then
   source "${HOME}/.iterm2_shell_integration.zsh"
 fi
 
-#if [ -e ~/.dircolors ]; then
-  #eval $(dircolors ~/.dircolors)
-#fi
+if [ -e ~/.dircolors ]; then
+  eval $(gdircolors ~/.dircolors)
+fi
 
 # Pull kerl settings
 if [ -e ~/.kerl/.kerlrc ]; then
@@ -170,8 +183,8 @@ fi
 eval "$(pyenv init -)"
 
 # Erlang activation
-if [ -e /usr/local/erlang/21.1/activate ]; then
-  source /usr/local/erlang/21.1/activate
+if [ -e /usr/local/erlang/22-kred/activate ]; then
+  source /usr/local/erlang/22-kred/activate
 fi
 
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -185,7 +198,7 @@ fe() {
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home
 
 # Set Spaceship ZSH as a prompt
 autoload -U promptinit; promptinit
@@ -217,7 +230,14 @@ export SPACESHIP_EXEC_TIME_COLOR="white"
 
 export SPACESHIP_BATTERY_THRESHOLD="15"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 # Allow local specifics
 if [ -e ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
+if [ -e /Users/liam.mcnamara/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/liam.mcnamara/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

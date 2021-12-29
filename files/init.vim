@@ -1,5 +1,5 @@
 
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 "Plug 'neovim/nvim-lsp'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
@@ -141,7 +141,7 @@ set wildmode=list:longest,full  " Command <Tab> completion, list matches, then l
 set winminheight=0              " Windows can be 0 line high
 set wrap linebreak
 
-let g:mapleader = ','
+let g:mapleader = ' '
 let g:maplocalleader = '_'
 
 " Easier moving in tabs and windows
@@ -342,8 +342,8 @@ function! MonkeyTerminalExec(cmd)
   wincmd p
 endfunction
 
-"let g:chadtree_settings = {}
-"let g:chadtree_settings['width'] = 30
+let g:chadtree_settings = {}
+let g:chadtree_settings['view.width'] = 28
 
 " Stupid shift key fixes
 if !exists('g:spf13_no_keyfixes')
